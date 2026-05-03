@@ -113,8 +113,9 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
         muted
         loop
         playsInline
+        autoPlay
         preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-100 transition-opacity duration-700 origin-center"
+        className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-100 max-md:opacity-80 transition-opacity duration-700 origin-center"
       />
       
       {/* Red Lighting Effect based on mouse speed - Centered */}

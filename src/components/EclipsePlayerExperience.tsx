@@ -114,7 +114,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
         loop
         playsInline
         autoPlay
-        preload="metadata"
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-100 max-md:opacity-80 transition-opacity duration-700 origin-center"
       />
       

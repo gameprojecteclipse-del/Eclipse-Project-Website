@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Instagram, Linkedin, Mail, ArrowRight } from "lucide-react";
+import logoSvg from "../assets/logo.svg";
 
 // ── Eclipse-only links (from Ecosystem_Chroma_Final_v3.md) ───────
 const LINKS = {
@@ -121,7 +122,7 @@ export const EclipseContact = () => {
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 gap-4">
           <div className="flex flex-col md:flex-row items-center gap-4">
-            <img src="/src/assets/logo.svg" alt="Eclipse Logo" className="h-6 w-auto opacity-40 hover:opacity-100 transition-opacity" />
+            <img src={logoSvg} alt="Eclipse Logo" className="h-6 w-auto opacity-40 hover:opacity-100 transition-opacity" />
             <p className="font-inter text-[10px] text-white/18 tracking-widest">
               © {new Date().getFullYear()} Chroma Studio · All rights reserved
             </p>

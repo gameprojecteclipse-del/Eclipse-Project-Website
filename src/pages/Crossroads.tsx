@@ -46,7 +46,7 @@ const Crossroads = () => {
 
       {/* ECLIPSE SIDE */}
       <motion.div 
-        className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/10 h-full overflow-hidden"
+        className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/10 h-full overflow-hidden max-md:!w-full max-md:!h-1/2"
         initial={{ width: "50%" }}
         animate={{ 
           width: hoveredSide === 'eclipse' ? "60%" : hoveredSide === 'chroma' ? "40%" : "50%" 
@@ -60,7 +60,7 @@ const Crossroads = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         <div className="absolute inset-0 bg-blood-red/10 mix-blend-overlay group-hover:bg-blood-red/30 transition-colors duration-700" />
         
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 min-w-[300px]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 min-w-[300px] max-md:min-w-0">
           <motion.h2 
             className="font-cinzel text-4xl md:text-6xl lg:text-7xl text-white font-bold tracking-widest text-center mb-6"
             whileHover={{ scale: 1.05 }}
@@ -78,7 +78,7 @@ const Crossroads = () => {
 
       {/* CHROMA SIDE */}
       <motion.div 
-        className="relative group cursor-pointer h-full overflow-hidden"
+        className="relative group cursor-pointer h-full overflow-hidden max-md:!w-full max-md:!h-1/2"
         initial={{ width: "50%" }}
         animate={{ 
           width: hoveredSide === 'chroma' ? "60%" : hoveredSide === 'eclipse' ? "40%" : "50%" 
@@ -97,7 +97,7 @@ const Crossroads = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 min-w-[300px]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 min-w-[300px] max-md:min-w-0">
           <motion.h2 
             className="font-oswald text-4xl md:text-6xl lg:text-7xl text-white font-bold tracking-[0.2em] text-center mb-6"
             whileHover={{ scale: 1.05 }}

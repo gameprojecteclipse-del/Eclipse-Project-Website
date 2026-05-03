@@ -261,10 +261,10 @@ export default function Chroma() {
               <a href="https://www.youtube.com/@ChromaDigital" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
                 YouTube
               </a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/company/121184022/" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
                 LinkedIn
               </a>
-              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
+              <a href="https://www.facebook.com/profile.php?id=61558231365851" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
                 Facebook
               </a>
             </div>

@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "eclipse": "Eclipse Experience",
+    "chroma": "Chroma Studios",
+    "lang": "FR"
+  },
+  "landing": {
+    "title": "Choose Your Destiny",
+    "eclipse_btn": "Enter the Eclipse",
+    "chroma_btn": "Discover the Studio",
+    "eclipse_desc": "Action-RPG Souls-like • Dark Fantasy",
+    "chroma_desc": "Independent Design & Development Studio"
+  },
+  "eclipse": {
+    "hero_title": "PROJECT ECLIPSE",
+    "hero_subtitle": "Extraction. Mutation. Resonance.",
+    "lore_title": "Abyssal Mythology",
+    "lore_text": "Cosmic Horror and Dark Fantasy. Maghrebian, Berber, and Ottoman Heritage.",
+    "gameplay_title": "Pillars of Resonance",
+    "gallery_title": "Final Visions",
+    "gallery_devlog_title": "R&D Archives",
+    "gallery_devlog_desc": "These raw concepts are undeniable proof of our rigorous production methodology and the continuous evolution of our artistic vision.",
+    "collective_title": "The Collective",
+    "collective_desc": "Project Eclipse is driven by 14 international experts (Algeria, France, Japan, Africa...).",
+    "roadmap_mawahub": "Incubated by Mawahub",
+    "roadmap_demo": "Playable Demo — Q1 2027"
+  },
+  "chroma": {
+    "hero_title": "CHROMA",
+    "hero_subtitle": "Architect of Complex Visions",
+    "manifesto_title": "Independence & Mastery",
+    "manifesto_text": "Founded by Amir Dekik, Chroma is an independent Design & Development Studio. Our mission is to build the architecture for the most complex creative visions, whether interactive experiences, cinema, or artistic installations.",
+    "services_title": "Expertise",
+    "services_1_title": "Art Direction",
+    "services_1_desc": "Branding, Installations, Cinema, Editorial.",
+    "services_2_title": "Development",
+    "services_2_desc": "PC / Console / Mobile, Experimental and educational games.",
+    "services_3_title": "Web Solutions",
+    "services_3_desc": "SaaS, Apps, High-end interactive sites.",
+    "services_4_title": "Marketing & Branding",
+    "services_4_desc": "Image management and digital strategy."
+  }
+}

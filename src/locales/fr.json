@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "eclipse": "Expérience Eclipse",
+    "chroma": "Chroma Studios",
+    "lang": "EN"
+  },
+  "landing": {
+    "title": "Choisissez Votre Voie",
+    "eclipse_btn": "Pénétrer l'Eclipse",
+    "chroma_btn": "Découvrir le Studio",
+    "eclipse_desc": "Action-RPG Souls-like • Dark Fantasy",
+    "chroma_desc": "Studio de Design & Développement Indépendant"
+  },
+  "eclipse": {
+    "hero_title": "PROJET ECLIPSE",
+    "hero_subtitle": "Extraction. Mutation. Résonance.",
+    "lore_title": "Mythologie Abyssale",
+    "lore_text": "Horreur cosmique et Dark Fantasy. Héritage Maghrébin, Berbère et Ottoman.",
+    "gameplay_title": "Piliers de Résonance",
+    "gallery_title": "Visions Finales",
+    "gallery_devlog_title": "Archives R&D",
+    "gallery_devlog_desc": "Ces concepts bruts sont la preuve irréfutable de notre méthodologie de production rigoureuse et de l'évolution constante de notre vision artistique.",
+    "collective_title": "Le Collectif",
+    "collective_desc": "Projet Eclipse est porté par 14 experts internationaux (Algérie, France, Japon, Afrique...).",
+    "roadmap_mawahub": "Incubé par Mawahub",
+    "roadmap_demo": "Démo Jouable - Q1 2027"
+  },
+  "chroma": {
+    "hero_title": "CHROMA",
+    "hero_subtitle": "Architecte de Visions Complexes",
+    "manifesto_title": "Indépendance & Maîtrise",
+    "manifesto_text": "Fondé par Amir Dekik, Chroma est un Studio de Design & Développement indépendant. Notre mission est de bâtir l'architecture des visions créatives les plus complexes, qu'il s'agisse d'expériences interactives, de cinéma ou d'installations artistiques.",
+    "services_title": "Expertise",
+    "services_1_title": "Art Direction",
+    "services_1_desc": "Branding, Installations, Cinéma, Éditorial.",
+    "services_2_title": "Development",
+    "services_2_desc": "PC / Console / Mobile, Jeux expérimentaux et éducatifs.",
+    "services_3_title": "Web Solutions",
+    "services_3_desc": "SaaS, Apps, Sites interactifs haut de gamme.",
+    "services_4_title": "Marketing & Branding",
+    "services_4_desc": "Gestion d'image et stratégie digitale."
+  }
+}

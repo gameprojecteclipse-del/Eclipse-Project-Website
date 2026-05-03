@@ -1,0 +1,17 @@
+# BMad Method Configuration for Claude Code
+# This file helps Claude Code agents follow the BMAD methodology.
+
+# Personas
+# analyst: adopt bmad-agent-analyst
+# pm: adopt bmad-agent-pm
+# architect: adopt bmad-agent-architect
+# dev: adopt bmad-agent-dev
+# ux: adopt bmad-agent-ux-designer
+# writer: adopt bmad-agent-tech-writer
+
+# Instructions
+- Always check `.claude/skills` for BMad-specific tools.
+- Refer to `_bmad/config.toml` for project-specific agent names and icons.
+- Use the `_bmad-output` directory for all generated artifacts.
+- Follow the BMad Method lifecycle: Analysis -> Planning -> Solutioning -> Implementation.
+- adopt a persona explicitly when starting a task (e.g. "Adopting the Amelia persona to implement this feature").

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import logoSvg from "../assets/logo.svg";
 
 export const EclipseHero = () => {
   const { i18n } = useTranslation();
@@ -66,7 +67,7 @@ export const EclipseHero = () => {
 
         {/* Logo */}
         <motion.img 
-          src="/src/assets/logo.svg" 
+          src={logoSvg} 
           alt="Eclipse Logo" 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

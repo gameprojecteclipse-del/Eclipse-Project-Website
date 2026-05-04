@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { SITE_URL } from "@/lib/constants";
 
 interface SEOProps {
   title: string;
   description: string;
+  path?: string;
 }
 
-export const useSEO = ({ title, description }: SEOProps) => {
+export const useSEO = ({ title, description, path }: SEOProps) => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
@@ -34,5 +36,17 @@ export const useSEO = ({ title, description }: SEOProps) => {
     // Update lang attribute for SEO
     document.documentElement.lang = i18n.language;
 
-  }, [title, description, i18n.language]);
+    // Update canonical URL
+    const canonicalUrl = path ? `${SITE_URL}${path}` : SITE_URL;
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (canonical) {
+      canonical.href = canonicalUrl;
+    } else {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      canonical.href = canonicalUrl;
+      document.head.appendChild(canonical);
+    }
+
+  }, [title, description, i18n.language, path]);
 };

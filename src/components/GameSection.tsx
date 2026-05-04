@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import videoTrailer from "@/assets/eclipse-video-trailer.mp4";
+const videoTrailer = "/assets/videos/trailer.mp4";
 import imageThumbnail from "@/assets/concept-art-1.jpg";
 
 interface GameSectionProps {

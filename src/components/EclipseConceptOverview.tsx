@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./SectionTitle";
+import { PictureBackground } from "./PictureBackground";
 
 const ROWS = [
   { labelFr: "Genre",       labelEn: "Genre",      valFr: "Action Aventure / Souls-like",               valEn: "Action Adventure / Souls-like" },
@@ -19,10 +20,11 @@ export const EclipseConceptOverview = () => {
     <section id="concept" className="relative bg-black overflow-hidden">
       {/* Full-height background image */}
       <div className="absolute inset-0">
-        {/* eclipse_concept_bg.png — replace with final interior shot */}
-        <div
-          className="absolute inset-0 bg-[url('/assets/eclipse_concept_bg.png')] bg-cover bg-[center_30%]"
-          style={{ opacity: 0.28, filter: "saturate(0.2) brightness(0.75)" }}
+        {/* WebP with PNG fallback */}
+        <PictureBackground
+          src="/assets/eclipse_concept_bg"
+          alt="Eclipse concept background"
+          imgClassName="opacity-[0.28] saturate-[0.2] brightness-[0.75]"
         />
         {/* Gradient mask — left side blacks out for legibility, right reveals the image */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/98 via-black/80 to-black/40" />

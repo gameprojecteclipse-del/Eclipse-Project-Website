@@ -18,6 +18,8 @@ const App = () => (
       </BrowserRouter>
       {/* Vercel Analytics tracking component */}
       <Analytics />
+      {/* Global Cinematic Film Grain */}
+      <div className="noise-overlay" />
     </TooltipProvider>
   </QueryClientProvider>
 );

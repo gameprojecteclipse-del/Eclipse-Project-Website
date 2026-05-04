@@ -100,7 +100,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
   return (
     <div
       ref={containerRef}
-      className="relative flex-shrink-0 flex items-end justify-start cursor-crosshair overflow-hidden group"
+      className="relative flex-shrink-0 flex items-end justify-start cursor-crosshair overflow-hidden group vignette-blend"
       style={{ width: "100vw", height: "100%" }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -146,7 +146,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
       {/* Content — pinned bottom-left, made smaller */}
       <div className="relative z-30 max-w-xl px-8 md:px-16 pb-16 md:pb-20 opacity-80 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
         <div className="flex items-center gap-4 mb-6">
-          <span className="liquid-text font-inter text-[10px] md:text-xs tracking-[0.5em] uppercase font-semibold">
+          <span className="text-[#8B0000] font-inter text-[10px] md:text-xs tracking-[0.5em] uppercase font-semibold drop-shadow-[0_0_5px_rgba(139,0,0,0.5)]">
             {isFr ? panel.tag.fr : panel.tag.en}
           </span>
         </div>

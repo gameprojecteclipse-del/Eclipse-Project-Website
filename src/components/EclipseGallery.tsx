@@ -6,6 +6,7 @@ import { SectionTitle } from "./SectionTitle";
 
 interface Artwork {
   src: string;
+  srcFallback: string;
   title: string;
   titleFr: string;
   caption: string;
@@ -14,38 +15,50 @@ interface Artwork {
 
 const artworks: Artwork[] = [
   {
-    src: "/assets/gallery/art-2.jpg",
-    title: "The Fracture", titleFr: "La Fracture",
+    src: "/assets/gallery/art-2.webp",
+    srcFallback: "/assets/gallery/art-2.jpg",
+    title: "The Fracture", 
+    titleFr: "La Fracture",
     caption: "First biome — the city of Gueldaman, devoured by the matter of the void.",
     captionFr: "Premier biome — cité gueldamane consumée par la matière du néant.",
   },
   {
-    src: "/assets/gallery/art-6.jpg",
-    title: "The Omen", titleFr: "Le Présage",
+    src: "/assets/gallery/art-6.webp",
+    srcFallback: "/assets/gallery/art-6.jpg",
+    title: "The Omen", 
+    titleFr: "Le Présage",
     caption: "The sacrifice takes flesh, and the halo of the last age slowly etches itself upon the world.",
     captionFr: "Le sacrifice prend forme et le halo du dernier âge se dessine.",
   },
   {
-    src: "/assets/gallery/art-1.jpg",
-    title: "The River", titleFr: "Le Fleuve",
+    src: "/assets/gallery/art-1.webp",
+    srcFallback: "/assets/gallery/art-1.jpg",
+    title: "The River", 
+    titleFr: "Le Fleuve",
     caption: "Deep in the guts of the primal site — the forgotten verses and the membranes of the founder.",
     captionFr: "Aux entrailles du premier lieu — les versets oubliés et les membranes du fondateur.",
   },
   {
-    src: "/assets/gallery/art-3.jpg",
-    title: "The City of the Gaetulians", titleFr: "La Cité des Gétules",
+    src: "/assets/gallery/art-3.webp",
+    srcFallback: "/assets/gallery/art-3.jpg",
+    title: "The City of the Gaetulians", 
+    titleFr: "La Cité des Gétules",
     caption: "Raised on ancient trails, bearing witness to a mighty dynasty — tiered architecture, a centralized socio-political order.",
-    captionFr: "Bâti sur des sentiers, témoin d’une dynastie majeure — architecture hiérarchique, organisation socio-politique centralisée.",
+    captionFr: "Bâti sur des sentiers, témoin d'une dynastie majeure — architecture hiérarchique, organisation socio-politique centralisée.",
   },
   {
-    src: "/assets/gallery/art-4.jpg",
-    title: "The Medracen Sepulcher", titleFr: "Le Sépulcre Medracen",
+    src: "/assets/gallery/art-4.webp",
+    srcFallback: "/assets/gallery/art-4.jpg",
+    title: "The Medracen Sepulcher", 
+    titleFr: "Le Sépulcre Medracen",
     caption: "Sanctuary of the devoted — where once blood rivers ran, now the clenched throats of the earth find no relief. The eclipse's promise gathers the living.",
-    captionFr: "Lieu de recueillement des fidèles — les rivières de sang n’épanchent plus les gorges nouées, la promesse de l’éclipse rassemble les vivants.",
+    captionFr: "Lieu de recueillement des fidèles — les rivières de sang n'épanchent plus les gorges nouées, la promesse de l'éclipse rassemble les vivants.",
   },
   {
-    src: "/assets/gallery/art-5.jpg",
-    title: "The Dawn of the Promise", titleFr: "L'Aube de la Promesse",
+    src: "/assets/gallery/art-5.webp",
+    srcFallback: "/assets/gallery/art-5.jpg",
+    title: "The Dawn of the Promise", 
+    titleFr: "L'Aube de la Promesse",
     caption: "Cathedrals thrust skyward, wrought from select matter — almost sacred. Their walls carry the heft of unseen layers.",
     captionFr: "Les cathédrales se dressent, faites de matières choisies, presque sacrées — les murs portent le poids des strates invisibles.",
   },
@@ -77,7 +90,7 @@ export const EclipseGallery = () => {
       </div>
 
       {/* ── Cinematic 16/9 Viewer ── */}
-      <div className="relative w-full max-w-[1920px] mx-auto h-[60vh] md:h-[85vh] bg-[#050505] overflow-hidden group">
+      <div className="relative w-full max-w-[1920px] mx-auto h-[60vh] md:h-[85vh] bg-black overflow-hidden group vignette-blend">
         
         {/* Crossfading Images — no Ken Burns zoom */}
         <AnimatePresence initial={false}>
@@ -92,8 +105,16 @@ export const EclipseGallery = () => {
             <img
               src={artworks[current].src}
               alt={artworks[current].title}
-              className="w-full h-full object-cover"
-              onError={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }}
+              className="w-full h-full object-cover animate-ken-burns origin-center"
+              loading="lazy"
+              onError={e => {
+                const target = e.currentTarget as HTMLImageElement;
+                if (target.src !== window.location.origin + artworks[current].srcFallback) {
+                  target.src = artworks[current].srcFallback;
+                } else {
+                  target.style.opacity = "0";
+                }
+              }}
             />
           </motion.div>
         </AnimatePresence>

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import logoSvg from "../assets/logo.svg";
+import { LINKS } from "@/lib/constants";
 
 export const EclipseHero = () => {
   const { i18n } = useTranslation();
@@ -12,42 +13,17 @@ export const EclipseHero = () => {
   };
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
-      {/* ── Liquid Blood CSS Keyframes ── */}
-      <style>{`
-        @keyframes liquidFill {
-          0%   { background-position: 200% center; }
-          100% { background-position: -200% center; }
-        }
-        @keyframes bloodDrip {
-          0%   { opacity: 0.12; letter-spacing: 0.55em; }
-          50%  { opacity: 0.30; letter-spacing: 0.58em; }
-          100% { opacity: 0.12; letter-spacing: 0.55em; }
-        }
-        .liquid-text {
-          background: linear-gradient(
-            90deg,
-            rgba(255,255,255,0.12) 0%,
-            rgba(139,0,0,0.9)      20%,
-            rgba(180,20,20,1)      50%,
-            rgba(139,0,0,0.9)      80%,
-            rgba(255,255,255,0.12) 100%
-          );
-          background-size: 300% auto;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: liquidFill 6s linear infinite;
-        }
-      `}</style>
+    <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center vignette-blend">
 
       {/* Background Image */}
       <motion.div
-        initial={{ scale: 1.08, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.42 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.42 }}
         transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute inset-0 bg-[url('/assets/gallery/art-3.webp')] bg-cover bg-center"
-      />
+        className="absolute inset-0"
+      >
+        <div className="absolute inset-0 bg-[url('/assets/gallery/art-3.webp')] bg-cover bg-center animate-ken-burns origin-center" />
+      </motion.div>
       <div className="absolute inset-0 bg-[#8B0000]/12 mix-blend-screen" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-transparent to-black/75" />
@@ -105,12 +81,12 @@ export const EclipseHero = () => {
           {isFr ? "INCARNEZ LE CYCLE — BRISEZ LE SILENCE" : "EMBODY THE CYCLE — BREAK THE SILENCE"}
         </motion.h2>
 
-        {/* 3 pillars — liquid blood animation */}
+        {/* 3 pillars */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2.5, delay: 1.9 }}
-          className="liquid-text font-inter text-[8px] tracking-[0.55em] uppercase mb-12"
+          className="text-[#8B0000] font-inter text-[8px] tracking-[0.55em] uppercase mb-12 drop-shadow-[0_0_10px_rgba(139,0,0,0.4)]"
         >
           Extraction&nbsp;&nbsp;·&nbsp;&nbsp;Mutation&nbsp;&nbsp;·&nbsp;&nbsp;Résonance
         </motion.p>
@@ -130,7 +106,7 @@ export const EclipseHero = () => {
             {isFr ? "Découvrir l'Univers" : "Explore the World"}
           </a>
           <a
-            href="https://discord.gg/eHKeyu5FW"
+            href={LINKS.eclipseDiscord}
             target="_blank"
             rel="noopener noreferrer"
             className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 border border-white/12 text-white/50 hover:border-[#5865F2] hover:text-[#5865F2] transition-all duration-500"

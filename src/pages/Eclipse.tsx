@@ -12,10 +12,17 @@ import { EclipsePlayerExperience } from "../components/EclipsePlayerExperience";
 import { EclipseRoadmapTimeline } from "../components/EclipseRoadmapTimeline";
 import { EclipseCollective } from "../components/EclipseCollective";
 import { EclipseContact } from "../components/EclipseContact";
+import { useSEO } from "@/hooks/useSEO";
 
 const Eclipse = () => {
   const { t, i18n } = useTranslation();
   const { scrollY } = useScroll();
+
+  useSEO({
+    title: "Eclipse — Dark Fantasy Action Adventure",
+    description: "Eclipse is a dark fantasy souls-like set in a civilizational crossroads. Extraction, Mutation, Resonance — discover the pillars of gameplay.",
+    path: "/eclipse",
+  });
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   // Only show header at the very top of the page (Hero section)

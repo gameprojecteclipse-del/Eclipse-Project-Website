@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
+import { imageSetWithFallback } from "@/lib/utils";
 
 const Crossroads = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Crossroads = () => {
   useSEO({
     title: t('landing.title') + " - Double Door Portal",
     description: "Welcome to Project Eclipse. Choose your path: Enter the dark fantasy universe or discover the Chroma Studios collective.",
+    path: "/",
   });
 
   const toggleLang = () => {
@@ -88,10 +90,10 @@ const Crossroads = () => {
         onHoverEnd={() => setHoveredSide(null)}
         onClick={() => navigate('/chroma')}
       >
-        <div 
-          className="absolute inset-0 bg-center opacity-20 group-hover:opacity-40 transition-all duration-700 bg-no-repeat" 
-          style={{ 
-            backgroundImage: `url("/assets/chroma portal image.png")`,
+        <div
+          className="absolute inset-0 bg-center opacity-20 group-hover:opacity-40 transition-all duration-700 bg-no-repeat"
+          style={{
+            backgroundImage: imageSetWithFallback('/assets/chroma portal image'),
             backgroundSize: "65%"
           }}
         />

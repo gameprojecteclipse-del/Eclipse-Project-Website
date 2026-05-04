@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./SectionTitle";
+import { PictureBackground } from "./PictureBackground";
 
 const pillars = [
   {
@@ -96,16 +97,17 @@ const PillarPanel = ({ pillar, idx, isFr }: { pillar: any, idx: number, isFr: bo
       className="relative flex-1 group cursor-crosshair overflow-hidden border-t md:border-t-0 md:border-l border-white/[0.02] first:border-l-0"
       style={{ flexBasis: "33.33%" }}
     >
-      {/* Background image with Parallax effect */}
+      {/* Background image with Parallax effect and WebP/PNG fallback */}
       <motion.div
-        className="absolute -inset-10 bg-cover bg-center opacity-40 group-hover:opacity-100 transition-opacity duration-1000 z-0"
-        style={{ 
-          backgroundImage: `url('${pillar.image}')`,
-          x: mouseX,
-          y: mouseY,
-          scale: 1.05
-        }}
-      />
+        className="absolute -inset-10 z-0"
+        style={{ x: mouseX, y: mouseY, scale: 1.05 }}
+      >
+        <PictureBackground
+          src={pillar.image.replace('.png', '')}
+          alt={pillar.title}
+          imgClassName="opacity-40 group-hover:opacity-100 transition-opacity duration-1000"
+        />
+      </motion.div>
 
       {/* Base overlay for readability, fades on hover */}
       <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-700 pointer-events-none z-10" />

@@ -2,16 +2,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Instagram, Linkedin, Mail, ArrowRight } from "lucide-react";
 import logoSvg from "../assets/logo.svg";
-
-// ── Eclipse-only links (from Ecosystem_Chroma_Final_v3.md) ───────
-const LINKS = {
-  eclipseInstagram: "https://www.instagram.com/eclipse.game.project/",
-  eclipseLinkedIn:  "https://www.linkedin.com/showcase/eclipse-game-project/",
-  discord:          "https://discord.gg/eHKeyu5FW",
-  steam:            "https://store.steampowered.com/",
-  chroma:           "/chroma",
-  email:            "mailto:gameproject.eclipse@gmail.com",
-};
+import { LINKS } from "@/lib/constants";
 
 const DiscordIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -44,7 +35,7 @@ export const EclipseContact = () => {
           </h2>
           {/* Main Community CTA */}
           <a
-            href={LINKS.discord}
+            href={LINKS.eclipseDiscord}
             target="_blank"
             rel="noreferrer"
             className="group relative inline-flex px-14 py-5 bg-white text-black font-cinzel text-sm tracking-[0.2em] uppercase overflow-hidden mt-4"
@@ -66,10 +57,10 @@ export const EclipseContact = () => {
             <div className="w-8 h-px bg-[#8B0000] mb-6" />
             <p className="font-inter text-xs text-white/50 leading-[2] mb-8">
               {isFr
-                ? "Le studio indépendant derrière ECLIPSE. Architecte d'expériences narratives sombres et exigeantes."
-                : "The independent studio behind ECLIPSE. Architect of dark, demanding narrative experiences."}
+                ? "Architecte de visions. Chroma est l'entité créative menant les projets vers l'excellence technique et artistique."
+                : "Architect of visions. Chroma is the creative entity driving projects towards technical and artistic excellence."}
             </p>
-            <a href={LINKS.chroma}
+            <a href={LINKS.chromaPage}
               className="inline-flex items-center gap-3 text-[#8B0000] hover:text-white transition-colors duration-300 group mt-auto">
               <span className="w-6 h-px bg-[#8B0000] group-hover:bg-white transition-colors" />
               <span className="font-cinzel text-[10px] tracking-[0.2em] uppercase font-bold">
@@ -83,7 +74,7 @@ export const EclipseContact = () => {
           <div className="md:px-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-8 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
             <h4 className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000] mb-4">Contact Lead</h4>
             <p className="font-cinzel text-xl text-white mb-2">Amir Dekik</p>
-            <a href={LINKS.email}
+            <a href={LINKS.eclipseEmail}
               className="font-inter text-sm text-white/50 hover:text-white transition-colors block mb-8 underline underline-offset-4 decoration-[#8B0000]/30 hover:decoration-[#8B0000]">
               gameproject.eclipse@gmail.com
             </a>

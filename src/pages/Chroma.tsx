@@ -3,13 +3,14 @@ import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-mot
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSEO } from "@/hooks/useSEO";
+import { PictureBackground } from "@/components/PictureBackground";
 
 /* ─── DATA ─────────────────────────────────────────── */
 const SERVICES = [
-  { fr: "Direction Artistique", en: "Art Direction", bg: "/assets/DIRECTION Artistique.jpg" },
-  { fr: "Installations Immersives", en: "Immersive Installations", bg: "/assets/Installations Immersives.jpg" },
-  { fr: "Cinéma & Vidéo", en: "Cinema & Video", bg: "/assets/Cinéma & Vidéo.png" },
-  { fr: "Design Éditorial", en: "Editorial Design", bg: "/assets/Design Éditorial.jpg" },
+  { fr: "Direction Artistique", en: "Art Direction", bg: "/assets/DIRECTION Artistique.webp", bgFallback: "/assets/DIRECTION Artistique.jpg" },
+  { fr: "Installations Immersives", en: "Immersive Installations", bg: "/assets/Installations Immersives.webp", bgFallback: "/assets/Installations Immersives.jpg" },
+  { fr: "Cinéma & Vidéo", en: "Cinema & Video", bg: "/assets/Cinéma & Vidéo.webp", bgFallback: "/assets/Cinéma & Vidéo.png" },
+  { fr: "Design Éditorial", en: "Editorial Design", bg: "/assets/Design Éditorial.webp", bgFallback: "/assets/Design Éditorial.jpg" },
 ];
 
 const CLIENTS = [
@@ -41,6 +42,7 @@ export default function Chroma() {
   useSEO({
     title: "Chroma Studio — Architecte de Visions",
     description: "Studio créatif indépendant. Architecture visuelle, expériences immersives, direction artistique.",
+    path: "/chroma",
   });
 
   const { scrollY } = useScroll();
@@ -143,7 +145,7 @@ export default function Chroma() {
           >
             <div
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url("${s.bg}")` }}
+              style={{ backgroundImage: `image-set(url("${s.bg}") type("image/webp"), url("${s.bgFallback}") type("image/jpeg"))` }}
             />
             <div className="absolute inset-0 bg-black/45" />
 
@@ -202,9 +204,10 @@ export default function Chroma() {
 
       {/* ── ECLIPSE BRIDGE ── */}
       <section data-dark className="relative overflow-hidden bg-[#000000] z-20" style={{ minHeight: "100vh" }}>
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/assets/boss_00039_.png')", opacity: 0.2 }}
+        <PictureBackground
+          src="/assets/boss_00039_"
+          alt="Background"
+          imgClassName="opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/70 to-transparent" />
 

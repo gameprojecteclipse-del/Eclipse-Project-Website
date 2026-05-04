@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./SectionTitle";
+import { PictureBackground } from "./PictureBackground";
 
 export const EclipseMythology = () => {
   const { i18n } = useTranslation();
@@ -10,9 +11,10 @@ export const EclipseMythology = () => {
     <section id="mythology" className="relative bg-black overflow-hidden">
       {/* Full-height bg image */}
       <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 bg-[url('/assets/eclipse_mythology_bg.png')] bg-cover bg-center"
-          style={{ opacity: 0.18, filter: "saturate(0.15) brightness(0.7)" }}
+        <PictureBackground
+          src="/assets/eclipse_mythology_bg"
+          alt="Eclipse mythology background"
+          imgClassName="opacity-[0.18] saturate-[0.15] brightness-[0.7] animate-ken-burns"
         />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.88)_100%)]" />
         <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black to-transparent" />

@@ -50,7 +50,7 @@ export const Navigation = ({ activeSection, onNavigate }: NavigationProps) => {
   return (
     <nav
       className={`fixed top-0 w-full transition-all duration-300 ${isScrolled
-          ? "bg-eclipse-black/70 backdrop-blur-md border-b border-our-red/70"
+          ? "bg-[#070709]/70 backdrop-blur-md border-b border-[#8B0000]/70"
           : "bg-transparent"
         }`}
       style={{ zIndex: 40 }}

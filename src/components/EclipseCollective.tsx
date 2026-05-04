@@ -3,10 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { X, Lock, Unlock } from "lucide-react";
 import { SectionTitle } from "./SectionTitle";
-
-const SECRET_CODE = "CHROMA2026";
-const FORMSPREE_ID = "xaqvnlyn"; // ✅ Live — gameproject.eclipse@gmail.com
-const PRESS_KIT_URL = "https://drive.google.com/YOUR_PRESS_KIT"; // ← Replace
+import { SECRET_CODE, FORMSPREE_ID, PRESS_KIT_URL } from "@/lib/constants";
 
 const PROFILES = [
   { name: "Amir Dekik",    roleFr: "Directeur Créatif & Produit",   roleEn: "Creative & Product Director",    expertise: "Unreal Engine 5, Game Design, Product Strategy",   photo: "/assets/team/amir.jpg" },
@@ -152,7 +149,7 @@ export const EclipseCollective = () => {
               {unlocked ? (
                 <>
                   <div className="aspect-square bg-[#0f0f0f] relative overflow-hidden">
-                    <img src={m.photo} alt={m.name} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                    <img src={m.photo} alt={m.name} loading="lazy" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                       onError={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>

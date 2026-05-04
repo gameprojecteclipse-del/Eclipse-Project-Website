@@ -42,6 +42,17 @@ const Crossroads = () => {
     return () => clearTimeout(id);
   }, []);
 
+  // Single parent-level mouse tracker — eliminates border flicker
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (selectedSide) return;
+    const midX = e.currentTarget.getBoundingClientRect().width / 2;
+    setHoveredSide(e.clientX - e.currentTarget.getBoundingClientRect().left < midX ? "eclipse" : "chroma");
+  };
+
+  const handleMouseLeave = () => {
+    if (!selectedSide) setHoveredSide(null);
+  };
+
   const handleSelect = (side: "eclipse" | "chroma") => {
     if (selectedSide) return;
     setSelectedSide(side);
@@ -128,8 +139,6 @@ const Crossroads = () => {
               ? { duration: 1.1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }
               : spring
           }
-          onHoverStart={() => !selectedSide && setHoveredSide("eclipse")}
-          onHoverEnd={() => !selectedSide && setHoveredSide(null)}
           onClick={() => handleSelect("eclipse")}
           style={{ zIndex: selectedSide === "eclipse" ? 20 : 10, cursor: "pointer" }}
         >
@@ -232,8 +241,6 @@ const Crossroads = () => {
               ? { duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }
               : spring
           }
-          onHoverStart={() => !selectedSide && setHoveredSide("chroma")}
-          onHoverEnd={() => !selectedSide && setHoveredSide(null)}
           onClick={() => handleSelect("chroma")}
           style={{ zIndex: selectedSide === "chroma" ? 20 : 10, cursor: "pointer" }}
         >

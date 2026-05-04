@@ -180,7 +180,11 @@ export const EclipsePlayerExperience = () => {
 
   return (
     <section ref={containerRef} className="relative bg-black" style={{ height: "500vh" }}>
-      
+      {/* ── Bridge from Gallery section ── */}
+      <div className="absolute top-0 inset-x-0 h-48 bg-gradient-to-b from-black via-black/90 to-transparent z-40 pointer-events-none" />
+      {/* ── Bridge bottom → next section ── */}
+      <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-black via-black/90 to-transparent z-40 pointer-events-none" />
+
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 

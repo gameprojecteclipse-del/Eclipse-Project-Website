@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { motion, useSpring, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./SectionTitle";
 import { PictureBackground } from "./PictureBackground";
@@ -28,125 +28,126 @@ const pillars = [
   },
 ];
 
-const PillarPanel = ({ pillar, idx, isFr }: { pillar: any, idx: number, isFr: boolean }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const lastMousePos = useRef({ x: 0, y: 0, time: 0 });
+// Spring config — heavy, overshoots slightly for organic feel
+const imgSpring = { type: "spring", stiffness: 55, damping: 18, mass: 1.2 } as const;
+const glowSpring = { type: "spring", stiffness: 40, damping: 22, mass: 1.5 } as const;
 
-  const intensitySpring = useSpring(0, { stiffness: 100, damping: 20 });
-  const mouseX = useSpring(0, { stiffness: 400, damping: 40 });
-  const mouseY = useSpring(0, { stiffness: 400, damping: 40 });
-
-  const handleMouseEnter = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    intensitySpring.set(0);
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    // Parallax logic (small movement based on mouse)
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    mouseX.set((x - centerX) / 12);
-    mouseY.set((y - centerY) / 12);
-
-    const now = performance.now();
-    const dt = now - lastMousePos.current.time;
-    if (dt > 0) {
-      const dx = x - lastMousePos.current.x;
-      const dy = y - lastMousePos.current.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      const speed = distance / dt;
-      const normalizedSpeed = Math.min(speed * 2, 1);
-      intensitySpring.set(0.3 + normalizedSpeed * 0.7);
-    }
-    lastMousePos.current = { x, y, time: now };
-  };
-
-  useEffect(() => {
-    if (!isHovering) return;
-    const interval = setInterval(() => {
-      const now = performance.now();
-      if (now - lastMousePos.current.time > 50) {
-        intensitySpring.set(0.1);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, [isHovering, intensitySpring]);
-
+const PillarPanel = ({
+  pillar,
+  idx,
+  isFr,
+  isActive,
+  isAnyActive,
+  onEnter,
+  onLeave,
+}: {
+  pillar: typeof pillars[number];
+  idx: number;
+  isFr: boolean;
+  isActive: boolean;
+  isAnyActive: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
+}) => {
   return (
     <motion.div
-      ref={containerRef}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.8, delay: idx * 0.1 }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      className="relative flex-1 group cursor-crosshair overflow-hidden border-t md:border-t-0 md:border-l border-white/[0.02] first:border-l-0"
+      transition={{ duration: 1.0, delay: idx * 0.15 }}
+      className="relative flex-1 cursor-crosshair overflow-hidden"
       style={{ flexBasis: "33.33%" }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
     >
-      {/* Background image with Parallax effect and WebP/PNG fallback */}
+      {/* ── Background image — spring-driven, no pump ── */}
       <motion.div
-        className="absolute -inset-10 z-0"
-        style={{ x: mouseX, y: mouseY, scale: 1.05 }}
+        className="absolute inset-0 z-0"
+        animate={{
+          opacity: isActive ? 1 : isAnyActive ? 0.08 : 0.22,
+        }}
+        transition={imgSpring}
       >
         <PictureBackground
-          src={pillar.image.replace('.png', '')}
+          src={pillar.image.replace(".png", "")}
           alt={pillar.title}
-          imgClassName="opacity-40 group-hover:opacity-100 transition-opacity duration-1000"
+          imgClassName="w-full h-full object-cover"
         />
       </motion.div>
 
-      {/* Base overlay for readability, fades on hover */}
-      <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-700 pointer-events-none z-10" />
-
-      {/* Red Lighting Effect based on mouse speed - Centered, over gradients */}
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20"
+      {/* ── Vignette mask — always present, fades out on active ── */}
+      <motion.div
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          width: "200%",
-          height: "200%",
-          background: "radial-gradient(circle, rgba(180,0,0,0.5) 0%, rgba(139,0,0,0.1) 30%, transparent 60%)",
-          opacity: isHovering ? intensitySpring : 0,
-          scale: useTransform(intensitySpring, [0.1, 1], [0.9, 1.4]),
+          background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 25%, black 100%)",
+        }}
+        animate={{ opacity: isActive ? 0.35 : 0.85 }}
+        transition={glowSpring}
+      />
+
+      {/* ── Blood red atmosphere — spring pulse on activate ── */}
+      <motion.div
+        className="absolute inset-0 z-[2] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 80%, rgba(100,0,0,0.5) 0%, transparent 70%)",
           mixBlendMode: "screen",
+        }}
+        animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.85 }}
+        transition={glowSpring}
+      />
+
+      {/* ── Edge dissolve — seamless into surrounding black ── */}
+      <div className="absolute inset-0 z-[3] pointer-events-none"
+        style={{
+          boxShadow: "inset 0 0 120px 40px black",
         }}
       />
 
-      {/* Blends to hide demarcations between pillars and top/bottom - placed UNDER text */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/80 to-transparent pointer-events-none z-10" />
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/90 to-transparent pointer-events-none z-10" />
-      {idx > 0 && <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black/70 to-transparent pointer-events-none z-10" />}
-      {idx < 2 && <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black/70 to-transparent pointer-events-none z-10" />}
+      {/* ── Content ── */}
+      <div className="relative z-[10] flex flex-col justify-end h-full p-8 md:p-10 min-h-[400px] md:min-h-0 pointer-events-none">
 
-      {/* Content - Text is completely unblocked by z-30 */}
-      <div className="relative z-30 flex flex-col justify-end h-full p-8 md:p-10 min-h-[400px] md:min-h-0 pointer-events-none">
-        <span className="font-cinzel text-3xl md:text-5xl text-[#8B0000]/30 group-hover:text-[#8B0000]/70 transition-colors duration-500 block mb-3">
+        {/* Index */}
+        <motion.span
+          className="font-cinzel text-3xl md:text-5xl block mb-3"
+          animate={{ color: isActive ? "rgba(139,0,0,0.6)" : "rgba(139,0,0,0.15)" }}
+          transition={imgSpring}
+        >
           {pillar.id}
-        </span>
-        <h3 className="font-cinzel text-2xl md:text-3xl text-white/70 group-hover:text-white tracking-widest uppercase mb-0 group-hover:mb-4 transition-all duration-500 drop-shadow-[0_0_15px_rgba(0,0,0,1)]">
-          {pillar.title}
-        </h3>
+        </motion.span>
 
-        <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-          <div className="overflow-hidden">
-            <p className="font-inter text-xs md:text-sm text-white/90 leading-relaxed pt-3 pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 drop-shadow-[0_0_15px_rgba(0,0,0,1)]">
-              {isFr ? pillar.descFr : pillar.descEn}
-            </p>
-            <div className="h-px w-10 bg-[#8B0000]/70" />
-          </div>
+        {/* Title */}
+        <motion.h3
+          className="font-cinzel text-2xl md:text-3xl tracking-widest uppercase drop-shadow-[0_0_20px_rgba(0,0,0,1)]"
+          animate={{ color: isActive ? "#ffffff" : "rgba(255,255,255,0.5)" }}
+          transition={imgSpring}
+        >
+          {pillar.title}
+        </motion.h3>
+
+        {/* Separator — draws from left on activate */}
+        <div className="mt-3 h-px overflow-hidden origin-left">
+          <motion.div
+            className="h-full bg-gradient-to-r from-[#8B0000]/80 via-[#8B0000]/40 to-transparent"
+            animate={{ scaleX: isActive ? 1 : 0 }}
+            transition={{ type: "spring", stiffness: 50, damping: 20 }}
+            style={{ originX: 0 }}
+          />
+        </div>
+
+        {/* Description — smooth spring height reveal */}
+        <div className="overflow-hidden">
+          <motion.p
+            className="font-inter text-xs md:text-sm text-white/80 leading-relaxed drop-shadow-[0_0_20px_rgba(0,0,0,1)]"
+            animate={{
+              opacity: isActive ? 1 : 0,
+              y: isActive ? 0 : 10,
+              height: isActive ? "auto" : 0,
+              marginTop: isActive ? "16px" : "0px",
+            }}
+            transition={glowSpring}
+          >
+            {isFr ? pillar.descFr : pillar.descEn}
+          </motion.p>
         </div>
       </div>
     </motion.div>
@@ -156,13 +157,12 @@ const PillarPanel = ({ pillar, idx, isFr }: { pillar: any, idx: number, isFr: bo
 export const EclipseGameplayLoop = () => {
   const { i18n } = useTranslation();
   const isFr = i18n.language === "fr";
+  const [activePillar, setActivePillar] = useState<number | null>(null);
 
   return (
     <section className="relative w-full bg-black overflow-hidden" id="gameplay">
-      {/* Top blend */}
-      <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black via-black/80 to-transparent z-10 pointer-events-none" />
 
-      {/* Section Title — above pillars */}
+      {/* Section title */}
       <div className="relative z-30 max-w-7xl mx-auto px-8 lg:px-16 pt-32 pb-12">
         <SectionTitle
           index="04"
@@ -172,11 +172,27 @@ export const EclipseGameplayLoop = () => {
         />
       </div>
 
-      <div className="relative flex flex-col md:flex-row z-20" style={{ minHeight: "85vh" }}>
+      {/* Pillars */}
+      <div
+        className="relative flex flex-col md:flex-row z-10"
+        style={{ minHeight: "85vh" }}
+      >
         {pillars.map((pillar, idx) => (
-          <PillarPanel key={pillar.id} pillar={pillar} idx={idx} isFr={isFr} />
+          <PillarPanel
+            key={pillar.id}
+            pillar={pillar}
+            idx={idx}
+            isFr={isFr}
+            isActive={activePillar === idx}
+            isAnyActive={activePillar !== null}
+            onEnter={() => setActivePillar(idx)}
+            onLeave={() => setActivePillar(null)}
+          />
         ))}
       </div>
+
+      {/* ── Section bridge bottom → Gallery ── */}
+      <div className="absolute bottom-0 inset-x-0 h-56 bg-gradient-to-t from-black via-black/90 to-transparent z-20 pointer-events-none" />
     </section>
   );
 };

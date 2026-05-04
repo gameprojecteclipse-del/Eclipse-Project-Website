@@ -74,7 +74,9 @@ export const EclipseGallery = () => {
   const prev = () => setCurrent((c) => (c - 1 + artworks.length) % artworks.length);
 
   return (
-    <section id="gallery" className="relative bg-black pt-20 pb-32">
+    <section id="gallery" className="relative bg-black pt-0 pb-32">
+      {/* ── Bridge from Gameplay section ── */}
+      <div className="absolute top-0 inset-x-0 h-56 bg-gradient-to-b from-black via-black/90 to-transparent z-20 pointer-events-none" />
       {/* Label */}
       <div className="relative z-10 max-w-[1920px] mx-auto px-8 lg:px-16 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <SectionTitle

@@ -7,10 +7,25 @@ const ROWS = [
   { labelFr: "Genre",       labelEn: "Genre",      valFr: "Action Aventure / Souls-like",               valEn: "Action Adventure / Souls-like" },
   { labelFr: "Sous-genre",  labelEn: "Sub-genre",  valFr: "Dark Fantasy Narratif",                      valEn: "Narrative Dark Fantasy" },
   { labelFr: "Plateformes", labelEn: "Platforms",  valFr: "PC → Console (PS / Xbox / Switch)",          valEn: "PC → Console (PS / Xbox / Switch)" },
-  { labelFr: "Cible",       labelEn: "Target",     valFr: "Fans de Souls-like & narration multiculturelle", valEn: "Souls-like & multicultural narrative fans" },
-  { labelFr: "Démo",        labelEn: "Demo",       valFr: "45–60 min jouable — Q1 2027",                valEn: "45–60 min playable — Q1 2027" },
+  { labelFr: "Cible",       labelEn: "Audience",   valFr: "Fans de Souls-like & narration multiculturelle", valEn: "Souls-like & multicultural narrative fans" },
+  { labelFr: "Démo",        labelEn: "Demo",       valFr: "15–30 min jouable — Q1 2027",                valEn: "15–30 min playable — Q1 2027" },
   { labelFr: "Structure",   labelEn: "Structure",  valFr: "3 Tomes — 10 à 15h d'expérience totale",     valEn: "3 Tomes — 10 to 15h total experience" },
 ] as const;
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, x: -16, filter: "blur(3px)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export const EclipseConceptOverview = () => {
   const { i18n } = useTranslation();
@@ -18,17 +33,13 @@ export const EclipseConceptOverview = () => {
 
   return (
     <section id="concept" className="relative bg-black overflow-hidden">
-      {/* Full-height background image */}
       <div className="absolute inset-0">
-        {/* WebP with PNG fallback */}
         <PictureBackground
           src="/assets/eclipse_concept_bg"
           alt="Eclipse concept background"
           imgClassName="opacity-[0.28] saturate-[0.2] brightness-[0.75]"
         />
-        {/* Gradient mask — left side blacks out for legibility, right reveals the image */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/98 via-black/80 to-black/40" />
-        {/* Top & bottom fade — seamless connection */}
         <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent" />
         <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
@@ -36,7 +47,6 @@ export const EclipseConceptOverview = () => {
       <div className="relative z-10 min-h-[70vh] flex items-center">
         <div className="max-w-7xl mx-auto px-8 lg:px-16 py-24 w-full grid grid-cols-1 lg:grid-cols-2 gap-16">
 
-          {/* LEFT — Codex data table */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -45,35 +55,48 @@ export const EclipseConceptOverview = () => {
           >
             <SectionTitle
               index="01"
-              label="Dossier Projet"
-              labelEn="Project Dossier"
+              label="Fiche Technique"
+              labelEn="Game Specification"
               isFr={isFr}
               className="mb-10"
             />
 
-            {/* Data grid — magazine / codex alignment */}
-            <div className="space-y-0 border-t border-white/[0.06]">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              className="border-t border-white/[0.06]"
+            >
               {ROWS.map((row, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.05 * i }}
-                  className="grid grid-cols-[130px_1fr] gap-6 items-baseline py-4 border-b border-white/[0.06] group"
+                  variants={rowVariants}
+                  className="grid grid-cols-[140px_1fr] gap-6 items-baseline py-5 border-b border-white/[0.05] group cursor-default"
                 >
-                  <span className="font-inter text-[9px] tracking-[0.35em] uppercase text-white/22">
+                  {/* Label — blood red */}
+                  <span className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000]">
                     {isFr ? row.labelFr : row.labelEn}
                   </span>
-                  <span className="font-inter text-sm text-white/65 group-hover:text-white/90 transition-colors duration-300">
+
+                  {/* Value — brightens on hover */}
+                  <span className="font-inter text-sm text-white/60 group-hover:text-white/95 transition-colors duration-400 leading-snug">
                     {isFr ? row.valFr : row.valEn}
                   </span>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
+
+            {/* Blood red closing line */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
+              className="mt-1 h-px bg-gradient-to-r from-[#8B0000]/50 via-[#8B0000]/20 to-transparent origin-left"
+            />
           </motion.div>
 
-          {/* RIGHT — empty, shows through the background image */}
           <div className="hidden lg:block" />
         </div>
       </div>

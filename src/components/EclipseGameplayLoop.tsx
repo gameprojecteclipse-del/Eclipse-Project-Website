@@ -103,6 +103,9 @@ const PillarPanel = ({
         }}
       />
 
+      {/* ── Bottom fade inside pillar (Image -> Gradient -> Text) ── */}
+      <div className="absolute bottom-0 inset-x-0 h-56 bg-gradient-to-t from-black via-black/90 to-transparent z-[4] pointer-events-none" />
+
       {/* ── Content ── */}
       <div className="relative z-[10] flex flex-col justify-end h-full p-8 md:p-10 min-h-[400px] md:min-h-0 pointer-events-none">
 
@@ -174,7 +177,7 @@ export const EclipseGameplayLoop = () => {
 
       {/* Pillars */}
       <div
-        className="relative flex flex-col md:flex-row z-10"
+        className="relative flex flex-col md:flex-row"
         style={{ minHeight: "85vh" }}
       >
         {pillars.map((pillar, idx) => (
@@ -191,8 +194,6 @@ export const EclipseGameplayLoop = () => {
         ))}
       </div>
 
-      {/* ── Section bridge bottom → Gallery ── */}
-      <div className="absolute bottom-0 inset-x-0 h-56 bg-gradient-to-t from-black via-black/90 to-transparent z-20 pointer-events-none" />
     </section>
   );
 };

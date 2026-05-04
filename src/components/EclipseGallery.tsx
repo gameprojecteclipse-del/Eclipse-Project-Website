@@ -31,7 +31,7 @@ const artworks: Artwork[] = [
     captionFr: "Le sacrifice prend forme et le halo du dernier âge se dessine.",
   },
   {
-    src: "/assets/gallery/art-1.webp",
+    src: "/assets/gallery/art-1.jpg",
     srcFallback: "/assets/gallery/art-1.jpg",
     title: "The River", 
     titleFr: "Le Fleuve",

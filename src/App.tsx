@@ -16,6 +16,7 @@ const App = () => (
       <BrowserRouter>
         <AnimatedRoutes />
       </BrowserRouter>
+      {/* Vercel Analytics tracking component */}
       <Analytics />
     </TooltipProvider>
   </QueryClientProvider>

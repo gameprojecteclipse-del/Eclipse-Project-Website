@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { PortalEffects } from "@/components/PortalEffects";
 
@@ -85,7 +86,7 @@ const Crossroads = () => {
       >
         {/* ════ ECLIPSE SIDE ════ */}
         <motion.div
-          className="relative cursor-pointer overflow-hidden"
+          className="relative cursor-pointer overflow-hidden w-full h-1/2 md:w-1/2 md:h-full shrink-0"
           animate={isMobile
             ? { width: "100%", height: eclipseH }
             : { width: eclipseW, height: "100%" }
@@ -151,7 +152,7 @@ const Crossroads = () => {
 
         {/* ════ CHROMA SIDE ════ */}
         <motion.div
-          className="relative cursor-pointer overflow-hidden"
+          className="relative cursor-pointer overflow-hidden w-full h-1/2 md:w-1/2 md:h-full shrink-0"
           animate={isMobile
             ? { width: "100%", height: chromaH }
             : { width: chromaW, height: "100%" }

@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./SectionTitle";
@@ -6,6 +7,8 @@ import { PictureBackground } from "./PictureBackground";
 export const EclipseMythology = () => {
   const { i18n } = useTranslation();
   const isFr = i18n.language === "fr";
+
+  const propType = useMemo(() => Math.random() > 0.5 ? 1 : 2, []);
 
   return (
     <section id="mythology" className="relative bg-black overflow-hidden">
@@ -41,8 +44,12 @@ export const EclipseMythology = () => {
           className="font-cinzel text-2xl md:text-4xl lg:text-5xl text-white font-light leading-[1.55] text-center mb-12"
         >
           {isFr
-            ? "Un carrefour civilisationnel où les mythes fondateurs renaissent à travers une Cosmico-Fantasy."
-            : "A civilizational crossroads where founding myths are reborn through a Cosmi-Fantasy."}
+            ? propType === 1
+              ? "Là où les civilisations se sont effacées, les mythes remontent — altérés — et, sous l’éclipse, le destin devient contrainte."
+              : "Là où des civilisations se sont superposées jusqu’à s’effacer, les mythes remontent des couches mortes — altérés — et le destin devient une contrainte lente, presque organique."
+            : propType === 1
+              ? "Where civilizations have faded, myths resurface — altered — and under the eclipse’s gaze, fate turns into shackles."
+              : "Where civilizations have piled atop each other into erasure, myths crawl back from the buried layers — altered — and fate turns into a slow, almost breathing leash."}
         </motion.blockquote>
 
         {/* Separator */}

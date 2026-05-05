@@ -37,7 +37,7 @@ const Crossroads = () => {
     }, 1700);
   }, [transitioning, navigate]);
 
-  const eclipseImage = "/assets/gallery/art-1.jpg";
+  const eclipseImage = "/assets/gallery/art-1.webp";
   const chromaImage = imageSetWithFallback('/assets/chroma portal image');
 
   return (

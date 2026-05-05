@@ -27,8 +27,8 @@ const artworks: Artwork[] = [
     srcFallback: "/assets/gallery/art-6.jpg",
     title: "The Omen", 
     titleFr: "Le Présage",
-    caption: "The sacrifice takes flesh, and the halo of the last age slowly etches itself upon the world.",
-    captionFr: "Le sacrifice prend forme et le halo du dernier âge se dessine.",
+    caption: "The ritual is all that remains of sacrifice. The air itself tells you so — the final age's halo slowly congeals.",
+    captionFr: "Le sacrifice n’est plus qu’un rituel. On le sent dans l’atmosphère, le halo du dernier âge prend forme.",
   },
   {
     src: "/assets/gallery/art-1.jpg",
@@ -78,7 +78,7 @@ export const EclipseGallery = () => {
       {/* ── Bridge from Gameplay section ── */}
       <div className="absolute top-0 inset-x-0 h-56 bg-gradient-to-b from-black via-black/90 to-transparent z-20 pointer-events-none" />
       {/* Label */}
-      <div className="relative z-10 max-w-[1920px] mx-auto px-8 lg:px-16 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="relative z-30 max-w-[1920px] mx-auto px-8 lg:px-16 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <SectionTitle
           index="03"
           label="Panorama Conceptuel"

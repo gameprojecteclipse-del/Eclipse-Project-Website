@@ -137,7 +137,7 @@ export const EclipseCollective = () => {
             </span>
           )}
           <p className="font-inter text-sm text-white/50 leading-[2] max-w-xl mt-6">
-            {isFr ? "Unis par une vision radicale. Les identités restent sous embargo pour protéger la gestation créative." : "United by a radical vision. Identities remain under embargo to protect the creative process."}
+            {isFr ? "Unis par la même vision. Les identités demeurent voilées pour préserver la gestation créative." : "One vision, many veiled selves. The unknown between us is the womb of making."}
           </p>
         </div>
 

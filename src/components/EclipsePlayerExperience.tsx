@@ -30,8 +30,8 @@ const panels = [
   {
     fr: "Confrontations Épiques",
     en: "Epic Confrontations",
-    descFr: "Des boss monumentaux qui servent de tests de compétence. La victoire ne vient pas de la chance, mais de l'apprentissage des patterns et de la persévérance.",
-    descEn: "Monumental bosses that serve as skill tests. Victory does not come from luck, but from learning patterns and perseverance.",
+    descFr: "Des confrontations colossales, conçues comme des épreuves rudes : la victoire exige l’étude minutieuse de leurs schémas, la persévérance, et l’exploitation de chaque indice récolté au fil de l’expérience.",
+    descEn: "Monumental battles, crafted as harsh trials: victory requires patient study of their designs, unyielding persistence, and the cunning to turn every hard-won lesson into a weapon.",
     video: "/assets/videos/player-exp-4.mp4",
     tag: { fr: "Le Challenge", en: "Challenge" },
   },

@@ -8,22 +8,22 @@ const pillars = [
   {
     id: "01",
     title: "Extraction",
-    descFr: "Le combat n'est pas qu'une question de survie — c'est une moisson. Vous arrachez la matière cosmique directement de l'âme de vos ennemis pour recharger vos capacités. La brutalité est récompensée.",
-    descEn: "Combat is not just survival — it is a harvest. You rip cosmic matter directly from the souls of your enemies to recharge your abilities. Brutality is rewarded.",
+    descFr: "Le combat ne se limite pas à la survie, c’est une moisson. Vous arrachez l’Essence directement de l’âme de vos ennemis pour alimenter vos pouvoirs. La brutalité est récompensée.",
+    descEn: "The fight is not merely survival — it is a harvest. You tear the essence directly from the souls of your enemies to fuel your powers. Brutality is rewarded.",
     image: "/assets/Extraction.png",
   },
   {
     id: "02",
     title: "Mutation",
-    descFr: "L'Essence récoltée vous corrompt autant qu'elle vous renforce. Utilisez cette matière pour muter votre armement ottoman en monstruosités eldritches, modifiant radicalement votre moveset.",
-    descEn: "Harvested Essence corrupts as much as it empowers. Use this matter to mutate your Ottoman weaponry into eldritch monstrosities, radically altering your moveset.",
+    descFr: "Cette Essence vous altère autant qu’elle vous renforce. Servez-vous-en pour transformer votre armement en formes aberrantes, changeant en profondeur votre manière de combattre.",
+    descEn: "This Essence alters you as much as it empowers you. Use it to twist your weaponry into aberrant forms, profoundly changing the way you fight.",
     image: "/assets/Mutation.png",
   },
   {
     id: "03",
     title: "Résonance",
-    descFr: "Le monde réagit à votre niveau de corruption. En accumulant de l'Essence, des passages secrets s'ouvrent, mais des entités invisibles commencent à vous traquer impitoyablement.",
-    descEn: "The world reacts to your corruption level. Accumulating Essence opens secret paths — but unseen entities begin to hunt you relentlessly.",
+    descFr: "Le monde se régit à votre niveau de corruption. En accumulant l’Essence, des passages s’ouvrent à vous, mais des entités monstrueuses vous traquent sans relâche. La corruption a son prix.",
+    descEn: "The world bends to your level of corruption. As you amass Essence, passages open to you but monstrous entities hunt you without rest. Corruption has its price.",
     image: "/assets/Résonance.png",
   },
 ];

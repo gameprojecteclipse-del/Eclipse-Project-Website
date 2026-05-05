@@ -7,6 +7,8 @@ import NotFound from "../pages/NotFound";
 // Lazy load heavy pages for code-splitting
 const Eclipse = lazy(() => import("../pages/Eclipse"));
 const Chroma = lazy(() => import("../pages/Chroma"));
+const Legal = lazy(() => import("../pages/Legal"));
+const Privacy = lazy(() => import("../pages/Privacy"));
 
 // Elegant fallback matching Eclipse dark theme (no brutal flash)
 const PageFallback = () => (
@@ -31,6 +33,8 @@ export const AnimatedRoutes = () => {
           <Route path="/" element={<Crossroads />} />
           <Route path="/eclipse/*" element={<Eclipse />} />
           <Route path="/chroma/*" element={<Chroma />} />
+          <Route path="/legal" element={<Legal />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

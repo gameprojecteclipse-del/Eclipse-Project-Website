@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Instagram, Linkedin, Mail, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Instagram, Linkedin, ArrowRight } from "lucide-react";
 import logoSvg from "../assets/logo.svg";
 import { LINKS } from "@/lib/constants";
 
@@ -119,12 +120,12 @@ export const EclipseContact = () => {
             </p>
           </div>
           <div className="flex gap-6">
-            <a href="#" className="font-inter text-[10px] text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
+            <Link to="/legal" className="font-inter text-[10px] text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
               {isFr ? "Mentions Légales" : "Legal"}
-            </a>
-            <a href="#" className="font-inter text-[10px] text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
+            </Link>
+            <Link to="/privacy" className="font-inter text-[10px] text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
               {isFr ? "Confidentialité" : "Privacy"}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

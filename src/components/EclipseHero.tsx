@@ -57,7 +57,7 @@ export const EclipseHero = () => {
             initial={{ y: "102%" }}
             animate={{ y: 0 }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            className="font-cinzel text-[22vw] md:text-[13vw] lg:text-[11vw] text-white font-bold tracking-[0.04em] leading-none"
+            className="font-cinzel text-[16vw] sm:text-[11vw] md:text-[9vw] lg:text-[8vw] text-white font-bold tracking-[0.06em] leading-none"
           >
             ECLIPSE
           </motion.h1>

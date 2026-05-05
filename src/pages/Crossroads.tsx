@@ -49,7 +49,7 @@ const Crossroads = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-black font-inter relative"
+        className="h-[100dvh] w-full flex flex-col md:flex-row overflow-hidden bg-black font-inter relative"
       >
         {/* Language Toggle */}
         <motion.div

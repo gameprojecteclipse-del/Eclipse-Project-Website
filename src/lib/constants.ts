@@ -15,7 +15,7 @@ export const LINKS = {
   chromaInstagram: "https://www.instagram.com/chroma.studio.interactive",
   chromaYouTube: "https://www.youtube.com/@ChromaDigital",
   chromaLinkedIn: "https://www.linkedin.com/company/121184022/",
-  chromaFacebook: "https://www.facebook.com/profile.php?id=61558231365851",
+  chromaFacebook: "https://www.facebook.com/share/18KiGMvTF9/?mibextid=wwXIfr",
   chromaEmail: "mailto:contact@chroma-studio.dz",
 
   // Internal

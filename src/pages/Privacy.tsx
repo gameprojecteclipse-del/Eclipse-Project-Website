@@ -24,7 +24,7 @@ const Privacy = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-[#8B0000]/40 font-inter py-24 px-6 md:px-16 lg:px-32 relative overflow-hidden">
+    <div className="min-h-[100dvh] bg-black text-white selection:bg-[#8B0000]/40 font-inter py-24 px-6 md:px-16 lg:px-32 relative overflow-hidden">
       {/* Background glow */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#8B0000]/10 rounded-full blur-[150px] pointer-events-none" />
       

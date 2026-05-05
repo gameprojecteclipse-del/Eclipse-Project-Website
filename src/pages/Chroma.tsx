@@ -140,7 +140,7 @@ export default function Chroma() {
         {SERVICES.map((s, idx) => (
           <div
             key={idx}
-            className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
+            className="sticky top-0 h-[100dvh] w-full flex items-center justify-center overflow-hidden"
             style={{ zIndex: 10 + idx }}
           >
             <div
@@ -211,7 +211,7 @@ export default function Chroma() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/70 to-transparent" />
 
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-8">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] text-center px-8">
           <motion.span
             initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="text-[10px] tracking-[0.55em] uppercase text-white/30 mb-16"
@@ -267,7 +267,7 @@ export default function Chroma() {
               <a href="https://www.linkedin.com/company/121184022/" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
                 LinkedIn
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61558231365851" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
+              <a href="https://www.facebook.com/share/18KiGMvTF9/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors">
                 Facebook
               </a>
             </div>

@@ -49,7 +49,7 @@ const Eclipse = () => {
   }, []);
 
   return (
-    <div className="bg-black min-h-screen text-white font-inter selection:bg-[#8B0000]/40 relative">
+    <div className="bg-black min-h-[100dvh] text-white font-inter selection:bg-[#8B0000]/40 relative">
       <AnimatePresence>
         {isHeaderVisible && (
           <motion.header

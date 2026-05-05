@@ -13,7 +13,7 @@ export const EclipseHero = () => {
   };
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center vignette-blend">
+    <section className="relative w-full h-[100dvh] overflow-hidden bg-black flex items-center justify-center vignette-blend">
 
       {/* Background Image */}
       <motion.div

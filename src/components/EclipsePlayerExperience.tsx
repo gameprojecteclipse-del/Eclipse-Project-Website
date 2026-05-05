@@ -186,7 +186,7 @@ export const EclipsePlayerExperience = () => {
       <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-black via-black/90 to-transparent z-40 pointer-events-none" />
 
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
 
         {/* Horizontal sliding rail */}
         <motion.div

@@ -65,13 +65,13 @@ const Crossroads = () => {
         </Button>
       </motion.div>
 
-      {/* Top title — desktop only */}
+      {/* Title */}
       <motion.div
-        className="fixed top-8 left-1/2 -translate-x-1/2 z-[60] pointer-events-none hidden md:block"
+        className="fixed z-[60] pointer-events-none top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:top-8 md:-translate-y-0"
         animate={{ opacity: transitioning ? 0 : 1 }}
         transition={{ duration: 0.3 }}
       >
-        <p className="text-white/40 font-cinzel text-[11px] tracking-[0.5em] uppercase text-center">
+        <p className="text-white/50 font-cinzel text-[9px] md:text-[11px] tracking-[0.5em] uppercase text-center bg-black/40 px-4 py-2 md:bg-transparent rounded-full md:rounded-none backdrop-blur-md md:backdrop-blur-none whitespace-nowrap">
           {t('landing.title')}
         </p>
       </motion.div>
@@ -127,25 +127,22 @@ const Crossroads = () => {
             transition={{ duration: 0.2 }}
           >
             <motion.h2
-              className="font-cinzel text-[clamp(2.5rem,8vw,5rem)] md:text-[clamp(3rem,5vw,5.5rem)] text-white font-bold tracking-widest text-center drop-shadow-lg leading-none"
+              className="font-cinzel text-[2.75rem] sm:text-5xl md:text-6xl text-white font-bold tracking-widest text-center drop-shadow-lg leading-none"
+              style={{ paddingLeft: '0.1em' }} /* Compense le letter-spacing pour un centrage parfait */
               animate={{ scale: hoveredSide === 'eclipse' && !transitioning ? 1.04 : 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 22 }}
             >
               ECLIPSE
             </motion.h2>
-            <div className="h-px w-8 bg-[#8B0000]/70 my-3" />
-            <p className="text-white/50 font-inter text-[10px] tracking-[0.3em] uppercase text-center max-w-[160px] md:max-w-[200px] leading-loose">
-              {t('landing.eclipse_desc')}
-            </p>
             <motion.div
-              className="mt-4"
+              className="mt-6"
               animate={{
                 opacity: hoveredSide === 'eclipse' && !transitioning ? 1 : 0,
                 y: hoveredSide === 'eclipse' && !transitioning ? 0 : 10,
               }}
               transition={{ duration: 0.3 }}
             >
-              <span className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white hover:bg-[#8B0000] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)] transition-all duration-500 cursor-pointer inline-block">
+              <span className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-8 py-3 md:px-10 md:py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white hover:bg-[#8B0000] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)] transition-all duration-500 cursor-pointer inline-block whitespace-nowrap">
                 {t('landing.eclipse_btn')}
               </span>
             </motion.div>
@@ -189,25 +186,22 @@ const Crossroads = () => {
             transition={{ duration: 0.2 }}
           >
             <motion.h2
-              className="font-oswald text-[clamp(2.5rem,8vw,5rem)] md:text-[clamp(3rem,5vw,5.5rem)] text-white font-bold tracking-[0.2em] text-center drop-shadow-lg leading-none"
+              className="font-oswald text-[3.25rem] sm:text-6xl md:text-7xl text-white font-bold tracking-[0.2em] text-center drop-shadow-lg leading-none"
+              style={{ paddingLeft: '0.2em' }} /* Compense le letter-spacing pour un centrage parfait */
               animate={{ scale: hoveredSide === 'chroma' && !transitioning ? 1.04 : 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 22 }}
             >
               CHROMA
             </motion.h2>
-            <div className="h-px w-8 bg-white/30 my-3" />
-            <p className="text-white/50 font-inter text-[10px] tracking-[0.3em] uppercase text-center max-w-[160px] md:max-w-[200px] leading-loose">
-              {t('landing.chroma_desc')}
-            </p>
             <motion.div
-              className="mt-4"
+              className="mt-6"
               animate={{
                 opacity: hoveredSide === 'chroma' && !transitioning ? 1 : 0,
                 y: hoveredSide === 'chroma' && !transitioning ? 0 : 10,
               }}
               transition={{ duration: 0.3 }}
             >
-              <span className="inline-block text-[11px] tracking-[0.45em] uppercase px-10 py-4 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer">
+              <span className="inline-block text-[10px] md:text-[11px] tracking-[0.45em] uppercase px-8 py-3 md:px-10 md:py-4 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer whitespace-nowrap">
                 {t('landing.chroma_btn')}
               </span>
             </motion.div>

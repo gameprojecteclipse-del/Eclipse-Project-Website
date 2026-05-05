@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { PortalEffects } from "@/components/PortalEffects";
 
@@ -146,9 +145,9 @@ const Crossroads = () => {
               }}
               transition={{ duration: 0.3 }}
             >
-              <Button variant="ghost" className="border border-white/25 text-white hover:bg-white hover:text-black uppercase tracking-widest text-[9px] h-9 px-6">
+              <span className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white hover:bg-[#8B0000] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)] transition-all duration-500 cursor-pointer inline-block">
                 {t('landing.eclipse_btn')}
-              </Button>
+              </span>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -208,9 +207,9 @@ const Crossroads = () => {
               }}
               transition={{ duration: 0.3 }}
             >
-              <Button variant="ghost" className="border border-white/25 text-white hover:bg-white hover:text-black uppercase tracking-widest text-[9px] h-9 px-6">
+              <span className="inline-block text-[11px] tracking-[0.45em] uppercase px-10 py-4 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer">
                 {t('landing.chroma_btn')}
-              </Button>
+              </span>
             </motion.div>
           </motion.div>
         </motion.div>

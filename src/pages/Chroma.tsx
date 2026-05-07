@@ -14,7 +14,26 @@ const SERVICES = [
 ];
 
 const CLIENTS = [
-  "MAWAHUB", "UBISOFT", "EPIC GAMES", "SONY INTERACTIVE", "L'ORÉAL", "LVMH", "SQUARE ENIX", "BANDAI NAMCO"
+  { name: "Cevital", logo: "/assets/logos/Cevital_logo_2016.svg.png", url: "https://hicosoftstudio.com/" },
+  { name: "OXXO", logo: "/assets/logos/logo_oxxo_kam.webp", url: "https://oxxo.dz/", scale: 1.5 },
+  { name: "Sanofi", logo: "/assets/logos/Logo-Sanofi.png", url: "https://www.sanofi.com/fr/algerie" },
+  { name: "Wellcom", logo: "/assets/logos/Logo-Wellcom-Black.png", url: "#" },
+  { name: "Radisson Blu", logo: "/assets/logos/Radisson_Blu_.png", url: "https://www.linkedin.com/company/radisson-blu-hotel-algiers-hydra/", scale: 0.8 },
+  { name: "Renault Algérie", logo: "/assets/logos/renault algerie logo.png", url: "https://www.renault.dz/" },
+  { name: "Zoom Moto", logo: "/assets/logos/Zoom Moto algerie.png", url: "https://www.info-clipper.com/fr/entreprise/algerie/zoom-moto.dzd6003e1.html", scale: 1.1 },
+  { name: "Noor Algerie", logo: "/assets/logos/Noor Algerie.png", url: "https://www.instagram.com/noor_algerie/", scale: 2 },
+  { name: "Baizid Machine Import", logo: "/assets/logos/Baizid machien import .png", url: "https://www.facebook.com/sarlbaizidmachineimport/" },
+  { name: "LOGO SEGP", logo: "/assets/logos/LOGO SEGP-PNG 1.png", url: "https://dz.kompass.com/c/societe-gardiennage-prevention-securite-general-eurl/dz258646/" },
+  { name: "Advision", logo: "/assets/logos/advisionwhitetahawourdark.png", url: "https://www.advision-dz.net/" },
+  { name: "Bel Algérie", logo: "/assets/logos/bel-algerie-logo.png", url: "https://www.groupe-bel.com/" },
+  { name: "BGS", logo: "/assets/logos/bgs logo_Plan de travail 1.png", url: "https://bgs-dz.com/" },
+  { name: "Gaya Dental", logo: "/assets/logos/gaya dental.png", url: "https://www.instagram.com/gaya_dental/" },
+  { name: "HD Concept", logo: "/assets/logos/hd concept.png", url: "https://hdconcept-dz.com/" },
+  { name: "Hicosoft Studio", logo: "/assets/logos/hicosoft studio.png", url: "https://hicosoftstudio.com/" },
+  { name: "Inside 360", logo: "/assets/logos/httpsinside360.dz.png", url: "https://inside360.dz/" },
+  { name: "Tenta Creative Agency", logo: "/assets/logos/tenta creative agency.png", url: "https://www.facebook.com/TENATACREATIVEAGENCY/" },
+  { name: "UTA", logo: "/assets/logos/uta-logo.png", url: "https://www.facebook.com/UTAequipement/?locale=fr_FR" },
+  { name: "Wamda Creative", logo: "/assets/logos/wamda creative.png", url: "https://www.instagram.com/wamda.dz/" }
 ];
 
 /* ─── SLIDE-UP REVEAL ───────────────────────────────── */
@@ -183,23 +202,53 @@ export default function Chroma() {
           </motion.p>
         </div>
 
-        <div className="flex overflow-x-hidden">
-          <div className="chroma-marquee flex items-center gap-20 lg:gap-32 whitespace-nowrap">
-            {[...CLIENTS, ...CLIENTS].map((c, i) => (
-              <span key={i}
-                style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: i % 2 === 0 ? "normal" : "italic" }}
-                className="text-3xl md:text-5xl font-light text-black/20 hover:text-black transition-colors duration-500 cursor-default select-none"
-              >
-                {c}
-              </span>
-            ))}
-          </div>
-        </div>
+        <div className="flex overflow-hidden w-full">
+          <motion.div
+            style={{ display: "flex", alignItems: "center", width: "max-content" }}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 100, ease: "linear", repeat: Infinity }}
+          >
+            {[...CLIENTS, ...CLIENTS].map((c, i) => {
+              const defaultFilter = c.defaultFilter || "grayscale(1) contrast(1.2)";
+              const hoverFilter = c.hoverFilter || "grayscale(0) contrast(1)";
+              const defaultOpacity = c.defaultOpacity !== undefined ? c.defaultOpacity : 0.45;
+              const hoverOpacity = c.hoverOpacity !== undefined ? c.hoverOpacity : 1;
+              const scale = c.scale || 1;
 
-        <style>{`
-          @keyframes chroma-run { from { transform: translateX(0) } to { transform: translateX(-50%) } }
-          .chroma-marquee { animation: chroma-run 30s linear infinite; display: flex; width: max-content; }
-        `}</style>
+              return (
+                <a
+                  key={i}
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "160px", height: "80px", flexShrink: 0, margin: "0 40px" }}
+                >
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    style={{ 
+                      width: "100%", 
+                      height: "100%", 
+                      objectFit: "contain", 
+                      filter: defaultFilter, 
+                      opacity: defaultOpacity, 
+                      transform: `scale(${scale})`,
+                      transition: "all 0.5s ease" 
+                    }}
+                    onMouseEnter={e => {
+                      (e.target as HTMLImageElement).style.filter = hoverFilter;
+                      (e.target as HTMLImageElement).style.opacity = hoverOpacity.toString();
+                    }}
+                    onMouseLeave={e => {
+                      (e.target as HTMLImageElement).style.filter = defaultFilter;
+                      (e.target as HTMLImageElement).style.opacity = defaultOpacity.toString();
+                    }}
+                  />
+                </a>
+              );
+            })}
+          </motion.div>
+        </div>
       </section>
 
       {/* ── ECLIPSE BRIDGE ── */}

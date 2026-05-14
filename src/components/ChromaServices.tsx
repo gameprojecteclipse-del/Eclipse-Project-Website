@@ -79,8 +79,10 @@ export const ChromaServices = () => {
         >
           {SERVICES.map((s, idx) => {
             const Icon = s.icon;
-            const isTopRow = idx < 2;
-            const isLeftCol = idx % 2 === 0;
+            const isTopRowMD = idx < 2;
+            const isTopRowLG = idx < 3;
+            const isLeftColMD = idx % 2 === 0;
+            const isLeftColLG = idx % 3 === 0;
 
             return (
               <motion.div
@@ -88,8 +90,11 @@ export const ChromaServices = () => {
                 variants={itemVariants}
                 whileHover="hover"
                 className={`relative group flex flex-col justify-between pt-12 pb-20 px-8 md:px-12 transition-all duration-700 overflow-hidden cursor-default
-                  ${!isTopRow ? "border-t border-[#1a1a1a]/10" : ""}
-                  ${!isLeftCol ? "md:border-l md:border-[#1a1a1a]/10" : ""}
+                  border-[#1a1a1a]/10
+                  ${!isTopRowMD ? "md:border-t" : ""}
+                  ${!isTopRowLG ? "lg:border-t" : "lg:border-t-0"}
+                  ${!isLeftColMD ? "md:border-l" : ""}
+                  ${!isLeftColLG ? "lg:border-l" : "lg:border-l-0"}
                 `}
               >
                 {/* Organic Hover Background Expansion */}

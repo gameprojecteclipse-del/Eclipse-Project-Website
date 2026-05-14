@@ -3,6 +3,53 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, ArrowRight } from "lucide-react";
 import { LINKS } from "@/lib/constants";
+import { useEffect, useRef, useState } from "react";
+
+const PingPongVideo = ({ src }: { src: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let frameId: number;
+
+    const update = () => {
+      if (direction === 'backward') {
+        // Manual reverse playback logic
+        if (video.currentTime <= 0.1) {
+          setDirection('forward');
+          video.play().catch(() => {});
+        } else {
+          // Decrement time to simulate reverse (approx 60fps)
+          video.currentTime -= 0.033; 
+        }
+      } else {
+        // Forward playback logic (let native player handle it)
+        if (video.currentTime >= video.duration - 0.1) {
+          video.pause();
+          setDirection('backward');
+        }
+      }
+      frameId = requestAnimationFrame(update);
+    };
+
+    frameId = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(frameId);
+  }, [direction]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      muted
+      playsInline
+      autoPlay
+      className="w-full h-full object-cover"
+    />
+  );
+};
 
 const DiscordIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -27,9 +74,9 @@ export const EclipseContact = () => {
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 1 }} className="text-center mb-32 relative py-20 overflow-hidden border border-[#8B0000]/10 bg-black/40">
           
-          {/* Background Image for this specific CTA */}
-          <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
-            <img src="/assets/eclipse/sections/Rejoignez le Cycle.jpg" alt="Join the Cycle Background" className="w-full h-full object-cover" />
+          {/* Background Video for this specific CTA */}
+          <div className="absolute inset-0 opacity-[0.25] pointer-events-none">
+            <PingPongVideo src="/assets/eclipse/videos/discord-cta.mp4" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none" />
           

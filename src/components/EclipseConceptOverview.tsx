@@ -44,8 +44,8 @@ export const EclipseConceptOverview = () => {
         <div className="absolute bottom-0 inset-x-0 h-64 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
       </div>
 
-      <div className="relative z-10 min-h-[70vh] flex items-center">
-        <div className="max-w-7xl mx-auto px-8 lg:px-16 py-16 w-full grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="relative z-10 min-h-[60vh] md:min-h-[70vh] flex items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-16 py-12 md:py-16 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
 
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -58,7 +58,7 @@ export const EclipseConceptOverview = () => {
               label="Fiche Technique"
               labelEn="Game Specification"
               isFr={isFr}
-              className="mb-10"
+              className="mb-8 md:mb-10"
             />
 
             <motion.div
@@ -72,15 +72,15 @@ export const EclipseConceptOverview = () => {
                 <motion.div
                   key={i}
                   variants={rowVariants}
-                  className="grid grid-cols-[140px_1fr] gap-6 items-baseline py-5 border-b border-white/[0.05] group cursor-default"
+                  className="grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] gap-4 md:gap-6 items-baseline py-4 md:py-5 border-b border-white/[0.05] group cursor-default"
                 >
                   {/* Label — blood red */}
-                  <span className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000]">
+                  <span className="font-inter text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.35em] uppercase text-[#8B0000]">
                     {isFr ? row.labelFr : row.labelEn}
                   </span>
 
                   {/* Value — brightens on hover */}
-                  <span className="font-inter text-sm md:text-base text-white/60 group-hover:text-white/95 transition-colors duration-400 leading-snug">
+                  <span className="font-inter text-sm md:text-base text-white/85 md:text-white/60 group-hover:text-white/95 transition-colors duration-400 leading-snug">
                     {isFr ? row.valFr : row.valEn}
                   </span>
                 </motion.div>

@@ -108,11 +108,11 @@ const PillarPanel = ({
       <div className="absolute bottom-0 inset-x-0 h-56 bg-gradient-to-t from-black via-black/90 to-transparent z-[4] pointer-events-none" />
 
       {/* ── Content ── */}
-      <div className="relative z-[10] flex flex-col justify-end h-full p-8 md:p-10 min-h-[400px] md:min-h-0 pointer-events-none">
+      <div className="relative z-[10] flex flex-col justify-end h-full p-6 md:p-10 min-h-[300px] md:min-h-[400px] lg:min-h-0 pointer-events-none">
 
         {/* Index */}
         <motion.span
-          className="font-cinzel text-3xl md:text-5xl block mb-3"
+          className="font-cinzel text-2xl md:text-5xl block mb-2 md:mb-3"
           animate={{ color: isActive ? "rgba(139,0,0,0.6)" : "rgba(139,0,0,0.15)" }}
           transition={imgSpring}
         >
@@ -121,7 +121,7 @@ const PillarPanel = ({
 
         {/* Title */}
         <motion.h3
-          className="font-cinzel text-2xl md:text-3xl tracking-widest uppercase drop-shadow-[0_0_20px_rgba(0,0,0,1)]"
+          className="font-cinzel text-xl md:text-3xl tracking-widest uppercase drop-shadow-[0_0_20px_rgba(0,0,0,1)]"
           animate={{ color: isActive ? "#ffffff" : "rgba(255,255,255,0.5)" }}
           transition={imgSpring}
         >
@@ -167,7 +167,7 @@ export const EclipseGameplayLoop = () => {
     <section className="relative w-full bg-black overflow-hidden" id="gameplay">
 
       {/* Section title */}
-      <div className="relative z-30 max-w-7xl mx-auto px-8 lg:px-16 pt-32 pb-16">
+      <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-8 lg:px-16 pt-16 md:pt-32 pb-8 md:pb-16">
         <SectionTitle
           index="05"
           label="Pilliers du Gameplay"
@@ -178,8 +178,7 @@ export const EclipseGameplayLoop = () => {
 
       {/* Pillars */}
       <div
-        className="relative flex flex-col md:flex-row"
-        style={{ minHeight: "90vh" }}
+        className="relative flex flex-col md:flex-row min-h-[auto] md:min-h-[90vh]"
       >
         {pillars.map((pillar, idx) => (
           <PillarPanel

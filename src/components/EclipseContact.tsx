@@ -14,6 +14,9 @@ const PingPongVideo = ({ src }: { src: string }) => {
     const video = videoRef.current;
     if (!video || !isReady) return;
 
+    // Ralentir la lecture à 50%
+    video.playbackRate = 0.5;
+
     let frameId: number;
     const update = () => {
       if (direction === 'backward') {
@@ -21,10 +24,9 @@ const PingPongVideo = ({ src }: { src: string }) => {
           setDirection('forward');
           video.play().catch(() => {});
         } else {
-          video.currentTime -= 0.033;
+          video.currentTime -= 0.015;
         }
       } else {
-        // On s'arrête une frame avant la fin (0.1s env)
         if (video.duration && video.currentTime >= video.duration - 0.1) {
           video.pause();
           setDirection('backward');
@@ -38,17 +40,33 @@ const PingPongVideo = ({ src }: { src: string }) => {
   }, [direction, isReady]);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      muted
-      playsInline
-      autoPlay
-      onLoadedMetadata={() => setIsReady(true)}
-      onCanPlay={() => videoRef.current?.play().catch(() => {})}
-      className="w-full h-full object-cover transition-opacity duration-1000"
-      style={{ opacity: isReady ? 1 : 0 }}
-    />
+    <div className="relative w-full h-full overflow-hidden">
+      <video
+        ref={videoRef}
+        src={src}
+        muted
+        playsInline
+        autoPlay
+        onLoadedMetadata={() => setIsReady(true)}
+        onCanPlay={() => videoRef.current?.play().catch(() => {})}
+        className="w-full h-full object-cover transition-opacity duration-1000 scale-[1.3]"
+        style={{ 
+          opacity: isReady ? 0.4 : 0,
+          filter: 'brightness(0.2) contrast(1.1) blur(2px)'
+        }}
+      />
+      {/* Dégradés horizontaux massifs pour cacher les bords gauche/droite */}
+      <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-black to-transparent pointer-events-none z-[7]" />
+      <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-black to-transparent pointer-events-none z-[7]" />
+      
+      {/* Dégradés verticaux massifs pour cacher les coupures haut/bas */}
+      <div className="absolute inset-x-0 top-0 h-32 md:h-64 bg-gradient-to-b from-black to-transparent pointer-events-none z-[7]" />
+      <div className="absolute inset-x-0 bottom-0 h-32 md:h-64 bg-gradient-to-t from-black to-transparent pointer-events-none z-[7]" />
+      
+      {/* Vignette floue sur les bords */}
+      <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,1)] pointer-events-none z-[6]" />
+      <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black_100%)] pointer-events-none z-[6]" />
+    </div>
   );
 };
 
@@ -63,40 +81,38 @@ export const EclipseContact = () => {
   const isFr = i18n.language === "fr";
 
   return (
-    <footer className="relative bg-black pt-32 pb-12 overflow-hidden border-t border-[#8B0000]/20">
-      {/* Intense Red Top Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] max-w-5xl h-px bg-gradient-to-r from-transparent via-[#8B0000]/80 to-transparent shadow-[0_0_20px_rgba(139,0,0,0.8)]" />
+    <footer className="relative bg-black pt-16 md:pt-32 pb-12 overflow-hidden">
       {/* Background red radial gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(139,0,0,0.08),transparent_70%)] pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16">
-
-        {/* ── Wishlist CTA — massive ── */}
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          transition={{ duration: 1 }} className="text-center mb-32 relative py-20 overflow-hidden border border-[#8B0000]/10 bg-black/40">
-          
-          {/* Background Video for this specific CTA */}
-          <div className="absolute inset-0 opacity-[0.25] pointer-events-none">
+      <div className="relative z-10">
+        {/* ── Wishlist CTA — full width ── */}
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          whileInView={{ opacity: 1 }} 
+          viewport={{ once: true }}
+          transition={{ duration: 1.5 }} 
+          className="relative w-screen left-1/2 -translate-x-1/2 text-center mb-16 md:mb-32 py-16 md:py-32 overflow-hidden"
+        >
+          {/* Background Video wrapper with its own internal effects */}
+          <div className="absolute inset-0 pointer-events-none">
             <PingPongVideo src="/assets/eclipse/videos/discord-cta.mp4" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none" />
           
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#8B0000]/15 blur-[120px] pointer-events-none" />
-          
-          <div className="relative z-10">
-            <div className="w-px h-20 bg-gradient-to-b from-[#8B0000] to-transparent mx-auto mb-10" />
-            <h2 className="font-cinzel text-4xl md:text-6xl lg:text-7xl text-white tracking-widest uppercase mb-12 drop-shadow-[0_0_15px_rgba(139,0,0,0.3)] px-4">
+          <div className="relative z-10 max-w-7xl mx-auto px-6">
+            <div className="w-px h-12 md:h-20 bg-gradient-to-b from-[#8B0000] to-transparent mx-auto mb-8 md:mb-10" />
+            <h2 className="font-cinzel text-4xl md:text-7xl lg:text-8xl text-white tracking-[0.2em] uppercase mb-10 md:mb-16 drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]">
               {isFr ? "Rejoignez le Cycle" : "Join the Cycle"}
             </h2>
-            {/* Main Community CTA */}
+            
             <a
               href={LINKS.eclipseDiscord}
               target="_blank"
               rel="noreferrer"
-              className="group relative inline-flex px-14 py-5 bg-white text-black font-cinzel text-sm tracking-[0.2em] uppercase overflow-hidden mt-4"
+              className="group relative inline-flex w-full sm:w-auto justify-center px-8 md:px-16 py-5 md:py-6 bg-white text-black font-cinzel text-xs md:text-base tracking-[0.2em] md:tracking-[0.3em] uppercase overflow-hidden"
             >
               <span className="absolute inset-0 bg-[#8B0000] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-              <span className="relative z-10 flex items-center gap-3 group-hover:text-white transition-colors duration-200">
+              <span className="relative z-10 flex items-center gap-3 md:gap-4 group-hover:text-white transition-colors duration-200">
                 <DiscordIcon />
                 {isFr ? "Rejoindre le Discord" : "Join Discord"}
               </span>
@@ -104,83 +120,84 @@ export const EclipseContact = () => {
           </div>
         </motion.div>
 
-        {/* ── Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 pb-16 border-b border-[#8B0000]/20">
-
-          {/* Chroma Bridge */}
-          <div className="md:pr-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-8 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
-            <h3 className="font-cinzel text-xl text-white mb-2">Chroma Studio</h3>
-            <div className="w-8 h-px bg-[#8B0000] mb-6" />
-            <p className="font-inter text-xs md:text-sm text-white/50 leading-[2] mb-8">
-              {isFr ? "Pour toute demande de presse ou opportunité d'investissement, veuillez télécharger notre kit officiel et nous contacter directement." : "For press inquiries or investment opportunities, please download our official kit and reach out to us directly."}
-            </p>
-            <a href={LINKS.chromaPage}
-              className="inline-flex items-center gap-3 text-[#8B0000] hover:text-white transition-colors duration-300 group mt-auto">
-              <span className="w-6 h-px bg-[#8B0000] group-hover:bg-white transition-colors" />
-              <span className="font-cinzel text-[10px] tracking-[0.2em] uppercase font-bold">
-                {isFr ? "Découvrir Chroma" : "Discover Chroma"}
-              </span>
-              <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
-          </div>
-
-          {/* Contact Lead */}
-          <div className="md:px-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-8 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
-            <h4 className="font-cinzel text-xl text-white mb-2">Amir Dekik</h4>
-            <p className="font-inter text-[10px] md:text-xs text-white/30 uppercase tracking-[0.2em] mb-4">
-              {isFr ? "DIRECTEUR DU PROJET" : "PROJECT DIRECTOR"}
-            </p>
-            <a href="mailto:gameproject.eclipse@gmail.com"
-              className="font-inter text-sm md:text-base text-white/50 hover:text-white transition-colors block mb-8 underline underline-offset-4 decoration-[#8B0000]/30 hover:decoration-[#8B0000]">
-              gameproject.eclipse@gmail.com
-            </a>
-            <div className="mt-auto w-full">
-              <div className="inline-flex w-full items-center justify-between px-5 py-3 border border-[#8B0000]/30 text-[#8B0000] font-cinzel text-[10px] tracking-[0.1em] uppercase cursor-not-allowed bg-black/60 shadow-[inset_0_0_20px_rgba(139,0,0,0.1)]">
-                <span className="flex items-center gap-3 font-bold">
-                  {isFr ? "Wishlist Steam" : "Steam Wishlist"}
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
+          {/* ── Grid ── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 pb-12 md:pb-16 border-b border-[#8B0000]/20">
+            {/* Chroma Bridge */}
+            <div className="md:pr-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-6 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
+              <h3 className="font-cinzel text-lg md:text-xl text-white mb-2">Chroma Studio</h3>
+              <div className="w-8 h-px bg-[#8B0000] mb-6" />
+              <p className="font-inter text-xs md:text-sm text-white/80 md:text-white/50 leading-[1.8] md:leading-[2] mb-8">
+                {isFr ? "Pour toute demande de presse ou opportunité d'investissement, veuillez télécharger notre kit officiel et nous contacter directement." : "For press inquiries or investment opportunities, please download our official kit and reach out to us directly."}
+              </p>
+              <a href={LINKS.chromaPage}
+                className="inline-flex items-center gap-3 text-[#8B0000] hover:text-white transition-colors duration-300 group mt-auto">
+                <span className="w-6 h-px bg-[#8B0000] group-hover:bg-white transition-colors" />
+                <span className="font-cinzel text-[10px] tracking-[0.2em] uppercase font-bold">
+                  {isFr ? "Découvrir Chroma" : "Discover Chroma"}
                 </span>
-                <span className="font-inter text-[8px] bg-[#8B0000]/20 px-2 py-1 text-white tracking-widest border border-[#8B0000]/30">
-                  {isFr ? "Bientôt Disponible" : "Coming Soon"}
-                </span>
+                <ArrowRight className="w-3   h-3 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+            </div>
+
+            {/* Contact Lead */}
+            <div className="md:px-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-6 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
+              <h4 className="font-cinzel text-lg md:text-xl text-white mb-2">Amir Dekik</h4>
+              <p className="font-inter text-[10px] md:text-xs text-white/50 md:text-white/30 uppercase tracking-[0.2em] mb-4">
+                {isFr ? "DIRECTEUR DU PROJET" : "PROJECT DIRECTOR"}
+              </p>
+              <a href="mailto:gameproject.eclipse@gmail.com"
+                className="font-inter text-sm md:text-base text-white/80 md:text-white/50 hover:text-white transition-colors block mb-8 underline underline-offset-4 decoration-[#8B0000]/50 md:decoration-[#8B0000]/30 hover:decoration-[#8B0000]">
+                gameproject.eclipse@gmail.com
+              </a>
+              <div className="mt-auto w-full">
+                <div className="inline-flex w-full items-center justify-between px-4 md:px-5 py-3 border border-[#8B0000]/30 text-[#8B0000] font-cinzel text-[9px] md:text-[10px] tracking-[0.1em] uppercase cursor-not-allowed bg-black/60 shadow-[inset_0_0_20px_rgba(139,0,0,0.1)]">
+                  <span className="flex items-center gap-3 font-bold">
+                    {isFr ? "Wishlist Steam" : "Steam Wishlist"}
+                  </span>
+                  <span className="font-inter text-[8px] bg-[#8B0000]/20 px-2 py-1 text-white tracking-widest border border-[#8B0000]/30">
+                    {isFr ? "Bientôt Disponible" : "Coming Soon"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Eclipse-only socials */}
+            <div className="md:pl-12 flex flex-col items-start bg-[#8B0000]/[0.02] p-6 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
+              <h4 className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000] mb-6">
+                {isFr ? "Réseaux Eclipse" : "Eclipse Networks"}
+              </h4>
+              <div className="space-y-4 md:space-y-6 w-full">
+                <a href={LINKS.eclipseInstagram} target="_blank" rel="noreferrer"
+                  className="flex items-center gap-4 font-inter text-sm text-white/80 md:text-white/50 hover:text-white transition-colors group p-3 bg-white/[0.02] hover:bg-[#8B0000]/10 border border-white/5 hover:border-[#8B0000]/30 rounded-sm">
+                  <Instagram className="w-4 h-4 group-hover:text-white transition-colors text-[#8B0000]" />
+                  @eclipse.game.project
+                </a>
+                <a href={LINKS.eclipseLinkedIn} target="_blank" rel="noreferrer"
+                  className="flex items-center gap-4 font-inter text-sm text-white/80 md:text-white/50 hover:text-white transition-colors group p-3 bg-white/[0.02] hover:bg-[#8B0000]/10 border border-white/5 hover:border-[#8B0000]/30 rounded-sm">
+                  <Linkedin className="w-4 h-4 group-hover:text-white transition-colors text-[#8B0000]" />
+                  Eclipse — Showcase
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Eclipse-only socials */}
-          <div className="md:pl-12 flex flex-col items-start bg-[#8B0000]/[0.02] p-8 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
-            <h4 className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000] mb-6">
-              {isFr ? "Réseaux Eclipse" : "Eclipse Networks"}
-            </h4>
-            <div className="space-y-6 w-full">
-              <a href={LINKS.eclipseInstagram} target="_blank" rel="noreferrer"
-                className="flex items-center gap-4 font-inter text-sm text-white/50 hover:text-white transition-colors group p-3 bg-white/[0.02] hover:bg-[#8B0000]/10 border border-white/5 hover:border-[#8B0000]/30 rounded-sm">
-                <Instagram className="w-4 h-4 group-hover:text-white transition-colors text-[#8B0000]" />
-                @eclipse.game.project
-              </a>
-              <a href={LINKS.eclipseLinkedIn} target="_blank" rel="noreferrer"
-                className="flex items-center gap-4 font-inter text-sm text-white/50 hover:text-white transition-colors group p-3 bg-white/[0.02] hover:bg-[#8B0000]/10 border border-white/5 hover:border-[#8B0000]/30 rounded-sm">
-                <Linkedin className="w-4 h-4 group-hover:text-white transition-colors text-[#8B0000]" />
-                Eclipse — Showcase
-              </a>
+          {/* Bottom bar */}
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 gap-6 md:gap-4 text-center md:text-left">
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <img src="/assets/eclipse/logos/logo.svg" alt="Eclipse Logo" className="h-6 w-auto opacity-60 md:opacity-40 hover:opacity-100 transition-opacity" />
+              <p className="font-inter text-[10px] text-white/40 md:text-white/18 tracking-widest">
+                © {new Date().getFullYear()} Chroma Studio · All rights reserved
+              </p>
             </div>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 gap-4">
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <img src="/assets/eclipse/logos/logo.svg" alt="Eclipse Logo" className="h-6 w-auto opacity-40 hover:opacity-100 transition-opacity" />
-            <p className="font-inter text-[10px] text-white/18 tracking-widest">
-              © {new Date().getFullYear()} Chroma Studio · All rights reserved
-            </p>
-          </div>
-          <div className="flex gap-6">
-            <Link to="/legal" className="font-inter text-[10px] text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
-              {isFr ? "Mentions Légales" : "Legal"}
-            </Link>
-            <Link to="/privacy" className="font-inter text-[10px] text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
-              {isFr ? "Confidentialité" : "Privacy"}
-            </Link>
+            <div className="flex gap-6">
+              <Link to="/legal" className="font-inter text-[10px] text-white/40 md:text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
+                {isFr ? "Mentions Légales" : "Legal"}
+              </Link>
+              <Link to="/privacy" className="font-inter text-[10px] text-white/40 md:text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
+                {isFr ? "Confidentialité" : "Privacy"}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

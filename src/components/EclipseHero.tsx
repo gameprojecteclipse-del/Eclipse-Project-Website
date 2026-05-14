@@ -54,14 +54,14 @@ export const EclipseHero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-transparent to-black/75" />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
+      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto flex flex-col items-center w-full">
 
         {/* Studio label */}
         <motion.span
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="font-inter text-[9px] tracking-[0.55em] uppercase text-white/20 mb-4 block"
+          className="font-inter text-[10px] md:text-[9px] tracking-[0.55em] uppercase text-white/50 md:text-white/20 mb-4 block"
         >
           {isFr ? "Chroma Studios Présente" : "Chroma Studios Presents"}
         </motion.span>
@@ -73,16 +73,16 @@ export const EclipseHero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-          className="h-10 md:h-16 w-auto mb-4 opacity-90 drop-shadow-[0_0_15px_rgba(139,0,0,0.3)]"
+          className="h-12 md:h-16 w-auto mb-4 opacity-100 md:opacity-90 drop-shadow-[0_0_15px_rgba(139,0,0,0.5)] md:drop-shadow-[0_0_15px_rgba(139,0,0,0.3)]"
         />
 
         {/* ECLIPSE — clip reveal */}
-        <div className="overflow-hidden mb-4">
+        <div className="overflow-hidden mb-4 w-full">
           <motion.h1
             initial={{ y: "102%" }}
             animate={{ y: 0 }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            className="font-cinzel text-[16vw] sm:text-[11vw] md:text-[9vw] lg:text-[8vw] text-white font-bold tracking-[0.06em] leading-none"
+            className="font-cinzel text-[17vw] sm:text-[11vw] md:text-[9vw] lg:text-[8vw] text-white font-bold tracking-[0.06em] leading-none"
           >
             ECLIPSE
           </motion.h1>
@@ -93,7 +93,7 @@ export const EclipseHero = () => {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
-          className="h-px w-1/2 md:w-1/3 mx-auto bg-gradient-to-r from-transparent via-[#8B0000] to-transparent my-7 origin-center"
+          className="h-px w-3/4 md:w-1/3 mx-auto bg-gradient-to-r from-transparent via-[#8B0000] to-transparent my-6 md:my-7 origin-center"
         />
 
         {/* Tagline */}
@@ -101,7 +101,7 @@ export const EclipseHero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1.4 }}
-          className="font-cinzel text-sm md:text-xl lg:text-2xl text-white/65 tracking-[0.2em] uppercase mb-4"
+          className="font-cinzel text-xs sm:text-sm md:text-xl lg:text-2xl text-white/85 md:text-white/65 tracking-[0.2em] md:tracking-[0.2em] uppercase mb-4"
         >
           {isFr ? "INCARNEZ LE CYCLE — BRISEZ LE SILENCE" : "EMBODY THE CYCLE — BREAK THE SILENCE"}
         </motion.h2>
@@ -111,7 +111,7 @@ export const EclipseHero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2.5, delay: 1.9 }}
-          className="text-[#8B0000] font-inter text-[8px] tracking-[0.55em] uppercase mb-12 drop-shadow-[0_0_10px_rgba(139,0,0,0.4)]"
+          className="text-[#8B0000] font-inter text-[9px] md:text-[10px] tracking-[0.3em] md:tracking-[0.55em] uppercase mb-10 md:mb-12 drop-shadow-[0_0_10px_rgba(139,0,0,0.6)] md:drop-shadow-[0_0_10px_rgba(139,0,0,0.4)]"
         >
           Extraction&nbsp;&nbsp;·&nbsp;&nbsp;Mutation&nbsp;&nbsp;·&nbsp;&nbsp;Résonance
         </motion.p>
@@ -121,7 +121,7 @@ export const EclipseHero = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 2.1 }}
-          className="flex flex-col sm:flex-row gap-4"
+          className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0"
         >
           <a
             href="#mythology"
@@ -130,7 +130,7 @@ export const EclipseHero = () => {
               scrollToMythology(e);
             }}
             onMouseEnter={() => audioManager.playSound('hover')}
-            className="btn-aaa font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white transition-all duration-500"
+            className="btn-aaa w-full sm:w-auto font-cinzel text-[10px] md:text-[11px] tracking-[0.3em] uppercase px-6 py-4 md:px-10 md:py-4 bg-[#8B0000]/80 md:bg-[#8B0000]/60 border border-[#8B0000] text-white transition-all duration-500 text-center"
           >
             {isFr ? "Découvrir l'Univers" : "Explore the World"}
           </a>
@@ -140,7 +140,7 @@ export const EclipseHero = () => {
             rel="noopener noreferrer"
             onMouseEnter={() => audioManager.playSound('hover')}
             onClick={() => audioManager.playSound('click')}
-            className="btn-aaa font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 border border-white/20 text-white/70 hover:text-white transition-all duration-500"
+            className="btn-aaa w-full sm:w-auto font-cinzel text-[10px] md:text-[11px] tracking-[0.3em] uppercase px-6 py-4 md:px-10 md:py-4 border border-white/30 md:border-white/20 text-white/90 md:text-white/70 hover:text-white transition-all duration-500 text-center bg-black/40 md:bg-transparent"
           >
             {isFr ? "Rejoindre le Discord" : "Join Discord"}
           </a>

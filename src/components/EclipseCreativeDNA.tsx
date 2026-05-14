@@ -32,7 +32,7 @@ export const EclipseCreativeDNA = () => {
   const isFr = i18n.language === "fr";
 
   return (
-    <section className="relative bg-[#050505] py-24 overflow-hidden border-t border-white/[0.02]">
+    <section className="relative bg-[#050505] py-16 overflow-hidden border-t border-white/[0.02]">
       {/* Background Image with Deep Overlays */}
       <div className="absolute inset-0">
         <PictureBackground
@@ -53,22 +53,22 @@ export const EclipseCreativeDNA = () => {
       </div>
 
       <div className="relative z-20 max-w-7xl mx-auto px-8 lg:px-16">
-        <div className="max-w-2xl mb-32">
+        <div className="max-w-2xl mb-16">
           <SectionTitle
             index="02"
             label="L'ADN Créatif"
             labelEn="Creative DNA"
             isFr={isFr}
-            className="mb-8"
+            className="mb-6"
           />
-          <p className="font-inter text-lg text-white/30 leading-relaxed italic border-l border-[#8B0000]/20 pl-6">
+          <p className="font-inter text-base md:text-lg text-white/30 leading-relaxed italic border-l border-[#8B0000]/20 pl-6">
             {isFr 
               ? "Au-delà des mécaniques, Eclipse repose sur une vision fondamentale. Notre ADN définit l'âme de l'expérience avant même la première ligne de code."
               : "Beyond mechanics, Eclipse rests upon a fundamental vision. Our DNA defines the soul of the experience before the first line of code is even written."}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {DNA_PILLARS.map((pillar, i) => (
             <motion.div
               key={pillar.id}
@@ -82,23 +82,23 @@ export const EclipseCreativeDNA = () => {
               <div className="absolute -inset-10 bg-[radial-gradient(circle_at_center,rgba(139,0,0,0.05)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               
               <div className="relative">
-                <div className="flex items-center gap-4 mb-10">
+                <div className="flex items-center gap-4 mb-6">
                   <span className="font-cinzel text-xs text-[#8B0000]/40 group-hover:text-[#8B0000] transition-colors tracking-[0.3em]">
                     {pillar.id}
                   </span>
                   <div className="h-px w-12 bg-gradient-to-r from-[#8B0000]/60 to-transparent" />
                 </div>
                 
-                <h3 className="font-cinzel text-2xl md:text-3xl text-white/80 group-hover:text-white mb-8 tracking-[0.2em] uppercase transition-all duration-700">
+                <h3 className="font-cinzel text-xl md:text-2xl text-white/80 group-hover:text-white mb-4 tracking-[0.2em] uppercase transition-all duration-700">
                   {isFr ? pillar.titleFr : pillar.titleEn}
                 </h3>
                 
-                <p className="font-inter text-sm md:text-base text-white/25 leading-[1.8] group-hover:text-white/50 transition-colors duration-700">
+                <p className="font-inter text-sm md:text-base text-white/25 leading-[1.6] group-hover:text-white/50 transition-colors duration-700">
                   {isFr ? pillar.descFr : pillar.descEn}
                 </p>
                 
                 {/* Ancient Erased Line */}
-                <div className="mt-10 h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
+                <div className="mt-8 h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
               </div>
             </motion.div>
           ))}

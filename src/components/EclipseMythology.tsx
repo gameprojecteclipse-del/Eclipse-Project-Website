@@ -26,7 +26,7 @@ export const EclipseMythology = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#8B0000]/5 rounded-full blur-[200px] pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-8 lg:px-16 py-20 md:py-24">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 lg:px-16 py-12 md:py-24">
         {/* Micro label */}
         <SectionTitle
           index="03"
@@ -34,14 +34,14 @@ export const EclipseMythology = () => {
           labelEn="The Universe"
           isFr={isFr}
           align="center"
-          className="mb-14"
+          className="mb-8 md:mb-14"
         />
 
         {/* Hero Quote */}
         <motion.blockquote
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-cinzel text-2xl md:text-4xl lg:text-5xl text-white font-light leading-[1.55] text-center mb-12"
+          className="font-cinzel text-xl md:text-4xl lg:text-5xl text-white font-light leading-[1.6] md:leading-[1.55] text-center mb-8 md:mb-12"
         >
           {isFr
             ? propType === 1
@@ -56,7 +56,7 @@ export const EclipseMythology = () => {
         <motion.div
           initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }}
           viewport={{ once: true }} transition={{ duration: 1.2, delay: 0.3 }}
-          className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-[#8B0000]/70 to-transparent mb-20 origin-center"
+          className="h-px w-24 md:w-32 mx-auto bg-gradient-to-r from-transparent via-[#8B0000]/70 to-transparent mb-10 md:mb-20 origin-center"
         />
 
         {/* Editorial description */}
@@ -64,7 +64,7 @@ export const EclipseMythology = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1 }}
-            className="font-inter text-base md:text-lg text-white/55 leading-[2.2] text-center"
+            className="font-inter text-sm md:text-lg text-white/80 md:text-white/55 leading-[1.8] md:leading-[2.2] text-center"
           >
             {isFr
               ? "Sous les cieux, quelque chose dort qui n'aurait jamais dû prendre forme. Les montagnes ont la forme des côtes. Les rivières y battent comme un pouls, et les hommes, aveuglés par l'habitude, prient la lune sans savoir qu'elle leur répond — par bribes, par cauchemars, par cette fièvre silencieuse qui les pousse, la nuit, à creuser plus profond qu'ils ne devraient. Dehors, par-delà l'étendue noire où les astres eux-mêmes hésitent, une présence veille. Elle n'a pas de visage. Elle a une peur. Et tous les âges, quand la lumière faiblit et que l'œil du large se détourne, quelque chose d'immense tente de bouger. Un corps. Une cage. Une erreur. Ça n'a jamais suffi. Mais cette fois, tout au fond, sous les strates et les silences, un battement ralentit. Quelque chose s'achève. Et pour la première fois, ce n'est pas un dieu qui frappe les barreaux. C'est une ombre. Un presque-rien. Un enfant qui tombe du ciel."

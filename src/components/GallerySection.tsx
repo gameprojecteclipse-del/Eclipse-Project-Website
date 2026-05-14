@@ -108,14 +108,14 @@ export const GallerySection = () => {
                                     whileHover={{ y: -5 }}
                                 >
                                     <img
-                                        src={`/assets/gallery/${image.base}_thumb.webp`}
+                                        src={`/assets/eclipse/gallery/${image.base}_thumb.webp`}
                                         alt={image.alt}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         loading="lazy"
                                         onError={(e) => {
                                             // Fallback logic
                                             const target = e.currentTarget;
-                                            const fallback = `/assets/gallery/${image.base}.jpg`;
+                                            const fallback = `/assets/eclipse/gallery/${image.base}.jpg`;
                                             if (target.src !== window.location.origin + fallback) {
                                                 target.src = fallback;
                                             }
@@ -176,12 +176,12 @@ export const GallerySection = () => {
                             transition={{ duration: 0.3 }}
                         >
                             <img
-                                src={`/assets/gallery/${galleryImages[lightboxIndex].base}.webp`}
+                                src={`/assets/eclipse/gallery/${galleryImages[lightboxIndex].base}.webp`}
                                 alt={galleryImages[lightboxIndex].alt}
                                 className="max-h-[85vh] max-w-full object-contain shadow-2xl shadow-black/50 rounded-sm"
                                 onError={(e) => {
                                     const target = e.currentTarget;
-                                    const fallback = `/assets/gallery/${galleryImages[lightboxIndex].base}.jpg`;
+                                    const fallback = `/assets/eclipse/gallery/${galleryImages[lightboxIndex].base}.jpg`;
                                     if (target.src !== window.location.origin + fallback) {
                                         target.src = fallback;
                                     }

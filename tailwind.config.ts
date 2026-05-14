@@ -76,6 +76,7 @@ export default {
         'cinzel': ['Cinzel', 'serif'],
         'oswald': ['Oswald', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
+        'playfair': ['"Playfair Display"', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'gradient-blood': 'var(--gradient-blood)',

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import heroBackground from "@/assets/hero-background.jpg";
-import downArrow from "@/assets/down-arrow.svg";
-import eclipseLogoFull from "@/assets/logo-full.svg";
+import heroBackground from "/assets/images/ui/hero-background.jpg";
+import downArrow from "/assets/images/ui/down-arrow.svg";
+import eclipseLogoFull from "/assets/images/ui/logo-full.svg";
 import ShinyText from "./ShinyText";
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";

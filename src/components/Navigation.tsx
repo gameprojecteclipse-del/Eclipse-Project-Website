@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import eclipseLogo from "@/assets/logo.svg";
+import eclipseLogo from "/assets/eclipse/logos/logo.svg";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface NavigationProps {

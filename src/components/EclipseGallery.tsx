@@ -11,56 +11,58 @@ interface Artwork {
   titleFr: string;
   caption: string;
   captionFr: string;
+  objectPosition?: string;
 }
 
 const artworks: Artwork[] = [
   {
-    src: "/assets/gallery/art-2.webp",
-    srcFallback: "/assets/gallery/art-2.jpg",
-    title: "The Fracture", 
-    titleFr: "La Fracture",
-    caption: "First biome — the city of Gueldaman, devoured by the matter of the void.",
-    captionFr: "Premier biome — cité gueldamane consumée par la matière du néant.",
-  },
-  {
-    src: "/assets/gallery/art-6.webp",
-    srcFallback: "/assets/gallery/art-6.jpg",
-    title: "The Omen", 
-    titleFr: "Le Présage",
-    caption: "The ritual is all that remains of sacrifice. The air itself tells you so — the final age's halo slowly congeals.",
-    captionFr: "Le sacrifice n’est plus qu’un rituel. On le sent dans l’atmosphère, le halo du dernier âge prend forme.",
-  },
-  {
-    src: "/assets/gallery/art-1.jpg",
-    srcFallback: "/assets/gallery/art-1.jpg",
-    title: "The River", 
-    titleFr: "Le Fleuve",
-    caption: "Deep in the guts of the primal site — the forgotten verses and the membranes of the founder.",
-    captionFr: "Aux entrailles du premier lieu — les versets oubliés et les membranes du fondateur.",
-  },
-  {
-    src: "/assets/gallery/art-3.webp",
-    srcFallback: "/assets/gallery/art-3.jpg",
-    title: "The City of the Gaetulians", 
-    titleFr: "La Cité des Gétules",
-    caption: "Raised on ancient trails, bearing witness to a mighty dynasty — tiered architecture, a centralized socio-political order.",
-    captionFr: "Bâti sur des sentiers, témoin d'une dynastie majeure — architecture hiérarchique, organisation socio-politique centralisée.",
-  },
-  {
-    src: "/assets/gallery/art-4.webp",
-    srcFallback: "/assets/gallery/art-4.jpg",
+    src: "/assets/eclipse/gallery/art-4.webp",
+    srcFallback: "/assets/eclipse/gallery/art-4.jpg",
     title: "The Medracen Sepulcher", 
     titleFr: "Le Sépulcre Medracen",
     caption: "Sanctuary of the devoted — where once blood rivers ran, now the clenched throats of the earth find no relief. The eclipse's promise gathers the living.",
     captionFr: "Lieu de recueillement des fidèles — les rivières de sang n'épanchent plus les gorges nouées, la promesse de l'éclipse rassemble les vivants.",
   },
   {
-    src: "/assets/gallery/art-5.webp",
-    srcFallback: "/assets/gallery/art-5.jpg",
+    src: "/assets/eclipse/gallery/art-6.webp",
+    srcFallback: "/assets/eclipse/gallery/art-6.jpg",
+    title: "The Omen", 
+    titleFr: "Le Présage",
+    caption: "The ritual is all that remains of sacrifice. The air itself tells you so — the final age's halo slowly congeals.",
+    captionFr: "Le sacrifice n’est plus qu’un rituel. On le sent dans l’atmosphère, le halo du dernier âge prend forme.",
+  },
+  {
+    src: "/assets/eclipse/gallery/art-1.webp",
+    srcFallback: "/assets/eclipse/gallery/art-1.jpg",
+    title: "The River", 
+    titleFr: "Le Fleuve",
+    caption: "Deep in the guts of the primal site — the forgotten verses and the membranes of the founder.",
+    captionFr: "Aux entrailles du premier lieu — les versets oubliés et les membranes du fondateur.",
+    objectPosition: "center 85%",
+  },
+  {
+    src: "/assets/eclipse/gallery/art-3.webp",
+    srcFallback: "/assets/eclipse/gallery/art-3.jpg",
+    title: "The City of the Gaetulians", 
+    titleFr: "La Cité des Gétules",
+    caption: "Raised on ancient trails, bearing witness to a mighty dynasty — tiered architecture, a centralized socio-political order.",
+    captionFr: "Bâti sur des sentiers, témoin d'une dynastie majeure — architecture hiérarchique, organisation socio-politique centralisée.",
+  },
+  {
+    src: "/assets/eclipse/gallery/art-5.webp",
+    srcFallback: "/assets/eclipse/gallery/art-5.jpg",
     title: "The Dawn of the Promise", 
     titleFr: "L'Aube de la Promesse",
     caption: "Cathedrals thrust skyward, wrought from select matter — almost sacred. Their walls carry the heft of unseen layers.",
     captionFr: "Les cathédrales se dressent, faites de matières choisies, presque sacrées — les murs portent le poids des strates invisibles.",
+  },
+  {
+    src: "/assets/eclipse/gallery/art-2.png",
+    srcFallback: "/assets/eclipse/gallery/art-2.webp",
+    title: "The Fracture", 
+    titleFr: "La Fracture",
+    caption: "First biome — the city of Gueldaman, devoured by the matter of the void.",
+    captionFr: "Premier biome — cité gueldamane consumée par la matière du néant.",
   },
 ];
 
@@ -80,7 +82,7 @@ export const EclipseGallery = () => {
       {/* Label */}
       <div className="relative z-30 max-w-[1920px] mx-auto px-8 lg:px-16 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <SectionTitle
-          index="03"
+          index="04"
           label="Panorama Conceptuel"
           labelEn="Conceptual Panorama"
           isFr={isFr}
@@ -108,6 +110,7 @@ export const EclipseGallery = () => {
               src={artworks[current].src}
               alt={artworks[current].title}
               className="w-full h-full object-cover animate-ken-burns origin-center"
+              style={{ objectPosition: artworks[current].objectPosition || "center" }}
               loading="lazy"
               onError={e => {
                 const target = e.currentTarget as HTMLImageElement;
@@ -146,7 +149,7 @@ export const EclipseGallery = () => {
                   <h3 className="font-cinzel text-3xl md:text-5xl lg:text-6xl text-white tracking-widest uppercase mb-4 shadow-black drop-shadow-2xl">
                     {isFr ? artworks[current].titleFr : artworks[current].title}
                   </h3>
-                  <p className="font-inter text-sm md:text-base text-white/70 leading-[1.8] max-w-xl shadow-black drop-shadow-lg">
+                  <p className="font-inter text-base md:text-lg text-white/70 leading-[1.8] max-w-xl shadow-black drop-shadow-lg">
                     {isFr ? artworks[current].captionFr : artworks[current].caption}
                   </p>
                 </motion.div>

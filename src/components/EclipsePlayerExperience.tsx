@@ -8,7 +8,7 @@ const panels = [
     en: "Narrative Exploration",
     descFr: "Un monde interconnecté où chaque ruelle cache un secret ou un raccourci. L'exploration est récompensée par la découverte d'un Lore visuel riche et mystérieux.",
     descEn: "An interconnected world where every alley hides a secret or a shortcut. Exploration is rewarded by discovering a rich and mysterious visual Lore.",
-    video: "/assets/videos/player-exp-1.mp4",
+    video: "/assets/eclipse/videos/player-exp-1.mp4",
     tag: { fr: "L'Atmosphère", en: "Atmosphere" },
   },
   {
@@ -16,7 +16,7 @@ const panels = [
     en: "Visceral & Reactive Combat",
     descFr: "Une action rapide et impitoyable où la survie dépend de l'esquive, du timing et de l'agressivité. Chaque coup porté doit être une décision tactique.",
     descEn: "Fast and ruthless action where survival depends on dodging, timing, and aggression. Every strike must be a tactical decision.",
-    video: "/assets/videos/player-exp-2.mp4",
+    video: "/assets/eclipse/videos/player-exp-2.mp4",
     tag: { fr: "L'Action", en: "Action" },
   },
   {
@@ -24,7 +24,7 @@ const panels = [
     en: "Rise in Power",
     descFr: "Un système d'armes transformables qui change le style de jeu à la volée. Le joueur ne change pas d'arme, il apprend à maîtriser un outil complexe.",
     descEn: "A transformable weapon system that changes playstyle on the fly. The player does not change weapons, they learn to master a complex tool.",
-    video: "/assets/videos/player-exp-3.mp4",
+    video: "/assets/eclipse/videos/player-exp-3.mp4",
     tag: { fr: "La Progression", en: "Progression" },
   },
   {
@@ -32,7 +32,7 @@ const panels = [
     en: "Epic Confrontations",
     descFr: "Des confrontations colossales, conçues comme des épreuves rudes : la victoire exige l’étude minutieuse de leurs schémas, la persévérance, et l’exploitation de chaque indice récolté au fil de l’expérience.",
     descEn: "Monumental battles, crafted as harsh trials: victory requires patient study of their designs, unyielding persistence, and the cunning to turn every hard-won lesson into a weapon.",
-    video: "/assets/videos/player-exp-4.mp4",
+    video: "/assets/eclipse/videos/player-exp-4.mp4",
     tag: { fr: "Le Challenge", en: "Challenge" },
   },
 ];
@@ -153,7 +153,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
         <h2 className="font-cinzel text-3xl md:text-4xl lg:text-5xl text-white tracking-widest uppercase mb-6 drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
           {isFr ? panel.fr : panel.en}
         </h2>
-        <p className="font-inter text-xs md:text-sm text-white/70 leading-relaxed border-l border-[#8B0000]/60 pl-5 max-w-md drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
+        <p className="font-inter text-sm md:text-base text-white/70 leading-relaxed border-l border-[#8B0000]/60 pl-5 max-w-md drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
           {isFr ? panel.descFr : panel.descEn}
         </p>
       </div>

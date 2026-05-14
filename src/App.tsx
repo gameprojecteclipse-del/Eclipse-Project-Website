@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatedRoutes } from "./components/AnimatedRoutes";
 import { Analytics } from "@vercel/analytics/react";
+import { CustomCursor } from "./components/CustomCursor";
+import { CursorClickEffect } from "./components/CursorClickEffect";
 
 const queryClient = new QueryClient();
 
@@ -15,11 +17,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
+        <CustomCursor />
+        <CursorClickEffect />
       </BrowserRouter>
       {/* Vercel Analytics tracking component */}
       <Analytics />
-      {/* Global Cinematic Film Grain */}
-      <div className="noise-overlay" />
     </TooltipProvider>
   </QueryClientProvider>
 );

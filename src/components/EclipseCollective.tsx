@@ -6,18 +6,18 @@ import { SectionTitle } from "./SectionTitle";
 import { SECRET_CODE, FORMSPREE_ID, PRESS_KIT_URL } from "@/lib/constants";
 
 const PROFILES = [
-  { name: "Amir Dekik",    roleFr: "Directeur Créatif & Produit",   roleEn: "Creative & Product Director",    expertise: "Unreal Engine 5, Game Design, Product Strategy",   photo: "/assets/team/amir.jpg" },
-  { name: "Alex",          roleFr: "Producteur & Lead Dev UE5",      roleEn: "Producer & Lead UE5 Developer",  expertise: "Unreal Engine 5, C++, Production Pipeline",         photo: "/assets/team/alex.jpg" },
-  { name: "Walid",         roleFr: "Développeur UE5 / IA",           roleEn: "UE5 Developer / AI Specialist",  expertise: "Behavior Trees, AI Systems, UE5",                   photo: "/assets/team/walid.jpg" },
-  { name: "Imad",          roleFr: "Développeur UE5 & Backend",      roleEn: "UE5 & Backend Developer",        expertise: "UE5 Blueprints, C++, Backend",                      photo: "/assets/team/imad.jpg" },
-  { name: "Issam",         roleFr: "Développeur Outils & Gameplay",  roleEn: "Tools & Gameplay Developer",     expertise: "Python, UE5 Plugins, Gameplay Systems",             photo: "/assets/team/issam.jpg" },
-  { name: "Anis",          roleFr: "Animateur Technique 3D",         roleEn: "3D Technical Animator",          expertise: "Rigging, Motion Capture, UE5 Mannequin",            photo: "/assets/team/anis.jpg" },
-  { name: "Horia",         roleFr: "Directeur Artistique 3D",        roleEn: "3D Art Director",                expertise: "Substance Painter, ZBrush, Environment Art",        photo: "/assets/team/horia.jpg" },
-  { name: "Nour",          roleFr: "Animateur 3D Personnages",       roleEn: "3D Character Animator",          expertise: "Blender, Character Animation, Keyframing",          photo: "/assets/team/nour.jpg" },
-  { name: "Sief Eddine",   roleFr: "Directeur Artistique UI/UX",     roleEn: "UI/UX Art Director",             expertise: "Figma, React, Game HUD Design",                    photo: "/assets/team/sief.jpg" },
-  { name: "Alili",         roleFr: "Concepteur Sonore",              roleEn: "Sound Designer",                 expertise: "Wwise, FMOD, Procedural Audio",                    photo: "/assets/team/alili.jpg" },
-  { name: "Abou",          roleFr: "Artiste Conceptuel",             roleEn: "Concept Artist",                 expertise: "Procreate, Photoshop, World-Building",              photo: "/assets/team/abou.jpg" },
-  { name: "Salah Eddine",  roleFr: "Designer Narratif",              roleEn: "Narrative Designer",             expertise: "Narrative Design, Twine, Scenario Writing",         photo: "/assets/team/salaheddine.jpg" },
+  { name: "Expert 01", roleFr: "DIRECTEUR DU PROJET & DIRECTEUR CRÉATIF", roleEn: "PROJECT DIRECTOR & CREATIVE DIRECTOR", expertise: "Direction Artistique, Vision Produit, Game Design", photo: "/assets/eclipse/team/amir.webp" },
+  { name: "Expert 02", roleFr: "LEAD SCÉNARISTE / NARRATIVE DIRECTOR", roleEn: "LEAD WRITER / NARRATIVE DIRECTOR", expertise: "Scénarisation, World Building, Lore Design", photo: "/assets/eclipse/team/alex.webp" },
+  { name: "Expert 03", roleFr: "CHARACTER ANIMATOR 3D", roleEn: "3D CHARACTER ANIMATOR", expertise: "Rigging, Keyframe Animation, Motion Capture", photo: "/assets/eclipse/team/salaheddine.webp" },
+  { name: "Expert 04", roleFr: "LEAD UNREAL ENGINE DEVELOPER", roleEn: "LEAD UNREAL ENGINE DEVELOPER", expertise: "Architecture C++, Blueprints, UE5 Optimization", photo: "/assets/eclipse/team/walid.webp" },
+  { name: "Expert 05", roleFr: "3D ENVIRONMENT ARTIST", roleEn: "3D ENVIRONMENT ARTIST", expertise: "Environment Art, Level Design, Lighting", photo: "/assets/eclipse/team/imad.webp" },
+  { name: "Expert 06", roleFr: "SCÉNARISTE / NARRATIVE DESIGNER", roleEn: "WRITER / NARRATIVE DESIGNER", expertise: "Narration Interactive, Dialogues, Quêtes", photo: "/assets/eclipse/team/horia.webp" },
+  { name: "Expert 07", roleFr: "LEAD 3D ARTIST", roleEn: "LEAD 3D ARTIST", expertise: "High Poly Modeling, Texturing, PBR Workflow", photo: "/assets/eclipse/team/issam.webp" },
+  { name: "Expert 08", roleFr: "WEB DEVELOPER & CREATIVE ASSOCIATE", roleEn: "WEB DEVELOPER & CREATIVE ASSOCIATE", expertise: "Frontend Development, Creative Strategy, UX", photo: "/assets/eclipse/team/anis.webp" },
+  { name: "Expert 09", roleFr: "CONCEPT ARTIST", roleEn: "CONCEPT ARTIST", expertise: "Visual Development, Illustration, Character Design", photo: "/assets/eclipse/team/nour.webp" },
+  { name: "Expert 10", roleFr: "3D ARTIST", roleEn: "3D ARTIST", expertise: "Modeling, Prop Design, Optimization", photo: "/assets/eclipse/team/sief.webp" },
+  { name: "Expert 11", roleFr: "UNREAL ENGINE DEVELOPER & TOOLS DEVELOPER", roleEn: "UNREAL ENGINE DEVELOPER & TOOLS DEVELOPER", expertise: "C++, Pipeline Tools, Shader Development", photo: "/assets/eclipse/team/alili.webp" },
+  { name: "Expert 12", roleFr: "3D & TEXTURE ARTIST", roleEn: "3D & TEXTURE ARTIST", expertise: "Substance Painter, Texturing, Assets", photo: "/assets/eclipse/team/abou.webp" },
 ];
 
 const AccessModal = ({ isFr, onClose, onUnlock }: { isFr: boolean; onClose: () => void; onUnlock: () => void }) => {
@@ -52,7 +52,7 @@ const AccessModal = ({ isFr, onClose, onUnlock }: { isFr: boolean; onClose: () =
         <div className="p-10">
           <div className="w-10 h-10 border border-[#8B0000]/40 flex items-center justify-center mb-7"><Lock className="w-4 h-4 text-[#8B0000]/70" /></div>
           <h3 className="font-cinzel text-xl text-white mb-2">{isFr ? "Dossier Confidentiel" : "Confidential Dossier"}</h3>
-          <p className="font-inter text-xs text-white/35 leading-relaxed mb-7">
+          <p className="font-inter text-sm md:text-base text-white/35 leading-relaxed mb-7">
             {isFr ? "Demandez l'accès ou entrez votre code de déverrouillage." : "Request access or enter your unlock code."}
           </p>
           {/* Tabs */}
@@ -69,7 +69,7 @@ const AccessModal = ({ isFr, onClose, onUnlock }: { isFr: boolean; onClose: () =
             <div className="text-center py-3">
               <div className="w-6 h-px bg-[#8B0000]/60 mx-auto mb-5" />
               <p className="font-cinzel text-white mb-4">{isFr ? "Requête Enregistrée" : "Request Logged"}</p>
-              <p className="font-inter text-xs text-white/45 leading-relaxed">
+              <p className="font-inter text-sm md:text-base text-white/45 leading-relaxed">
                 {isFr
                   ? "Vous recevrez un email avec votre code d'accès, le Pitch Deck et le Press Kit sous 48h."
                   : "You will receive an email with your access code, Pitch Deck and Press Kit within 48h."}
@@ -95,7 +95,7 @@ const AccessModal = ({ isFr, onClose, onUnlock }: { isFr: boolean; onClose: () =
           {/* Code tab */}
           {tab === "code" && (
             <form onSubmit={submitCode} className="space-y-4">
-              <p className="font-inter text-xs text-white/35 leading-relaxed">
+              <p className="font-inter text-sm md:text-base text-white/35 leading-relaxed">
                 {isFr ? "Entrez le code reçu par email après validation." : "Enter the code received by email after approval."}
               </p>
               <input type="password" value={code} onChange={e => setCode(e.target.value)}
@@ -120,23 +120,31 @@ export const EclipseCollective = () => {
   const [unlocked, setUnlocked] = useState(false);
 
   return (
-    <section className="relative bg-[#050505] py-28 border-t border-white/[0.03] overflow-hidden">
+    <section className="relative bg-black py-28 border-t border-white/[0.03] overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
+        <img src="/assets/eclipse/sections/team.jpg" alt="Team Background" className="w-full h-full object-cover" />
+      </div>
+      {/* Transition Gradients */}
+      <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black via-black/80 to-transparent pointer-events-none z-0" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-0" />
+      
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(139,0,0,0.04),transparent_55%)] pointer-events-none" />
       <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-16">
         <div className="mb-16">
           <SectionTitle
-            index="06"
+            index="08"
             label="Le Collectif"
             labelEn="The Collective"
             isFr={isFr}
             className="mb-6"
           />
           {unlocked && (
-            <span className="flex items-center gap-1.5 font-inter text-[8px] uppercase text-[#8B0000] border border-[#8B0000]/30 px-2 py-1 w-fit">
+            <span className="flex items-center gap-1.5 font-inter text-xs uppercase text-[#8B0000] border border-[#8B0000]/30 px-2 py-1 w-fit">
               <Unlock className="w-2.5 h-2.5" />{isFr ? "Déverrouillé" : "Unlocked"}
             </span>
           )}
-          <p className="font-inter text-sm text-white/50 leading-[2] max-w-xl mt-6">
+          <p className="font-inter text-base md:text-lg text-white/50 leading-[2] max-w-xl mt-6">
             {isFr ? "Unis par la même vision. Les identités demeurent voilées pour préserver la gestation créative." : "One vision, many veiled selves. The unknown between us is the womb of making."}
           </p>
         </div>
@@ -154,15 +162,15 @@ export const EclipseCollective = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
                   <div className="p-4">
-                    <h4 className="font-cinzel text-sm text-white mb-1">{m.name}</h4>
-                    <p className="font-inter text-[8px] text-[#8B0000]/80 tracking-wider uppercase mb-2">{isFr ? m.roleFr : m.roleEn}</p>
-                    <p className="font-inter text-[9px] text-white/35 leading-relaxed">{m.expertise}</p>
+                    <h4 className="font-cinzel text-sm md:text-base text-white mb-1">{m.name}</h4>
+                    <p className="font-inter text-[10px] md:text-xs text-[#8B0000]/80 tracking-wider uppercase mb-2">{isFr ? m.roleFr : m.roleEn}</p>
+                    <p className="font-inter text-xs md:text-sm text-white/35 leading-relaxed">{m.expertise}</p>
                   </div>
                 </>
               ) : (
                 <div className="p-5">
-                  <span className="font-inter text-[7px] tracking-[0.25em] text-[#8B0000]/50 group-hover:text-[#8B0000]/80 transition-colors block mb-3">OP_{String(i + 1).padStart(2, "0")}</span>
-                  <span className="font-cinzel text-xs md:text-sm text-white/60 group-hover:text-white/90 transition-colors leading-snug">{isFr ? m.roleFr : m.roleEn}</span>
+                  <span className="font-inter text-[9px] md:text-[10px] tracking-[0.25em] text-[#8B0000]/50 group-hover:text-[#8B0000]/80 transition-colors block mb-3">OP_{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-cinzel text-sm md:text-base text-white/60 group-hover:text-white/90 transition-colors leading-snug">{isFr ? m.roleFr : m.roleEn}</span>
                 </div>
               )}
             </motion.div>

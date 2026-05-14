@@ -4,37 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSEO } from "@/hooks/useSEO";
 import { PictureBackground } from "@/components/PictureBackground";
-
-/* ─── DATA ─────────────────────────────────────────── */
-const SERVICES = [
-  { fr: "Direction Artistique", en: "Art Direction", bg: "/assets/DIRECTION Artistique.webp", bgFallback: "/assets/DIRECTION Artistique.jpg" },
-  { fr: "Installations Immersives", en: "Immersive Installations", bg: "/assets/Installations Immersives.webp", bgFallback: "/assets/Installations Immersives.jpg" },
-  { fr: "Cinéma & Vidéo", en: "Cinema & Video", bg: "/assets/Cinéma & Vidéo.webp", bgFallback: "/assets/Cinéma & Vidéo.png" },
-  { fr: "Design Éditorial", en: "Editorial Design", bg: "/assets/Design Éditorial.webp", bgFallback: "/assets/Design Éditorial.jpg" },
-];
-
-const CLIENTS = [
-  { name: "Cevital", logo: "/assets/logos/Cevital_logo_2016.svg.png", url: "https://hicosoftstudio.com/" },
-  { name: "OXXO", logo: "/assets/logos/logo_oxxo_kam.webp", url: "https://oxxo.dz/", scale: 1.5 },
-  { name: "Sanofi", logo: "/assets/logos/Logo-Sanofi.png", url: "https://www.sanofi.com/fr/algerie" },
-  { name: "Wellcom", logo: "/assets/logos/Logo-Wellcom-Black.png", url: "#" },
-  { name: "Radisson Blu", logo: "/assets/logos/Radisson_Blu_.png", url: "https://www.linkedin.com/company/radisson-blu-hotel-algiers-hydra/", scale: 0.8 },
-  { name: "Renault Algérie", logo: "/assets/logos/renault algerie logo.png", url: "https://www.renault.dz/" },
-  { name: "Zoom Moto", logo: "/assets/logos/Zoom Moto algerie.png", url: "https://www.info-clipper.com/fr/entreprise/algerie/zoom-moto.dzd6003e1.html", scale: 1.1 },
-  { name: "Noor Algerie", logo: "/assets/logos/Noor Algerie.png", url: "https://www.instagram.com/noor_algerie/", scale: 2 },
-  { name: "Baizid Machine Import", logo: "/assets/logos/Baizid machien import .png", url: "https://www.facebook.com/sarlbaizidmachineimport/" },
-  { name: "LOGO SEGP", logo: "/assets/logos/LOGO SEGP-PNG 1.png", url: "https://dz.kompass.com/c/societe-gardiennage-prevention-securite-general-eurl/dz258646/" },
-  { name: "Advision", logo: "/assets/logos/advisionwhitetahawourdark.png", url: "https://www.advision-dz.net/" },
-  { name: "Bel Algérie", logo: "/assets/logos/bel-algerie-logo.png", url: "https://www.groupe-bel.com/" },
-  { name: "BGS", logo: "/assets/logos/bgs logo_Plan de travail 1.png", url: "https://bgs-dz.com/" },
-  { name: "Gaya Dental", logo: "/assets/logos/gaya dental.png", url: "https://www.instagram.com/gaya_dental/" },
-  { name: "HD Concept", logo: "/assets/logos/hd concept.png", url: "https://hdconcept-dz.com/" },
-  { name: "Hicosoft Studio", logo: "/assets/logos/hicosoft studio.png", url: "https://hicosoftstudio.com/" },
-  { name: "Inside 360", logo: "/assets/logos/httpsinside360.dz.png", url: "https://inside360.dz/" },
-  { name: "Tenta Creative Agency", logo: "/assets/logos/tenta creative agency.png", url: "https://www.facebook.com/TENATACREATIVEAGENCY/" },
-  { name: "UTA", logo: "/assets/logos/uta-logo.png", url: "https://www.facebook.com/UTAequipement/?locale=fr_FR" },
-  { name: "Wamda Creative", logo: "/assets/logos/wamda creative.png", url: "https://www.instagram.com/wamda.dz/" }
-];
+import { SERVICES, CLIENTS } from "@/data/chromaData";
 
 /* ─── SLIDE-UP REVEAL ───────────────────────────────── */
 const Up = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
@@ -70,12 +40,7 @@ export default function Chroma() {
   });
 
   return (
-    <div id="top" style={{ fontFamily: "'Inter', sans-serif", background: "#f3f3f1", color: "#000000" }}>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&display=swap"
-        rel="stylesheet"
-      />
-
+    <div id="top" className="font-inter bg-[#f3f3f1] text-[#000000]">
       {/* ── NAV ── */}
       <motion.nav
         initial={{ y: 0, opacity: 1 }}
@@ -88,8 +53,7 @@ export default function Chroma() {
           ← {isFr ? "Retour" : "Back"}
         </button>
         <a href="#top"
-          style={{ fontFamily: "'Playfair Display', serif", fontWeight: 300 }}
-          className="text-sm tracking-[0.3em] text-black">
+          className="font-playfair font-light text-sm tracking-[0.3em] text-black">
           CHROMA
         </a>
         <button onClick={() => i18n.changeLanguage(isFr ? "en" : "fr")}
@@ -106,14 +70,7 @@ export default function Chroma() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontSize: "clamp(5rem, 18vw, 22rem)",
-                fontWeight: 300,
-                lineHeight: 0.9,
-                letterSpacing: "-0.03em",
-                color: "#000000",
-              }}
+              className="font-playfair font-light text-[clamp(5rem,18vw,22rem)] leading-[0.9] tracking-[-0.03em] text-[#000000]"
             >
               CHROMA
             </motion.h1>
@@ -123,8 +80,7 @@ export default function Chroma() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.9 }}
-            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", color: "#000000" }}
-            className="mt-8 text-lg md:text-2xl font-light leading-relaxed max-w-2xl"
+            className="font-playfair italic text-[#000000] mt-8 text-lg md:text-2xl font-light leading-relaxed max-w-2xl"
           >
             {isFr
               ? "Architecte de visions. Chroma est l'entité créative menant les projets vers l'excellence technique et artistique."
@@ -140,14 +96,7 @@ export default function Chroma() {
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-            style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: "clamp(4rem, 12vw, 14rem)",
-              fontWeight: 300,
-              letterSpacing: "-0.02em",
-              lineHeight: 0.9,
-              color: "#000000",
-            }}
+            className="font-playfair font-light text-[clamp(4rem,12vw,14rem)] tracking-[-0.02em] leading-[0.9] text-[#000000]"
           >
             {isFr ? "NOS SERVICES" : "OUR SERVICES"}
           </motion.h2>
@@ -174,15 +123,7 @@ export default function Chroma() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  fontFamily: "'Playfair Display', Georgia, serif",
-                  fontSize: "clamp(3rem, 10vw, 11rem)",
-                  fontWeight: 300,
-                  color: "#ffffff",
-                  lineHeight: 0.9,
-                  letterSpacing: "0.01em",
-                  textShadow: "0 4px 60px rgba(0,0,0,0.5)",
-                }}
+                className="font-playfair font-light text-[clamp(3rem,10vw,11rem)] text-[#ffffff] leading-[0.9] tracking-[0.01em] drop-shadow-[0_4px_60px_rgba(0,0,0,0.5)]"
               >
                 {isFr ? s.fr.toUpperCase() : s.en.toUpperCase()}
               </motion.h2>
@@ -204,7 +145,7 @@ export default function Chroma() {
 
         <div className="flex overflow-hidden w-full">
           <motion.div
-            style={{ display: "flex", alignItems: "center", width: "max-content" }}
+            className="flex items-center w-max"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 100, ease: "linear", repeat: Infinity }}
           >
@@ -221,19 +162,16 @@ export default function Chroma() {
                   href={c.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "160px", height: "80px", flexShrink: 0, margin: "0 40px" }}
+                  className="flex items-center justify-center w-[160px] h-[80px] shrink-0 mx-10"
                 >
                   <img
                     src={c.logo}
                     alt={c.name}
+                    className="w-full h-full object-contain transition-all duration-500"
                     style={{ 
-                      width: "100%", 
-                      height: "100%", 
-                      objectFit: "contain", 
                       filter: defaultFilter, 
                       opacity: defaultOpacity, 
-                      transform: `scale(${scale})`,
-                      transition: "all 0.5s ease" 
+                      transform: `scale(${scale})`
                     }}
                     onMouseEnter={e => {
                       (e.target as HTMLImageElement).style.filter = hoverFilter;
@@ -252,9 +190,9 @@ export default function Chroma() {
       </section>
 
       {/* ── ECLIPSE BRIDGE ── */}
-      <section data-dark className="relative overflow-hidden bg-[#000000] z-20" style={{ minHeight: "100vh" }}>
+      <section data-dark className="relative overflow-hidden bg-[#000000] z-20 min-h-screen">
         <PictureBackground
-          src="/assets/boss_00039_"
+          src="/assets/eclipse/sections/boss-00039"
           alt="Background"
           imgClassName="opacity-20"
         />
@@ -269,12 +207,12 @@ export default function Chroma() {
           </motion.span>
 
           <Up className="mb-2">
-            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(4rem, 13vw, 15rem)", fontWeight: 300, color: "#ffffff", lineHeight: 0.87, letterSpacing: "-0.03em" }}>
+            <h2 className="font-playfair font-light text-[clamp(4rem,13vw,15rem)] text-[#ffffff] leading-[0.87] tracking-[-0.03em]">
               PROJECT
             </h2>
           </Up>
           <Up delay={0.1} className="mb-16">
-            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontSize: "clamp(4rem, 13vw, 15rem)", fontWeight: 300, color: "transparent", WebkitTextStroke: "1px rgba(255,255,255,0.4)", lineHeight: 0.87, letterSpacing: "-0.03em" }}>
+            <h2 className="font-playfair italic font-light text-[clamp(4rem,13vw,15rem)] text-transparent leading-[0.87] tracking-[-0.03em] [-webkit-text-stroke:1px_rgba(255,255,255,0.4)]">
               ECLIPSE
             </h2>
           </Up>
@@ -299,8 +237,7 @@ export default function Chroma() {
               </p>
               <a
                 href="mailto:contact@chroma-studio.dz"
-                className="block text-2xl md:text-3xl lg:text-4xl font-light text-white/90 hover:text-white transition-colors tracking-tight"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                className="block text-2xl md:text-3xl lg:text-4xl font-light text-white/90 hover:text-white transition-colors tracking-tight font-playfair"
               >
                 contact@chroma-studio.dz
               </a>
@@ -342,16 +279,7 @@ export default function Chroma() {
         {/* Giant outline wordmark */}
         <div className="overflow-hidden leading-none -mb-[0.2em] pointer-events-none">
           <h2
-            style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: "clamp(5rem, 21vw, 28rem)",
-              fontWeight: 300,
-              color: "transparent",
-              WebkitTextStroke: "1px rgba(255,255,255,0.15)",
-              lineHeight: 1,
-              letterSpacing: "-0.025em",
-              userSelect: "none",
-            }}
+            className="font-playfair font-light text-[clamp(5rem,21vw,28rem)] text-transparent leading-none tracking-[-0.025em] select-none [-webkit-text-stroke:1px_rgba(255,255,255,0.15)]"
           >
             CHROMA
           </h2>

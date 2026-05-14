@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { EclipseHero } from "../components/EclipseHero";
 import { EclipseConceptOverview } from "../components/EclipseConceptOverview";
+import { EclipseCreativeDNA } from "../components/EclipseCreativeDNA";
 import { EclipseMythology } from "../components/EclipseMythology";
 import { EclipseGallery } from "../components/EclipseGallery";
 import { EclipseGameplayLoop } from "../components/EclipseGameplayLoop";
@@ -12,6 +13,8 @@ import { EclipsePlayerExperience } from "../components/EclipsePlayerExperience";
 import { EclipseRoadmapTimeline } from "../components/EclipseRoadmapTimeline";
 import { EclipseCollective } from "../components/EclipseCollective";
 import { EclipseContact } from "../components/EclipseContact";
+import { BloodScrollProgress } from "../components/BloodScrollProgress";
+import { PostProcessing } from "../components/PostProcessing";
 import { useSEO } from "@/hooks/useSEO";
 
 const Eclipse = () => {
@@ -87,8 +90,11 @@ const Eclipse = () => {
           </motion.header>
         )}
       </AnimatePresence>
+      <PostProcessing />
+      <BloodScrollProgress />
       <EclipseHero />
       <EclipseConceptOverview />
+      <EclipseCreativeDNA />
       <EclipseMythology />
       <EclipseGallery />
       <EclipseGameplayLoop />

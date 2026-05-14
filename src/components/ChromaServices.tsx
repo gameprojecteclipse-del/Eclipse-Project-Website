@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Paintbrush, Code2, MonitorSmartphone, Target } from "lucide-react";
+import { Paintbrush, Code2, MonitorSmartphone, Target, Gamepad2 } from "lucide-react";
 
 const SERVICES = [
   {
@@ -26,6 +26,12 @@ const SERVICES = [
     key_title: "chroma.services_4_title",
     key_desc: "chroma.services_4_desc",
     index: "04",
+  },
+  {
+    icon: Gamepad2,
+    key_title: "chroma.services_5_title",
+    key_desc: "chroma.services_5_desc",
+    index: "05",
   },
 ];
 
@@ -60,16 +66,16 @@ export const ChromaServices = () => {
           <span className="text-xs font-medium uppercase tracking-[0.25em] text-[#1a1a1a]/40">
             {t("chroma.services_title")}
           </span>
-          <span className="text-xs text-[#1a1a1a]/25 tracking-widest">4 POLES</span>
+          <span className="text-xs text-[#1a1a1a]/25 tracking-widest">5 POLES</span>
         </motion.div>
 
-        {/* 2x2 Grid for services */}
+        {/* 2x2 Grid for services -> 3 columns on large screens */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-[#1a1a1a]/10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-[#1a1a1a]/10"
         >
           {SERVICES.map((s, idx) => {
             const Icon = s.icon;

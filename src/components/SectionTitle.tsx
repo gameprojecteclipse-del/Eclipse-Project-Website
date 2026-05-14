@@ -5,7 +5,8 @@
  * <SectionTitle index="01" label="L'Univers" labelEn="The Universe" isFr={isFr} />
  */
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 interface SectionTitleProps {
   index: string;        // "01", "02", …
@@ -26,13 +27,23 @@ export const SectionTitle = ({
 }: SectionTitleProps) => {
   const text = isFr ? label : labelEn;
   const isCenter = align === "center";
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      ref={containerRef}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      style={{ y }}
       className={`relative mb-20 ${isCenter ? "text-center" : ""} ${className}`}
     >
       {/* Accent line */}

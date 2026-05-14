@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, ArrowRight } from "lucide-react";
-import logoSvg from "../assets/logo.svg";
 import { LINKS } from "@/lib/constants";
 
 const DiscordIcon = () => (
@@ -26,27 +25,35 @@ export const EclipseContact = () => {
 
         {/* ── Wishlist CTA — massive ── */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          transition={{ duration: 1 }} className="text-center mb-32 relative">
+          transition={{ duration: 1 }} className="text-center mb-32 relative py-20 overflow-hidden border border-[#8B0000]/10 bg-black/40">
           
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#8B0000]/20 blur-[120px] pointer-events-none" />
+          {/* Background Image for this specific CTA */}
+          <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
+            <img src="/assets/eclipse/sections/Rejoignez le Cycle.jpg" alt="Join the Cycle Background" className="w-full h-full object-cover" />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none" />
           
-          <div className="w-px h-20 bg-gradient-to-b from-[#8B0000] to-transparent mx-auto mb-10" />
-          <h2 className="font-cinzel text-4xl md:text-6xl lg:text-8xl text-white tracking-widest uppercase mb-12 drop-shadow-[0_0_15px_rgba(139,0,0,0.3)]">
-            {isFr ? "Rejoignez le Cycle" : "Join the Cycle"}
-          </h2>
-          {/* Main Community CTA */}
-          <a
-            href={LINKS.eclipseDiscord}
-            target="_blank"
-            rel="noreferrer"
-            className="group relative inline-flex px-14 py-5 bg-white text-black font-cinzel text-sm tracking-[0.2em] uppercase overflow-hidden mt-4"
-          >
-            <span className="absolute inset-0 bg-[#8B0000] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-            <span className="relative z-10 flex items-center gap-3 group-hover:text-white transition-colors duration-200">
-              <DiscordIcon />
-              {isFr ? "Rejoindre le Discord" : "Join Discord"}
-            </span>
-          </a>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#8B0000]/15 blur-[120px] pointer-events-none" />
+          
+          <div className="relative z-10">
+            <div className="w-px h-20 bg-gradient-to-b from-[#8B0000] to-transparent mx-auto mb-10" />
+            <h2 className="font-cinzel text-4xl md:text-6xl lg:text-7xl text-white tracking-widest uppercase mb-12 drop-shadow-[0_0_15px_rgba(139,0,0,0.3)] px-4">
+              {isFr ? "Rejoignez le Cycle" : "Join the Cycle"}
+            </h2>
+            {/* Main Community CTA */}
+            <a
+              href={LINKS.eclipseDiscord}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative inline-flex px-14 py-5 bg-white text-black font-cinzel text-sm tracking-[0.2em] uppercase overflow-hidden mt-4"
+            >
+              <span className="absolute inset-0 bg-[#8B0000] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+              <span className="relative z-10 flex items-center gap-3 group-hover:text-white transition-colors duration-200">
+                <DiscordIcon />
+                {isFr ? "Rejoindre le Discord" : "Join Discord"}
+              </span>
+            </a>
+          </div>
         </motion.div>
 
         {/* ── Grid ── */}
@@ -56,10 +63,8 @@ export const EclipseContact = () => {
           <div className="md:pr-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-8 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
             <h3 className="font-cinzel text-xl text-white mb-2">Chroma Studio</h3>
             <div className="w-8 h-px bg-[#8B0000] mb-6" />
-            <p className="font-inter text-xs text-white/50 leading-[2] mb-8">
-              {isFr
-                ? "Architecte de visions. Chroma est l'entité créative menant les projets vers l'excellence technique et artistique."
-                : "Architect of visions. Chroma is the creative entity driving projects towards technical and artistic excellence."}
+            <p className="font-inter text-xs md:text-sm text-white/50 leading-[2] mb-8">
+              {isFr ? "Pour toute demande de presse ou opportunité d'investissement, veuillez télécharger notre kit officiel et nous contacter directement." : "For press inquiries or investment opportunities, please download our official kit and reach out to us directly."}
             </p>
             <a href={LINKS.chromaPage}
               className="inline-flex items-center gap-3 text-[#8B0000] hover:text-white transition-colors duration-300 group mt-auto">
@@ -73,10 +78,12 @@ export const EclipseContact = () => {
 
           {/* Contact Lead */}
           <div className="md:px-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-8 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
-            <h4 className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000] mb-4">Contact Lead</h4>
-            <p className="font-cinzel text-xl text-white mb-2">Amir Dekik</p>
-            <a href={LINKS.eclipseEmail}
-              className="font-inter text-sm text-white/50 hover:text-white transition-colors block mb-8 underline underline-offset-4 decoration-[#8B0000]/30 hover:decoration-[#8B0000]">
+            <h4 className="font-cinzel text-xl text-white mb-2">Amir Dekik</h4>
+            <p className="font-inter text-[10px] md:text-xs text-white/30 uppercase tracking-[0.2em] mb-4">
+              {isFr ? "Directeur Créatif" : "Creative Director"}
+            </p>
+            <a href="mailto:gameproject.eclipse@gmail.com"
+              className="font-inter text-sm md:text-base text-white/50 hover:text-white transition-colors block mb-8 underline underline-offset-4 decoration-[#8B0000]/30 hover:decoration-[#8B0000]">
               gameproject.eclipse@gmail.com
             </a>
             <div className="mt-auto w-full">
@@ -96,7 +103,7 @@ export const EclipseContact = () => {
             <h4 className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000] mb-6">
               {isFr ? "Réseaux Eclipse" : "Eclipse Networks"}
             </h4>
-            <div className="space-y-5 w-full">
+            <div className="space-y-6 w-full">
               <a href={LINKS.eclipseInstagram} target="_blank" rel="noreferrer"
                 className="flex items-center gap-4 font-inter text-sm text-white/50 hover:text-white transition-colors group p-3 bg-white/[0.02] hover:bg-[#8B0000]/10 border border-white/5 hover:border-[#8B0000]/30 rounded-sm">
                 <Instagram className="w-4 h-4 group-hover:text-white transition-colors text-[#8B0000]" />
@@ -114,7 +121,7 @@ export const EclipseContact = () => {
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 gap-4">
           <div className="flex flex-col md:flex-row items-center gap-4">
-            <img src={logoSvg} alt="Eclipse Logo" className="h-6 w-auto opacity-40 hover:opacity-100 transition-opacity" />
+            <img src="/assets/eclipse/logos/logo.svg" alt="Eclipse Logo" className="h-6 w-auto opacity-40 hover:opacity-100 transition-opacity" />
             <p className="font-inter text-[10px] text-white/18 tracking-widest">
               © {new Date().getFullYear()} Chroma Studio · All rights reserved
             </p>

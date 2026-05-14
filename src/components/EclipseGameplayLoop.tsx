@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./SectionTitle";
 import { PictureBackground } from "./PictureBackground";
+import { audioManager } from "@/lib/audio";
 
 const pillars = [
   {
@@ -10,21 +11,21 @@ const pillars = [
     title: "Extraction",
     descFr: "Le combat ne se limite pas à la survie, c’est une moisson. Vous arrachez l’Essence directement de l’âme de vos ennemis pour alimenter vos pouvoirs. La brutalité est récompensée.",
     descEn: "The fight is not merely survival — it is a harvest. You tear the essence directly from the souls of your enemies to fuel your powers. Brutality is rewarded.",
-    image: "/assets/Extraction.png",
+    image: "/assets/eclipse/sections/extraction",
   },
   {
     id: "02",
     title: "Mutation",
     descFr: "Cette Essence vous altère autant qu’elle vous renforce. Servez-vous-en pour transformer votre armement en formes aberrantes, changeant en profondeur votre manière de combattre.",
     descEn: "This Essence alters you as much as it empowers you. Use it to twist your weaponry into aberrant forms, profoundly changing the way you fight.",
-    image: "/assets/Mutation.png",
+    image: "/assets/eclipse/sections/mutation",
   },
   {
     id: "03",
     title: "Résonance",
     descFr: "Le monde se régit à votre niveau de corruption. En accumulant l’Essence, des passages s’ouvrent à vous, mais des entités monstrueuses vous traquent sans relâche. La corruption a son prix.",
     descEn: "The world bends to your level of corruption. As you amass Essence, passages open to you but monstrous entities hunt you without rest. Corruption has its price.",
-    image: "/assets/Résonance.png",
+    image: "/assets/eclipse/sections/resonance",
   },
 ];
 
@@ -137,21 +138,21 @@ const PillarPanel = ({
           />
         </div>
 
-        {/* Description — smooth spring height reveal */}
-        <div className="overflow-hidden">
-          <motion.p
-            className="font-inter text-xs md:text-sm text-white/80 leading-relaxed drop-shadow-[0_0_20px_rgba(0,0,0,1)]"
-            animate={{
-              opacity: isActive ? 1 : 0,
-              y: isActive ? 0 : 10,
-              height: isActive ? "auto" : 0,
-              marginTop: isActive ? "16px" : "0px",
-            }}
-            transition={glowSpring}
-          >
+        {/* Description — robust height reveal */}
+        <motion.div
+          initial={false}
+          animate={{
+            height: isActive ? "auto" : 0,
+            opacity: isActive ? 1 : 0,
+            marginTop: isActive ? 16 : 0
+          }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="overflow-hidden"
+        >
+          <p className="font-inter text-sm md:text-base text-white/80 leading-relaxed drop-shadow-[0_0_20px_rgba(0,0,0,1)] pb-2">
             {isFr ? pillar.descFr : pillar.descEn}
-          </motion.p>
-        </div>
+          </p>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -166,9 +167,9 @@ export const EclipseGameplayLoop = () => {
     <section className="relative w-full bg-black overflow-hidden" id="gameplay">
 
       {/* Section title */}
-      <div className="relative z-30 max-w-7xl mx-auto px-8 lg:px-16 pt-32 pb-12">
+      <div className="relative z-30 max-w-7xl mx-auto px-8 lg:px-16 pt-32 pb-16">
         <SectionTitle
-          index="04"
+          index="05"
           label="Pilliers du Gameplay"
           labelEn="Gameplay Pillars"
           isFr={isFr}
@@ -178,7 +179,7 @@ export const EclipseGameplayLoop = () => {
       {/* Pillars */}
       <div
         className="relative flex flex-col md:flex-row"
-        style={{ minHeight: "85vh" }}
+        style={{ minHeight: "90vh" }}
       >
         {pillars.map((pillar, idx) => (
           <PillarPanel
@@ -188,7 +189,10 @@ export const EclipseGameplayLoop = () => {
             isFr={isFr}
             isActive={activePillar === idx}
             isAnyActive={activePillar !== null}
-            onEnter={() => setActivePillar(idx)}
+            onEnter={() => {
+              setActivePillar(idx);
+              audioManager.playSound('hover');
+            }}
             onLeave={() => setActivePillar(null)}
           />
         ))}

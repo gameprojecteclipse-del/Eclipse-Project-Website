@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 const videoTrailer = "/assets/videos/trailer.mp4";
-import imageThumbnail from "@/assets/concept-art-1.jpg";
+import imageThumbnail from "/assets/images/ui/concept-art-1.jpg";
 
 interface GameSectionProps {
   onLearnMoreProject: () => void;

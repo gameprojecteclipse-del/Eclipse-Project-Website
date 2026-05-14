@@ -15,7 +15,7 @@ export const EclipseMythology = () => {
       {/* Full-height bg image */}
       <div className="absolute inset-0">
         <PictureBackground
-          src="/assets/eclipse_mythology_bg"
+          src="/assets/eclipse/backgrounds/eclipse-mythology-bg"
           alt="Eclipse mythology background"
           imgClassName="opacity-[0.18] saturate-[0.15] brightness-[0.7] animate-ken-burns"
         />
@@ -26,10 +26,10 @@ export const EclipseMythology = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#8B0000]/5 rounded-full blur-[200px] pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-8 lg:px-16 py-32 md:py-48">
+      <div className="relative z-10 max-w-6xl mx-auto px-8 lg:px-16 py-20 md:py-24">
         {/* Micro label */}
         <SectionTitle
-          index="02"
+          index="03"
           label="L'Univers"
           labelEn="The Universe"
           isFr={isFr}
@@ -64,7 +64,7 @@ export const EclipseMythology = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1 }}
-            className="font-inter text-sm md:text-base text-white/55 leading-[2.2] text-center"
+            className="font-inter text-base md:text-lg text-white/55 leading-[2.2] text-center"
           >
             {isFr
               ? "Sous les cieux, quelque chose dort qui n'aurait jamais dû prendre forme. Les montagnes ont la forme des côtes. Les rivières y battent comme un pouls, et les hommes, aveuglés par l'habitude, prient la lune sans savoir qu'elle leur répond — par bribes, par cauchemars, par cette fièvre silencieuse qui les pousse, la nuit, à creuser plus profond qu'ils ne devraient. Dehors, par-delà l'étendue noire où les astres eux-mêmes hésitent, une présence veille. Elle n'a pas de visage. Elle a une peur. Et tous les âges, quand la lumière faiblit et que l'œil du large se détourne, quelque chose d'immense tente de bouger. Un corps. Une cage. Une erreur. Ça n'a jamais suffi. Mais cette fois, tout au fond, sous les strates et les silences, un battement ralentit. Quelque chose s'achève. Et pour la première fois, ce n'est pas un dieu qui frappe les barreaux. C'est une ombre. Un presque-rien. Un enfant qui tombe du ciel."

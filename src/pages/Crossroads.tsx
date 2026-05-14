@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { PortalEffects } from "@/components/PortalEffects";
+import { audioManager } from "@/lib/audio";
 
 const spring = { type: "spring" as const, stiffness: 45, damping: 25, mass: 1.2 };
 
@@ -35,8 +36,8 @@ const Crossroads = () => {
     setTimeout(() => navigate(side === 'eclipse' ? '/eclipse' : '/chroma'), 1700);
   }, [transitioning, navigate]);
 
-  const eclipseImage = "/assets/gallery/art-1.webp";
-  const chromaImage = "/assets/chroma portal image.webp";
+  const eclipseImage = "/assets/eclipse/gallery/art-1.webp";
+  const chromaImage = "/assets/portal/backgrounds/chroma-portal-image.webp";
 
   // Width values for desktop split
   const eclipseW = transitioning === 'eclipse' ? "100%" : transitioning === 'chroma' ? "0%" : hoveredSide === 'eclipse' ? "62%" : hoveredSide === 'chroma' ? "38%" : "50%";
@@ -143,7 +144,16 @@ const Crossroads = () => {
               }}
               transition={{ duration: 0.3 }}
             >
-              <span className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-8 py-3 md:px-10 md:py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white hover:bg-[#8B0000] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)] transition-all duration-500 cursor-pointer inline-block whitespace-nowrap">
+              <span 
+                className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-8 py-3 md:px-10 md:py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white hover:bg-[#8B0000] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)] transition-all duration-500 cursor-pointer inline-block whitespace-nowrap"
+                onMouseEnter={() => audioManager.playSound('hover')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  audioManager.playSound('click');
+                  audioManager.startAmbience();
+                  handleEnter('eclipse');
+                }}
+              >
                 {t('landing.eclipse_btn')}
               </span>
             </motion.div>
@@ -202,7 +212,11 @@ const Crossroads = () => {
               }}
               transition={{ duration: 0.3 }}
             >
-              <span className="inline-block text-[10px] md:text-[11px] tracking-[0.45em] uppercase px-8 py-3 md:px-10 md:py-4 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer whitespace-nowrap">
+              <span 
+                className="inline-block text-[10px] md:text-[11px] tracking-[0.45em] uppercase px-8 py-3 md:px-10 md:py-4 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer whitespace-nowrap"
+                onMouseEnter={() => audioManager.playSound('hover')}
+                onClick={() => audioManager.playSound('click')}
+              >
                 {t('landing.chroma_btn')}
               </span>
             </motion.div>

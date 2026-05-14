@@ -73,12 +73,12 @@ export const EclipseRoadmapTimeline = () => {
   const lineWidth = useTransform(lineProgress, [0, 1], ["0%", PROGRESS_PCT]);
 
   return (
-    <section ref={sectionRef} className="relative bg-black py-40 border-t border-white/[0.03] overflow-hidden">
+    <section ref={sectionRef} className="relative bg-black pt-24 pb-32 border-t border-white/[0.03] overflow-hidden">
       {/* Background Image without parallax or zoom */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.12] pointer-events-none"
         style={{ 
-          backgroundImage: "url('/assets/boss_00039_.png')"
+          backgroundImage: "url('/assets/eclipse/sections/tmeline-bg.jpg')"
         }}
       />
 
@@ -91,7 +91,7 @@ export const EclipseRoadmapTimeline = () => {
 
       <div className="max-w-7xl mx-auto px-8 lg:px-16 relative z-10">
         <SectionTitle
-          index="05"
+          index="07"
           label="Feuille de Route"
           labelEn="Roadmap"
           isFr={isFr}
@@ -141,7 +141,7 @@ export const EclipseRoadmapTimeline = () => {
                 </div>
 
                 {/* Title */}
-                <h4 className={`font-cinzel text-[10px] md:text-xs tracking-widest uppercase mb-1 md:mb-2 px-1 transition-colors duration-300
+                <h4 className={`font-cinzel text-xs md:text-sm tracking-widest uppercase mb-1 md:mb-2 px-1 transition-colors duration-300
                   ${step.active 
                     ? "text-white" 
                     : step.done 
@@ -151,7 +151,7 @@ export const EclipseRoadmapTimeline = () => {
                 </h4>
 
                 {/* Status / Subtitle (italic) */}
-                <span className={`font-inter text-[10px] italic mb-3 transition-colors duration-300
+                <span className={`font-inter text-xs md:text-sm italic mb-3 transition-colors duration-300
                   ${step.active
                     ? "text-[#C41E1E]"
                     : step.done
@@ -162,8 +162,8 @@ export const EclipseRoadmapTimeline = () => {
                 </span>
 
                 {/* Full detail — hover reveal, absolute so it doesn't shift layout */}
-                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[220px] mt-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-20">
-                  <p className="font-inter text-[10px] text-white/60 leading-relaxed px-3 pt-3 pb-4 border-t border-[#8B0000]/30 bg-black/60 backdrop-blur-sm rounded-b-md">
+                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[280px] mt-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-20">
+                  <p className="font-inter text-xs md:text-sm text-white/60 leading-relaxed px-4 pt-4 pb-5 border-t border-[#8B0000]/30 bg-black/60 backdrop-blur-sm rounded-b-md">
                     {isFr ? step.detailFr : step.detailEn}
                   </p>
                 </div>

@@ -35,17 +35,17 @@ export const EclipseConceptOverview = () => {
     <section id="concept" className="relative bg-black overflow-hidden">
       <div className="absolute inset-0">
         <PictureBackground
-          src="/assets/eclipse_concept_bg"
+          src="/assets/eclipse/backgrounds/eclipse-concept-bg"
           alt="Eclipse concept background"
           imgClassName="opacity-[0.28] saturate-[0.2] brightness-[0.75]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/98 via-black/80 to-black/40" />
         <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent" />
-        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute bottom-0 inset-x-0 h-64 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
       </div>
 
       <div className="relative z-10 min-h-[70vh] flex items-center">
-        <div className="max-w-7xl mx-auto px-8 lg:px-16 py-24 w-full grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="max-w-7xl mx-auto px-8 lg:px-16 py-16 w-full grid grid-cols-1 lg:grid-cols-2 gap-16">
 
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -80,7 +80,7 @@ export const EclipseConceptOverview = () => {
                   </span>
 
                   {/* Value — brightens on hover */}
-                  <span className="font-inter text-sm text-white/60 group-hover:text-white/95 transition-colors duration-400 leading-snug">
+                  <span className="font-inter text-sm md:text-base text-white/60 group-hover:text-white/95 transition-colors duration-400 leading-snug">
                     {isFr ? row.valFr : row.valEn}
                   </span>
                 </motion.div>

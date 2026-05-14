@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import logoSvg from "../assets/logo.svg";
 import { LINKS } from "@/lib/constants";
+import { audioManager } from "@/lib/audio";
 
 export const EclipseHero = () => {
   const { i18n } = useTranslation();
@@ -22,7 +22,7 @@ export const EclipseHero = () => {
         transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
         className="absolute inset-0"
       >
-        <div className="absolute inset-0 bg-[url('/assets/gallery/art-3.webp')] bg-cover bg-center animate-ken-burns origin-center" />
+        <div className="absolute inset-0 bg-[url('/assets/eclipse/gallery/art-3.webp')] bg-cover bg-center animate-ken-burns origin-center" />
       </motion.div>
       <div className="absolute inset-0 bg-[#8B0000]/12 mix-blend-screen" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
@@ -43,7 +43,7 @@ export const EclipseHero = () => {
 
         {/* Logo */}
         <motion.img 
-          src={logoSvg} 
+          src="/assets/eclipse/logos/logo.svg" 
           alt="Eclipse Logo" 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -100,8 +100,12 @@ export const EclipseHero = () => {
         >
           <a
             href="#mythology"
-            onClick={scrollToMythology}
-            className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white hover:bg-[#8B0000] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)] transition-all duration-500"
+            onClick={(e) => {
+              audioManager.playSound('click');
+              scrollToMythology(e);
+            }}
+            onMouseEnter={() => audioManager.playSound('hover')}
+            className="btn-aaa font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 bg-[#8B0000]/80 border border-[#8B0000] text-white transition-all duration-500"
           >
             {isFr ? "Découvrir l'Univers" : "Explore the World"}
           </a>
@@ -109,7 +113,9 @@ export const EclipseHero = () => {
             href={LINKS.eclipseDiscord}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 border border-white/12 text-white/50 hover:border-[#5865F2] hover:text-[#5865F2] transition-all duration-500"
+            onMouseEnter={() => audioManager.playSound('hover')}
+            onClick={() => audioManager.playSound('click')}
+            className="btn-aaa font-cinzel text-[10px] tracking-[0.3em] uppercase px-10 py-4 border border-white/20 text-white/70 hover:text-white transition-all duration-500"
           >
             {isFr ? "Rejoindre le Discord" : "Join Discord"}
           </a>

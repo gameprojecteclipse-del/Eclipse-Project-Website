@@ -1,13 +1,15 @@
 import { createRoot } from "react-dom/client";
-import posthog from "posthog-js";
+import mixpanel from "mixpanel-browser";
 import App from "./App.tsx";
 import "./index.css";
 import "./i18n";
 
-// Initialize PostHog Analytics - Configured for EU Cloud
-posthog.init('phc_xWahzaXaHubibFsMXPp9LnJvfF3Br8YedAEejXznQUAT', {
-    api_host: 'https://eu.i.posthog.com',
-    person_profiles: 'always' // Required for advanced session replays
+// Initialize Mixpanel Analytics - Configured for EU Data Residency
+mixpanel.init('e9b8ed39cd6166cba531878526cd5c60', {
+    api_host: "https://api-eu.mixpanel.com",
+    track_pageview: true,
+    record_sessions: true, // Activation de l'enregistrement des sessions
+    persistence: 'localStorage'
 });
 
 createRoot(document.getElementById("root")!).render(<App />);

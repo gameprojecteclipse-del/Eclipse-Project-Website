@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { PortalEffects } from "@/components/PortalEffects";
 import { audioManager } from "@/lib/audio";
-
-import posthog from "posthog-js";
+import mixpanel from "mixpanel-browser";
 
 const spring = { type: "spring" as const, stiffness: 45, damping: 25, mass: 1.2 };
 
@@ -35,8 +34,8 @@ const Crossroads = () => {
   const handleEnter = useCallback((side: 'eclipse' | 'chroma') => {
     if (transitioning) return;
     
-    // Explicitly track the entry action
-    posthog.capture('portal_entry', { 
+    // Explicitly track the entry action with Mixpanel
+    mixpanel.track('portal_entry', { 
       side,
       language: i18n.language 
     });

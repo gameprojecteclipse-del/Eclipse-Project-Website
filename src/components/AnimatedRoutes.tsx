@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import posthog from "posthog-js";
+import mixpanel from "mixpanel-browser";
 import { AnimatePresence, motion } from "framer-motion";
 import Crossroads from "../pages/Crossroads";
 import NotFound from "../pages/NotFound";
@@ -28,8 +28,8 @@ export const AnimatedRoutes = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Manually capture pageview in SPA
-    posthog.capture('$pageview');
+    // Manually track pageview in SPA
+    mixpanel.track_pageview();
   }, [location]);
 
   return (

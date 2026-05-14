@@ -80,7 +80,7 @@ export const EclipseContact = () => {
           <div className="md:px-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-8 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
             <h4 className="font-cinzel text-xl text-white mb-2">Amir Dekik</h4>
             <p className="font-inter text-[10px] md:text-xs text-white/30 uppercase tracking-[0.2em] mb-4">
-              {isFr ? "Directeur Créatif" : "Creative Director"}
+              {isFr ? "DIRECTEUR DU PROJET" : "PROJECT DIRECTOR"}
             </p>
             <a href="mailto:gameproject.eclipse@gmail.com"
               className="font-inter text-sm md:text-base text-white/50 hover:text-white transition-colors block mb-8 underline underline-offset-4 decoration-[#8B0000]/30 hover:decoration-[#8B0000]">

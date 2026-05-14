@@ -6,7 +6,7 @@ import { SectionTitle } from "./SectionTitle";
 import { SECRET_CODE, FORMSPREE_ID, PRESS_KIT_URL } from "@/lib/constants";
 
 const PROFILES = [
-  { name: "Expert 01", roleFr: "DIRECTEUR DU PROJET & DIRECTEUR CRÉATIF", roleEn: "PROJECT DIRECTOR & CREATIVE DIRECTOR", expertise: "Direction Artistique, Vision Produit, Game Design", photo: "/assets/eclipse/team/amir.webp" },
+  { name: "Expert 01", roleFr: "DIRECTEUR DU PROJET", roleEn: "PROJECT DIRECTOR", expertise: "Direction Artistique, Vision Produit, Game Design", photo: "/assets/eclipse/team/amir.webp" },
   { name: "Expert 02", roleFr: "LEAD SCÉNARISTE / NARRATIVE DIRECTOR", roleEn: "LEAD WRITER / NARRATIVE DIRECTOR", expertise: "Scénarisation, World Building, Lore Design", photo: "/assets/eclipse/team/alex.webp" },
   { name: "Expert 03", roleFr: "CHARACTER ANIMATOR 3D", roleEn: "3D CHARACTER ANIMATOR", expertise: "Rigging, Keyframe Animation, Motion Capture", photo: "/assets/eclipse/team/salaheddine.webp" },
   { name: "Expert 04", roleFr: "LEAD UNREAL ENGINE DEVELOPER", roleEn: "LEAD UNREAL ENGINE DEVELOPER", expertise: "Architecture C++, Blueprints, UE5 Optimization", photo: "/assets/eclipse/team/walid.webp" },

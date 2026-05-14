@@ -1,5 +1,6 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import posthog from "posthog-js";
 import { AnimatePresence, motion } from "framer-motion";
 import Crossroads from "../pages/Crossroads";
 import NotFound from "../pages/NotFound";
@@ -25,6 +26,11 @@ const PageFallback = () => (
 
 export const AnimatedRoutes = () => {
   const location = useLocation();
+
+  useEffect(() => {
+    // Manually capture pageview in SPA
+    posthog.capture('$pageview');
+  }, [location]);
 
   return (
     <AnimatePresence mode="wait">

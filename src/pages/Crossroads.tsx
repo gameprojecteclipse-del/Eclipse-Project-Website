@@ -7,6 +7,8 @@ import { useSEO } from "@/hooks/useSEO";
 import { PortalEffects } from "@/components/PortalEffects";
 import { audioManager } from "@/lib/audio";
 
+import posthog from "posthog-js";
+
 const spring = { type: "spring" as const, stiffness: 45, damping: 25, mass: 1.2 };
 
 const Crossroads = () => {
@@ -32,9 +34,16 @@ const Crossroads = () => {
 
   const handleEnter = useCallback((side: 'eclipse' | 'chroma') => {
     if (transitioning) return;
+    
+    // Explicitly track the entry action
+    posthog.capture('portal_entry', { 
+      side,
+      language: i18n.language 
+    });
+
     setTransitioning(side);
     setTimeout(() => navigate(side === 'eclipse' ? '/eclipse' : '/chroma'), 1700);
-  }, [transitioning, navigate]);
+  }, [transitioning, navigate, i18n.language]);
 
   const eclipseImage = "/assets/eclipse/backgrounds/rgthree.compare._temp_ddgda_00029_.png";
   const chromaImage = "/assets/portal/backgrounds/chroma-portal-image.webp";

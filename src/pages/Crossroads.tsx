@@ -36,7 +36,7 @@ const Crossroads = () => {
     setTimeout(() => navigate(side === 'eclipse' ? '/eclipse' : '/chroma'), 1700);
   }, [transitioning, navigate]);
 
-  const eclipseImage = "/assets/eclipse/gallery/art-1.webp";
+  const eclipseImage = "/assets/eclipse/backgrounds/rgthree.compare._temp_ddgda_00029_.png";
   const chromaImage = "/assets/portal/backgrounds/chroma-portal-image.webp";
 
   // Width values for desktop split

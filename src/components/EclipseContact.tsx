@@ -7,37 +7,48 @@ import { useEffect, useRef, useState } from "react";
 
 const PingPongVideo = ({ src }: { src: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const [isReady, setIsReady] = useState(false);
 
+  // IntersectionObserver: triggers play when the element enters the viewport.
+  // This is required by mobile browsers (iOS Safari, Chrome Android) which
+  // silently ignore `autoPlay` unless triggered programmatically after a
+  // visibility event.
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !isReady) return;
+    if (!video) return;
 
-    // Ralentir la lecture à 50%
-    video.playbackRate = 0.5;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    let frameId: number;
-    const update = () => {
-      if (direction === 'backward') {
-        if (video.currentTime <= 0.1) {
-          setDirection('forward');
-          video.play().catch(() => {});
-        } else {
-          video.currentTime -= 0.015;
-        }
-      } else {
-        if (video.duration && video.currentTime >= video.duration - 0.1) {
-          video.pause();
-          setDirection('backward');
-        }
-      }
-      frameId = requestAnimationFrame(update);
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  // Ping-pong: when video ends, rewind and play again smoothly
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.playbackRate = 0.6;
+
+    const handleEnded = () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
     };
 
-    frameId = requestAnimationFrame(update);
-    return () => cancelAnimationFrame(frameId);
-  }, [direction, isReady]);
+    video.addEventListener("ended", handleEnded);
+    return () => video.removeEventListener("ended", handleEnded);
+  }, []);
 
   return (
     <div className="relative w-full h-full overflow-hidden">
@@ -47,22 +58,23 @@ const PingPongVideo = ({ src }: { src: string }) => {
         muted
         playsInline
         autoPlay
+        loop
         onLoadedMetadata={() => setIsReady(true)}
-        onCanPlay={() => videoRef.current?.play().catch(() => {})}
-        className="w-full h-full object-cover transition-opacity duration-1000 scale-[1.3]"
-        style={{ 
+        className="w-full h-full object-cover scale-[1.3]"
+        style={{
           opacity: isReady ? 0.4 : 0,
-          filter: 'brightness(0.2) contrast(1.1) blur(2px)'
+          filter: 'brightness(0.2) contrast(1.1) blur(2px)',
+          transition: 'opacity 1s ease',
         }}
       />
       {/* Dégradés horizontaux massifs pour cacher les bords gauche/droite */}
       <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-black to-transparent pointer-events-none z-[7]" />
       <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-black to-transparent pointer-events-none z-[7]" />
-      
+
       {/* Dégradés verticaux massifs pour cacher les coupures haut/bas */}
       <div className="absolute inset-x-0 top-0 h-32 md:h-64 bg-gradient-to-b from-black to-transparent pointer-events-none z-[7]" />
       <div className="absolute inset-x-0 bottom-0 h-32 md:h-64 bg-gradient-to-t from-black to-transparent pointer-events-none z-[7]" />
-      
+
       {/* Vignette floue sur les bords */}
       <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,1)] pointer-events-none z-[6]" />
       <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black_100%)] pointer-events-none z-[6]" />

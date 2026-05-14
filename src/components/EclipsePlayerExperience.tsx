@@ -10,6 +10,7 @@ const panels = [
     descEn: "An interconnected world where every alley hides a secret or a shortcut. Exploration is rewarded by discovering a rich and mysterious visual Lore.",
     video: "/assets/eclipse/videos/player-exp-1.mp4",
     tag: { fr: "L'Atmosphère", en: "Atmosphere" },
+    videoPosition: "center center",
   },
   {
     fr: "Combat Viscéral & Réactif",
@@ -18,6 +19,8 @@ const panels = [
     descEn: "Fast and ruthless action where survival depends on dodging, timing, and aggression. Every strike must be a tactical decision.",
     video: "/assets/eclipse/videos/player-exp-2.mp4",
     tag: { fr: "L'Action", en: "Action" },
+    // Reframe to center on the character — the action happens in the middle-lower portion
+    videoPosition: "center 65%",
   },
   {
     fr: "Montée en Puissance",
@@ -26,27 +29,32 @@ const panels = [
     descEn: "A transformable weapon system that changes playstyle on the fly. The player does not change weapons, they learn to master a complex tool.",
     video: "/assets/eclipse/videos/player-exp-3.mp4",
     tag: { fr: "La Progression", en: "Progression" },
+    videoPosition: "center center",
   },
   {
     fr: "Confrontations Épiques",
     en: "Epic Confrontations",
-    descFr: "Des confrontations colossales, conçues comme des épreuves rudes : la victoire exige l’étude minutieuse de leurs schémas, la persévérance, et l’exploitation de chaque indice récolté au fil de l’expérience.",
+    descFr: "Des confrontations colossales, conçues comme des épreuves rudes : la victoire exige l'étude minutieuse de leurs schémas, la persévérance, et l'exploitation de chaque indice récolté au fil de l'expérience.",
     descEn: "Monumental battles, crafted as harsh trials: victory requires patient study of their designs, unyielding persistence, and the cunning to turn every hard-won lesson into a weapon.",
     video: "/assets/eclipse/videos/player-exp-4.mp4",
     tag: { fr: "Le Challenge", en: "Challenge" },
+    videoPosition: "center center",
   },
 ];
 
-const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number, isFr: boolean, totalPanels: number }) => {
+// Spring config — heavy, overshoots slightly for organic feel
+const imgSpring = { stiffness: 100, damping: 20 } as const;
+
+const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: typeof panels[number], idx: number, isFr: boolean, totalPanels: number }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  
+
   // Track last mouse pos and time for speed calculation
   const lastMousePos = useRef({ x: 0, y: 0, time: 0 });
-  
+
   // Spring for the red light intensity (based on speed)
-  const intensitySpring = useSpring(0, { stiffness: 100, damping: 20 });
+  const intensitySpring = useSpring(0, imgSpring);
 
   const handleMouseEnter = () => {
     setIsHovering(true);
@@ -64,23 +72,19 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const now = performance.now();
     const dt = now - lastMousePos.current.time;
-    
-    // Calculate speed if dt is valid
+
     if (dt > 0) {
       const dx = x - lastMousePos.current.x;
       const dy = y - lastMousePos.current.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      const speed = distance / dt; // pixels per millisecond
-      
-      // Normalize speed to an intensity between 0 and 1
+      const speed = distance / dt;
       const normalizedSpeed = Math.min(speed * 2, 1);
-      // Base intensity of 0.2, scales up to 1.0 based on speed
       intensitySpring.set(0.2 + normalizedSpeed * 0.8);
     }
-    
+
     lastMousePos.current = { x, y, time: now };
   };
 
@@ -89,7 +93,6 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
     if (!isHovering) return;
     const interval = setInterval(() => {
       const now = performance.now();
-      // If no mouse move for 50ms, reduce the light back to base
       if (now - lastMousePos.current.time > 50) {
         intensitySpring.set(0.1);
       }
@@ -106,7 +109,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
     >
-      {/* Background Video - Base version logic */}
+      {/* Background Video */}
       <video
         ref={videoRef}
         src={panel.video}
@@ -116,10 +119,11 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
         autoPlay
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-100 max-md:opacity-80 transition-opacity duration-700 origin-center"
+        style={{ objectPosition: panel.videoPosition }}
       />
-      
-      {/* Red Lighting Effect based on mouse speed - Centered */}
-      <motion.div 
+
+      {/* Red Lighting Effect based on mouse speed */}
+      <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20"
         style={{
           width: "100vw",
@@ -131,7 +135,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
         }}
       />
 
-      {/* Overlay - Reduced to reveal more video */}
+      {/* Overlay */}
       <div className="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-10" />
       <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-black via-black/20 to-transparent pointer-events-none z-10" />
 
@@ -143,7 +147,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: any, idx: number
         <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-black to-transparent pointer-events-none z-20" />
       )}
 
-      {/* Content — pinned bottom-left, made smaller */}
+      {/* Content — pinned bottom-left */}
       <div className="relative z-30 max-w-xl px-8 md:px-16 pb-16 md:pb-20 opacity-80 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
         <div className="flex items-center gap-4 mb-6">
           <span className="text-[#8B0000] font-inter text-[10px] md:text-xs tracking-[0.5em] uppercase font-semibold drop-shadow-[0_0_5px_rgba(139,0,0,0.5)]">
@@ -171,12 +175,15 @@ export const EclipsePlayerExperience = () => {
     offset: ["start start", "end end"],
   });
 
-  // Create plateaus in the scroll mapping so the slide "locks" in place
-  const x = useTransform(
+  // Raw scroll-to-position transform — plateau per panel
+  const xRaw = useTransform(
     scrollYProgress,
     [0, 0.2, 0.3, 0.5, 0.6, 0.8, 0.9, 1],
     ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"]
   );
+
+  // Spring-smooth to eliminate stutter/jump when scrolling quickly
+  const x = useSpring(xRaw, { stiffness: 200, damping: 40, mass: 1 });
 
   return (
     <section ref={containerRef} className="relative bg-black" style={{ height: "500vh" }}>

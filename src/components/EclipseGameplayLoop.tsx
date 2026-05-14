@@ -72,7 +72,7 @@ const PillarPanel = ({
         <PictureBackground
           src={pillar.image.replace(".png", "")}
           alt={pillar.title}
-          imgClassName="w-full h-full object-cover"
+          imgClassName="w-full h-full object-cover object-bottom"
         />
       </motion.div>
 

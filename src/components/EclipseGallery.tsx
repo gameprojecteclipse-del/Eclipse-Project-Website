@@ -75,6 +75,10 @@ export const EclipseGallery = () => {
   const next = () => setCurrent((c) => (c + 1) % artworks.length);
   const prev = () => setCurrent((c) => (c - 1 + artworks.length) % artworks.length);
 
+  // Preload adjacent images so they're instant on click
+  const preloadNext = artworks[(current + 1) % artworks.length];
+  const preloadPrev = artworks[(current - 1 + artworks.length) % artworks.length];
+
   return (
     <section id="gallery" className="relative bg-black pt-0 pb-32">
       {/* ── Bridge from Gameplay section ── */}
@@ -96,6 +100,10 @@ export const EclipseGallery = () => {
       {/* ── Cinematic 16/9 Viewer ── */}
       <div className="relative w-full max-w-[1920px] mx-auto h-[60vh] md:h-[85vh] bg-black overflow-hidden group vignette-blend">
         
+        {/* Hidden preloads for adjacent images — instant transitions */}
+        <img src={preloadNext.src} alt="" aria-hidden className="sr-only absolute w-0 h-0" />
+        <img src={preloadPrev.src} alt="" aria-hidden className="sr-only absolute w-0 h-0" />
+
         {/* Crossfading Images — no Ken Burns zoom */}
         <AnimatePresence initial={false}>
           <motion.div
@@ -111,7 +119,8 @@ export const EclipseGallery = () => {
               alt={artworks[current].title}
               className="w-full h-full object-cover animate-ken-burns origin-center"
               style={{ objectPosition: artworks[current].objectPosition || "center" }}
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
               onError={e => {
                 const target = e.currentTarget as HTMLImageElement;
                 if (target.src !== window.location.origin + artworks[current].srcFallback) {

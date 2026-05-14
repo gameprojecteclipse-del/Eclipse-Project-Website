@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { LINKS } from "@/lib/constants";
@@ -6,6 +7,20 @@ import { audioManager } from "@/lib/audio";
 export const EclipseHero = () => {
   const { i18n } = useTranslation();
   const isFr = i18n.language === "fr";
+  const [lowResLoaded, setLowResLoaded] = useState(false);
+  const [highResLoaded, setHighResLoaded] = useState(false);
+
+  useEffect(() => {
+    // Force tiny thumb first
+    const thumb = new Image();
+    thumb.src = "/assets/eclipse/gallery/art-3-thumb.webp";
+    thumb.onload = () => setLowResLoaded(true);
+
+    // Load massive 19MB high-res in background
+    const high = new Image();
+    high.src = "/assets/eclipse/gallery/art-3.webp";
+    high.onload = () => setHighResLoaded(true);
+  }, []);
 
   const scrollToMythology = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -15,14 +30,24 @@ export const EclipseHero = () => {
   return (
     <section className="relative w-full h-[100dvh] overflow-hidden bg-black flex items-center justify-center vignette-blend">
 
-      {/* Background Image */}
+      {/* Background Image Container */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.42 }}
         transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
         className="absolute inset-0"
       >
-        <div className="absolute inset-0 bg-[url('/assets/eclipse/gallery/art-3.webp')] bg-cover bg-center animate-ken-burns origin-center" />
+        {/* Low-res blurred placeholder */}
+        <div 
+          className={`absolute inset-0 bg-[url('/assets/eclipse/gallery/art-3-thumb.webp')] bg-cover bg-center animate-ken-burns origin-center transition-opacity duration-1000 ${highResLoaded ? 'opacity-0' : 'opacity-100 blur-lg'}`}
+        />
+        
+        {/* High-res final image */}
+        {lowResLoaded && (
+          <div 
+            className={`absolute inset-0 bg-[url('/assets/eclipse/gallery/art-3.webp')] bg-cover bg-center animate-ken-burns origin-center transition-opacity duration-1000 ${highResLoaded ? 'opacity-100' : 'opacity-0'}`}
+          />
+        )}
       </motion.div>
       <div className="absolute inset-0 bg-[#8B0000]/12 mix-blend-screen" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />

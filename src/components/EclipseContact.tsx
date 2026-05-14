@@ -8,26 +8,24 @@ import { useEffect, useRef, useState } from "react";
 const PingPongVideo = ({ src }: { src: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !isReady) return;
 
     let frameId: number;
-
     const update = () => {
       if (direction === 'backward') {
-        // Manual reverse playback logic
         if (video.currentTime <= 0.1) {
           setDirection('forward');
           video.play().catch(() => {});
         } else {
-          // Decrement time to simulate reverse (approx 60fps)
-          video.currentTime -= 0.033; 
+          video.currentTime -= 0.033;
         }
       } else {
-        // Forward playback logic (let native player handle it)
-        if (video.currentTime >= video.duration - 0.1) {
+        // On s'arrête une frame avant la fin (0.1s env)
+        if (video.duration && video.currentTime >= video.duration - 0.1) {
           video.pause();
           setDirection('backward');
         }
@@ -37,7 +35,7 @@ const PingPongVideo = ({ src }: { src: string }) => {
 
     frameId = requestAnimationFrame(update);
     return () => cancelAnimationFrame(frameId);
-  }, [direction]);
+  }, [direction, isReady]);
 
   return (
     <video
@@ -46,7 +44,10 @@ const PingPongVideo = ({ src }: { src: string }) => {
       muted
       playsInline
       autoPlay
-      className="w-full h-full object-cover"
+      onLoadedMetadata={() => setIsReady(true)}
+      onCanPlay={() => videoRef.current?.play().catch(() => {})}
+      className="w-full h-full object-cover transition-opacity duration-1000"
+      style={{ opacity: isReady ? 1 : 0 }}
     />
   );
 };

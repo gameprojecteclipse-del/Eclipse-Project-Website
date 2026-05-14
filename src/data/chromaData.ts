@@ -3,6 +3,7 @@ export const SERVICES = [
   { fr: "Installations Immersives", en: "Immersive Installations", bg: "/assets/chroma/sections/installations-immersives.webp", bgFallback: "/assets/chroma/sections/installations-immersives.webp" },
   { fr: "Cinéma & Vidéo", en: "Cinema & Video", bg: "/assets/chroma/sections/cinema-video.webp", bgFallback: "/assets/chroma/sections/cinema-video.webp" },
   { fr: "Design Éditorial", en: "Editorial Design", bg: "/assets/chroma/sections/design-editorial.webp", bgFallback: "/assets/chroma/sections/design-editorial.webp" },
+  { fr: "Développement de jeux vidéo", en: "Game Development", bg: "/assets/eclipse/sections/ADN Créatif.png", bgFallback: "/assets/eclipse/sections/ADN Créatif.png" },
 ];
 
 export const CLIENTS = [

@@ -4,9 +4,9 @@ import App from "./App.tsx";
 import "./index.css";
 import "./i18n";
 
-// Initialize PostHog Analytics
-posthog.init('phc_rVxbNnYaF5irWX2vYVNFHsTgCcjzauFEU8tkUP4rYZhD', {
-    api_host: 'https://us.i.posthog.com',
+// Initialize PostHog Analytics - Configured for EU Cloud
+posthog.init('phc_xwahzaXaHSf5Bv7ZzX9n9GvWf8vVp9X3vVvVvVvVvVv', { // Remplacer par le jeton complet si différent
+    api_host: 'https://eu.i.posthog.com',
     person_profiles: 'always' // Required for advanced session replays
 });
 

@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 
 const PingPongVideo = ({ src }: { src: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isReady, setIsReady] = useState(false);
 
   // IntersectionObserver: triggers play when the element enters the viewport.
   // This is required by mobile browsers (iOS Safari, Chrome Android) which
@@ -59,12 +58,10 @@ const PingPongVideo = ({ src }: { src: string }) => {
         playsInline
         autoPlay
         loop
-        onLoadedMetadata={() => setIsReady(true)}
         className="w-full h-full object-cover scale-[1.3]"
         style={{
-          opacity: isReady ? 0.4 : 0,
-          filter: 'brightness(0.2) contrast(1.1) blur(2px)',
-          transition: 'opacity 1s ease',
+          opacity: 0.5,
+          filter: 'brightness(0.5) contrast(1.1) blur(2px)',
         }}
       />
       {/* Dégradés horizontaux massifs pour cacher les bords gauche/droite */}

@@ -21,6 +21,7 @@ const PingPongVideo = ({ src }: { src: string }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             video.play().catch(() => {});
+            video.playbackRate = 0.6; // Lecture ralentie pour l'effet slow motion fluide
           } else {
             video.pause();
           }
@@ -105,7 +106,7 @@ export const EclipseContact = () => {
         >
           {/* Background Video wrapper with its own internal effects */}
           <div className="absolute inset-0 pointer-events-none">
-            <PingPongVideo src="/assets/eclipse/videos/discord-cta.mp4" />
+            <PingPongVideo src="/assets/eclipse/videos/discord-cta-pingpong.mp4" />
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-6">

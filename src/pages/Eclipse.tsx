@@ -17,20 +17,10 @@ import { BloodScrollProgress } from "../components/BloodScrollProgress";
 import { PostProcessing } from "../components/PostProcessing";
 import { useSEO } from "@/hooks/useSEO";
 
-const EclipseArchives = lazy(() => import("./EclipseArchives"));
 
 
 const Eclipse = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<EclipseMain />} />
-      <Route path="/archives" element={
-        <Suspense fallback={<div className="fixed inset-0 bg-black" />}>
-          <EclipseArchives />
-        </Suspense>
-      } />
-    </Routes>
-  );
+  return <EclipseMain />;
 };
 
 const EclipseMain = () => {

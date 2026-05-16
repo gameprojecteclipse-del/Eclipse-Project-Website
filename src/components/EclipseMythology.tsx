@@ -1,43 +1,16 @@
-import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useMemo } from "react";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./SectionTitle";
 import { PictureBackground } from "./PictureBackground";
-import { useLoreTimer, useSecretUnlock } from "@/hooks/useSecretUnlock";
-import { SecretUnlockToast } from "./SecretUnlock";
 
 export const EclipseMythology = () => {
   const { i18n } = useTranslation();
   const isFr = i18n.language === "fr";
   const propType = useMemo(() => Math.random() > 0.5 ? 1 : 2, []);
-  const sectionRef = useRef<HTMLElement>(null);
-  const { startTimer, pauseTimer } = useLoreTimer();
-  const [showToast, setShowToast] = useState(false);
-
-  // Watch for the unlock event to display the toast
-  useSecretUnlock(useCallback(() => setShowToast(true), []));
-
-  // Start/pause timer based on section visibility
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) startTimer();
-        else pauseTimer();
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [startTimer, pauseTimer]);
 
   return (
-    <>
-    <AnimatePresence>
-      {showToast && <SecretUnlockToast onDone={() => setShowToast(false)} />}
-    </AnimatePresence>
-    <section ref={sectionRef} id="mythology" className="relative bg-black overflow-hidden">
+    <section id="mythology" className="relative bg-black overflow-hidden">
       {/* Full-height bg image */}
       <div className="absolute inset-0">
         <PictureBackground
@@ -99,6 +72,5 @@ export const EclipseMythology = () => {
         </div>
       </div>
     </section>
-    </>
   );
 };

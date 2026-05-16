@@ -196,7 +196,7 @@ export const EclipseGameplayLoop = () => {
           />
         ))}
       </div>
-
+      
     </section>
   );
 };

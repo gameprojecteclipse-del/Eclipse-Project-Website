@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { EclipseHero } from "../components/EclipseHero";
@@ -17,7 +17,23 @@ import { BloodScrollProgress } from "../components/BloodScrollProgress";
 import { PostProcessing } from "../components/PostProcessing";
 import { useSEO } from "@/hooks/useSEO";
 
+const EclipseArchives = lazy(() => import("./EclipseArchives"));
+
+
 const Eclipse = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<EclipseMain />} />
+      <Route path="/archives" element={
+        <Suspense fallback={<div className="fixed inset-0 bg-black" />}>
+          <EclipseArchives />
+        </Suspense>
+      } />
+    </Routes>
+  );
+};
+
+const EclipseMain = () => {
   const { t, i18n } = useTranslation();
   const { scrollY } = useScroll();
 

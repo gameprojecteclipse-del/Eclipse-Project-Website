@@ -1,9 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, ArrowRight } from "lucide-react";
 import { LINKS } from "@/lib/constants";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useSecretUnlock, isSecretUnlocked } from "@/hooks/useSecretUnlock";
+import { SecretArchivesButton } from "./SecretUnlock";
 
 const PingPongVideo = ({ src }: { src: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -89,6 +91,10 @@ const DiscordIcon = () => (
 export const EclipseContact = () => {
   const { i18n } = useTranslation();
   const isFr = i18n.language === "fr";
+  const [secretUnlocked, setSecretUnlocked] = useState(isSecretUnlocked);
+
+  // React in real-time if the user unlocks the secret while on this page
+  useSecretUnlock(useCallback(() => setSecretUnlocked(true), []));
 
   return (
     <footer className="relative bg-black pt-16 md:pt-32 pb-12 overflow-hidden">
@@ -191,6 +197,21 @@ export const EclipseContact = () => {
               </div>
             </div>
           </div>
+
+          {/* ── Secret Easter Egg — only for initiated readers ── */}
+          <AnimatePresence>
+            {secretUnlocked && (
+              <motion.div
+                key="secret-btn"
+                className="border-t border-[#8B0000]/20 pt-8 flex justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2 }}
+              >
+                <SecretArchivesButton />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Bottom bar */}
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 gap-6 md:gap-4 text-center md:text-left">

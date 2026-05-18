@@ -49,11 +49,10 @@ export const Navigation = ({ activeSection, onNavigate }: NavigationProps) => {
 
   return (
     <nav
-      className={`fixed top-0 w-full transition-all duration-300 ${isScrolled
+      className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled
           ? "bg-[#070709]/70 backdrop-blur-md border-b border-[#8B0000]/70"
           : "bg-transparent"
         }`}
-      style={{ zIndex: 40 }}
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">

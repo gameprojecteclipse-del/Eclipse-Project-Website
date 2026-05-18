@@ -29,7 +29,76 @@ const DNA_PILLARS = [
 
 export const EclipseCreativeDNA = () => {
   const { i18n } = useTranslation();
-  const isFr = i18n.language === "fr";
+  const lang = i18n.language || "en";
+  const isFr = lang === "fr";
+
+  const translatedPillars = DNA_PILLARS.map(pillar => {
+    switch (lang) {
+      case "zh":
+        switch (pillar.id) {
+          case "01":
+            return {
+              id: "01",
+              title: "残缺美学",
+              desc: "世界并非单纯死去，而是凝固在其自身的坠落中。每一处环境都如大师级的画作，美感在残垣与垂死的残阳中悄然绽放。"
+            };
+          case "02":
+            return {
+              id: "02",
+              title: "空白叙事",
+              desc: "留白与静默是我们最强大的叙事武器。我们不灌输故事，而是引导玩家从阴影、遗骸与言外之意中将其发掘。"
+            };
+          case "03":
+            return {
+              id: "03",
+              title: "主动宿命论",
+              desc: "命运是一种有机的束缚。玩家无法逃离日食的笼罩，而是学会栖息其中。每一次选择，都是与注定终焉的殊死抗争。"
+            };
+          default:
+            return { id: pillar.id, title: pillar.titleEn, desc: pillar.descEn };
+        }
+      case "ja":
+        switch (pillar.id) {
+          case "01":
+            return {
+              id: "01",
+              title: "荒廃の美学",
+              desc: "世界はただ死に絶えたのではなく、その崩壊の瞬間で石化しています。すべての環境は名画のように設計され、廃墟と死にゆく光から美が生まれます。"
+            };
+          case "02":
+            return {
+              id: "02",
+              title: "空白による語り",
+              desc: "沈黙こそが最も強力なストーリーテリングツールです。物語をただ語るのではなく、プレイヤー自らが影や残骸、語られざる真実から発掘するのです。"
+            };
+          case "03":
+            return {
+              id: "03",
+              title: "能動的宿命論",
+              desc: "運命は有機的な制約です。プレイヤーは日食から逃れるのではなく、その中で生きることを学びます。あらゆる選択は、避けられない終焉への抗いです。"
+            };
+          default:
+            return { id: pillar.id, title: pillar.titleEn, desc: pillar.descEn };
+        }
+      case "fr":
+        return { id: pillar.id, title: pillar.titleFr, desc: pillar.descFr };
+      default:
+        return { id: pillar.id, title: pillar.titleEn, desc: pillar.descEn };
+    }
+  });
+
+  const sub = (() => {
+    switch (lang) {
+      case "zh":
+        return "在机制之外，Eclipse 建立在一种核心愿景之上。在写下第一行代码之前，我们的基因就已定义了这场体验的灵魂。";
+      case "ja":
+        return "システムやメカニクスを超え、Eclipseは根源的なビジョンの上に築かれています。私たちのDNAは、最初のコードが書かれるより前に体験の魂を定義します。";
+      case "fr":
+        return "Au-delà des mécaniques, Eclipse repose sur une vision fondamentale. Notre ADN définit l'âme de l'expérience avant même la première ligne de code.";
+      default:
+        return "Beyond mechanics, Eclipse rests upon a fundamental vision. Our DNA defines the soul of the experience before the first line of code is even written.";
+    }
+  })();
 
   return (
     <section className="relative bg-[#050505] py-16 overflow-hidden border-t border-white/[0.02]">
@@ -62,14 +131,12 @@ export const EclipseCreativeDNA = () => {
             className="mb-6"
           />
           <p className="font-inter text-base md:text-lg text-white/30 leading-relaxed italic border-l border-[#8B0000]/20 pl-6">
-            {isFr 
-              ? "Au-delà des mécaniques, Eclipse repose sur une vision fondamentale. Notre ADN définit l'âme de l'expérience avant même la première ligne de code."
-              : "Beyond mechanics, Eclipse rests upon a fundamental vision. Our DNA defines the soul of the experience before the first line of code is even written."}
+            {sub}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-          {DNA_PILLARS.map((pillar, i) => (
+          {translatedPillars.map((pillar, i) => (
             <motion.div
               key={pillar.id}
               initial={{ opacity: 0 }}
@@ -90,11 +157,11 @@ export const EclipseCreativeDNA = () => {
                 </div>
                 
                 <h3 className="font-cinzel text-xl md:text-2xl text-white/80 group-hover:text-white mb-4 tracking-[0.2em] uppercase transition-all duration-700">
-                  {isFr ? pillar.titleFr : pillar.titleEn}
+                  {pillar.title}
                 </h3>
                 
                 <p className="font-inter text-sm md:text-base text-white/25 leading-[1.6] group-hover:text-white/50 transition-colors duration-700">
-                  {isFr ? pillar.descFr : pillar.descEn}
+                  {pillar.desc}
                 </p>
                 
                 {/* Ancient Erased Line */}

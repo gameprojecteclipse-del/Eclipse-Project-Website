@@ -24,9 +24,9 @@ export const CustomCursor = () => {
 
       // Manage browser cursor visibility
       if (shouldShow) {
-        document.body.style.cursor = "none";
+        document.documentElement.classList.add("no-cursor");
       } else {
-        document.body.style.cursor = "default";
+        document.documentElement.classList.remove("no-cursor");
       }
 
       if (cursorRef.current && shouldShow) {
@@ -61,7 +61,7 @@ export const CustomCursor = () => {
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mousedown", handleClick);
-      document.body.style.cursor = "default";
+      document.documentElement.classList.remove("no-cursor");
     };
   }, [isEclipsePage, isPortal, isVisible]);
 
@@ -73,7 +73,7 @@ export const CustomCursor = () => {
     if (isChromaSide || isChromaPage) {
       // Immediate kill when in Chroma territory
       audioManager.forceStopAll();
-      document.body.style.cursor = "default";
+      document.documentElement.classList.remove("no-cursor");
     }
 
     // Auto-start music ONLY if in Eclipse page and already interacted
@@ -85,31 +85,19 @@ export const CustomCursor = () => {
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 z-[999999] pointer-events-none will-change-transform hidden lg:block transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-      style={{
-        width: "56px",
-        height: "56px",
-        marginLeft: "-28px",
-        marginTop: "-28px",
-        backgroundImage: `url('${cursorSrc}')`,
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        mixBlendMode: "screen", 
-      }}
+      className={`fixed top-0 left-0 z-[999999] pointer-events-none will-change-transform hidden lg:block transition-opacity duration-200 w-[56px] h-[56px] -ml-[28px] -mt-[28px] mix-blend-screen ${isVisible ? 'opacity-100' : 'opacity-0'}`}
     >
+      <img src={cursorSrc} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-contain pointer-events-none" />
       <div 
-        className="absolute inset-0 rounded-full blur-md opacity-30"
-        style={{
-          background: "radial-gradient(circle, rgba(139,0,0,0.8) 0%, transparent 70%)",
-          transform: "scale(0.8)",
-          animation: "pulse-organic 3s ease-in-out infinite"
-        }}
+        className="absolute inset-0 rounded-full blur-md opacity-30 bg-[radial-gradient(circle,_rgba(139,0,0,0.8)_0%,_transparent_70%)] scale-[0.8] animate-[pulse-organic_3s_ease-in-out_infinite]"
       />
       <style>{`
         @keyframes pulse-organic {
           0%, 100% { opacity: 0.2; transform: scale(0.7); }
           50% { opacity: 0.4; transform: scale(0.9); }
+        }
+        .no-cursor, .no-cursor * {
+          cursor: none !important;
         }
       `}</style>
     </div>

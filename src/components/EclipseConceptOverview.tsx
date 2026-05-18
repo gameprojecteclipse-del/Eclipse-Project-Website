@@ -29,7 +29,37 @@ const rowVariants = {
 
 export const EclipseConceptOverview = () => {
   const { i18n } = useTranslation();
-  const isFr = i18n.language === "fr";
+  const lang = i18n.language || "en";
+  const isFr = lang === "fr";
+
+  const translatedRows = ROWS.map(row => {
+    switch (lang) {
+      case "zh":
+        switch (row.labelEn) {
+          case "Genre":       return { label: "类型", val: "动作冒险 / 类魂 (Souls-like)" };
+          case "Sub-genre":   return { label: "子类型", val: "叙事性暗黑奇幻 (Dark Fantasy)" };
+          case "Platforms":   return { label: "平台", val: "PC → 主机 (PS / Xbox / Switch)" };
+          case "Audience":    return { label: "受众", val: "类魂玩家与跨文化叙事爱好者" };
+          case "Demo":        return { label: "试玩版", val: "15–30 分钟可玩体验 — Q1 2027" };
+          case "Structure":   return { label: "结构", val: "共 3 卷 — 累计 10 至 15 小时总体验" };
+          default:            return { label: row.labelEn, val: row.valEn };
+        }
+      case "ja":
+        switch (row.labelEn) {
+          case "Genre":       return { label: "ジャンル", val: "アクションアドベンチャー / ソウルライク" };
+          case "Sub-genre":   return { label: "サブジャンル", val: "ナラティブ・ダークファンタジー" };
+          case "Platforms":   return { label: "対応機種", val: "PC → コンソール (PS / Xbox / Switch)" };
+          case "Audience":    return { label: "ターゲット", val: "ソウルライクファン ＆ 多文化ナラティブ愛好家" };
+          case "Demo":        return { label: "体験版", val: "15–30分プレイ可能 — Q1 2027" };
+          case "Structure":   return { label: "構成", val: "全 3 巻 — 総計 10〜15時間の体験" };
+          default:            return { label: row.labelEn, val: row.valEn };
+        }
+      case "fr":
+        return { label: row.labelFr, val: row.valFr };
+      default:
+        return { label: row.labelEn, val: row.valEn };
+    }
+  });
 
   return (
     <section id="concept" className="relative bg-black overflow-hidden">
@@ -68,7 +98,7 @@ export const EclipseConceptOverview = () => {
               viewport={{ once: true, margin: "-40px" }}
               className="border-t border-white/[0.06]"
             >
-              {ROWS.map((row, i) => (
+              {translatedRows.map((row, i) => (
                 <motion.div
                   key={i}
                   variants={rowVariants}
@@ -76,12 +106,12 @@ export const EclipseConceptOverview = () => {
                 >
                   {/* Label — blood red */}
                   <span className="font-inter text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.35em] uppercase text-[#8B0000]">
-                    {isFr ? row.labelFr : row.labelEn}
+                    {row.label}
                   </span>
 
                   {/* Value — brightens on hover */}
                   <span className="font-inter text-sm md:text-base text-white/85 md:text-white/60 group-hover:text-white/95 transition-colors duration-400 leading-snug">
-                    {isFr ? row.valFr : row.valEn}
+                    {row.val}
                   </span>
                 </motion.div>
               ))}

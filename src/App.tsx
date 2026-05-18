@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatedRoutes } from "./components/AnimatedRoutes";
-import { Analytics } from "@vercel/analytics/react";
 import { CustomCursor } from "./components/CustomCursor";
 import { CursorClickEffect } from "./components/CursorClickEffect";
 
@@ -20,8 +19,6 @@ const App = () => (
         <CustomCursor />
         <CursorClickEffect />
       </BrowserRouter>
-      {/* Vercel Analytics tracking component */}
-      <Analytics />
     </TooltipProvider>
   </QueryClientProvider>
 );

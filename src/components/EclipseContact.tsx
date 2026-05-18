@@ -59,11 +59,7 @@ const PingPongVideo = ({ src }: { src: string }) => {
         playsInline
         autoPlay
         loop
-        className="w-full h-full object-cover scale-[1.3]"
-        style={{
-          opacity: 0.5,
-          filter: 'brightness(0.5) contrast(1.1) blur(2px)',
-        }}
+        className="w-full h-full object-cover scale-[1.3] opacity-50 brightness-50 contrast-[1.1] blur-[2px]"
       />
       {/* Dégradés horizontaux massifs pour cacher les bords gauche/droite */}
       <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-black to-transparent pointer-events-none z-[7]" />
@@ -88,7 +84,65 @@ const DiscordIcon = () => (
 
 export const EclipseContact = () => {
   const { i18n } = useTranslation();
-  const isFr = i18n.language === "fr";
+  const lang = i18n.language || "en";
+  const isFr = lang === "fr";
+
+  const t = (() => {
+    switch (lang) {
+      case "zh":
+        return {
+          join: "加入循环",
+          joinDiscord: "加入 Discord",
+          chromaDesc: "如有媒体垂询或投资合作意向，请下载我们的官方媒体包并直接与我们取得联系。",
+          discoverChroma: "了解 Chroma",
+          role: "项目制作人",
+          wishlist: "Steam 愿望单",
+          comingSoon: "即将推出",
+          networks: "Eclipse 官方社交网络",
+          legal: "法律声明",
+          privacy: "隐私政策"
+        };
+      case "ja":
+        return {
+          join: "サイクルに参加",
+          joinDiscord: "Discordに参加する",
+          chromaDesc: "プレス関係のお問い合わせや投資のご提案については、公式プレスキットをダウンロードの上、直接お問い合わせください。",
+          discoverChroma: "Chromaを見る",
+          role: "プロジェクトディレクター",
+          wishlist: "Steam ウィッシュリスト",
+          comingSoon: "まもなく登場",
+          networks: "Eclipse 公式ソーシャルネットワーク",
+          legal: "法的通知",
+          privacy: "プライバシーポリシー"
+        };
+      case "fr":
+        return {
+          join: "Rejoignez le Cycle",
+          joinDiscord: "Rejoindre le Discord",
+          chromaDesc: "Pour toute demande de presse ou opportunité d'investissement, veuillez télécharger notre kit officiel et nous contacter directement.",
+          discoverChroma: "Découvrir Chroma",
+          role: "DIRECTEUR DU PROJET",
+          wishlist: "Wishlist Steam",
+          comingSoon: "Bientôt Disponible",
+          networks: "Réseaux Eclipse",
+          legal: "Mentions Légales",
+          privacy: "Confidentialité"
+        };
+      default:
+        return {
+          join: "Join the Cycle",
+          joinDiscord: "Join Discord",
+          chromaDesc: "For press inquiries or investment opportunities, please download our official kit and reach out to us directly.",
+          discoverChroma: "Discover Chroma",
+          role: "PROJECT DIRECTOR",
+          wishlist: "Steam Wishlist",
+          comingSoon: "Coming Soon",
+          networks: "Eclipse Networks",
+          legal: "Legal",
+          privacy: "Privacy"
+        };
+    }
+  })();
 
   return (
     <footer className="relative bg-black pt-16 md:pt-32 pb-12 overflow-hidden">
@@ -112,7 +166,7 @@ export const EclipseContact = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-6">
             <div className="w-px h-12 md:h-20 bg-gradient-to-b from-[#8B0000] to-transparent mx-auto mb-8 md:mb-10" />
             <h2 className="font-cinzel text-4xl md:text-7xl lg:text-8xl text-white tracking-[0.2em] uppercase mb-10 md:mb-16 drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]">
-              {isFr ? "Rejoignez le Cycle" : "Join the Cycle"}
+              {t.join}
             </h2>
             
             <a
@@ -124,7 +178,7 @@ export const EclipseContact = () => {
               <span className="absolute inset-0 bg-[#8B0000] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               <span className="relative z-10 flex items-center gap-3 md:gap-4 group-hover:text-white transition-colors duration-200">
                 <DiscordIcon />
-                {isFr ? "Rejoindre le Discord" : "Join Discord"}
+                {t.joinDiscord}
               </span>
             </a>
           </div>
@@ -138,13 +192,13 @@ export const EclipseContact = () => {
               <h3 className="font-cinzel text-lg md:text-xl text-white mb-2">Chroma Studio</h3>
               <div className="w-8 h-px bg-[#8B0000] mb-6" />
               <p className="font-inter text-xs md:text-sm text-white/80 md:text-white/50 leading-[1.8] md:leading-[2] mb-8">
-                {isFr ? "Pour toute demande de presse ou opportunité d'investissement, veuillez télécharger notre kit officiel et nous contacter directement." : "For press inquiries or investment opportunities, please download our official kit and reach out to us directly."}
+                {t.chromaDesc}
               </p>
               <a href={LINKS.chromaPage}
                 className="inline-flex items-center gap-3 text-[#8B0000] hover:text-white transition-colors duration-300 group mt-auto">
                 <span className="w-6 h-px bg-[#8B0000] group-hover:bg-white transition-colors" />
                 <span className="font-cinzel text-[10px] tracking-[0.2em] uppercase font-bold">
-                  {isFr ? "Découvrir Chroma" : "Discover Chroma"}
+                  {t.discoverChroma}
                 </span>
                 <ArrowRight className="w-3   h-3 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
@@ -154,7 +208,7 @@ export const EclipseContact = () => {
             <div className="md:px-12 md:border-r border-[#8B0000]/20 flex flex-col items-start bg-[#8B0000]/[0.02] p-6 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
               <h4 className="font-cinzel text-lg md:text-xl text-white mb-2">Amir Dekik</h4>
               <p className="font-inter text-[10px] md:text-xs text-white/50 md:text-white/30 uppercase tracking-[0.2em] mb-4">
-                {isFr ? "DIRECTEUR DU PROJET" : "PROJECT DIRECTOR"}
+                {t.role}
               </p>
               <a href="mailto:gameproject.eclipse@gmail.com"
                 className="font-inter text-sm md:text-base text-white/80 md:text-white/50 hover:text-white transition-colors block mb-8 underline underline-offset-4 decoration-[#8B0000]/50 md:decoration-[#8B0000]/30 hover:decoration-[#8B0000]">
@@ -163,10 +217,10 @@ export const EclipseContact = () => {
               <div className="mt-auto w-full">
                 <div className="inline-flex w-full items-center justify-between px-4 md:px-5 py-3 border border-[#8B0000]/30 text-[#8B0000] font-cinzel text-[9px] md:text-[10px] tracking-[0.1em] uppercase cursor-not-allowed bg-black/60 shadow-[inset_0_0_20px_rgba(139,0,0,0.1)]">
                   <span className="flex items-center gap-3 font-bold">
-                    {isFr ? "Wishlist Steam" : "Steam Wishlist"}
+                    {t.wishlist}
                   </span>
                   <span className="font-inter text-[8px] bg-[#8B0000]/20 px-2 py-1 text-white tracking-widest border border-[#8B0000]/30">
-                    {isFr ? "Bientôt Disponible" : "Coming Soon"}
+                    {t.comingSoon}
                   </span>
                 </div>
               </div>
@@ -175,7 +229,7 @@ export const EclipseContact = () => {
             {/* Eclipse-only socials */}
             <div className="md:pl-12 flex flex-col items-start bg-[#8B0000]/[0.02] p-6 md:p-0 md:bg-transparent border border-[#8B0000]/10 md:border-transparent">
               <h4 className="font-inter text-[9px] tracking-[0.35em] uppercase text-[#8B0000] mb-6">
-                {isFr ? "Réseaux Eclipse" : "Eclipse Networks"}
+                {t.networks}
               </h4>
               <div className="space-y-4 md:space-y-6 w-full">
                 <a href={LINKS.eclipseInstagram} target="_blank" rel="noreferrer"
@@ -202,10 +256,10 @@ export const EclipseContact = () => {
             </div>
             <div className="flex gap-6">
               <Link to="/legal" className="font-inter text-[10px] text-white/40 md:text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
-                {isFr ? "Mentions Légales" : "Legal"}
+                {t.legal}
               </Link>
               <Link to="/privacy" className="font-inter text-[10px] text-white/40 md:text-white/18 hover:text-white/50 transition-colors uppercase tracking-wider">
-                {isFr ? "Confidentialité" : "Privacy"}
+                {t.privacy}
               </Link>
             </div>
           </div>

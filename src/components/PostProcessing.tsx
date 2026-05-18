@@ -11,20 +11,10 @@ export const PostProcessing = () => {
       </svg>
       
       {/* ── Subtle Cinematic Vignette ── */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 120% 120% at 50% 50%, transparent 60%, rgba(0,0,0,0.8) 100%)",
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_120%_120%_at_50%_50%,_transparent_60%,_rgba(0,0,0,0.8)_100%)]" />
       
       {/* ── Subtle Red Chromatic Aberration (No Blue) ── */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-screen"
-        style={{
-          background: "linear-gradient(90deg, rgba(139,0,0,0.5) 0%, transparent 10%, transparent 90%, rgba(139,0,0,0.5) 100%)"
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-screen bg-[linear-gradient(90deg,_rgba(139,0,0,0.5)_0%,_transparent_10%,_transparent_90%,_rgba(139,0,0,0.5)_100%)]" />
     </div>
   );
 };

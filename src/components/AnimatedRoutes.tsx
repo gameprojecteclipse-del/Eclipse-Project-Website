@@ -1,9 +1,9 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import mixpanel from "mixpanel-browser";
 import { AnimatePresence, motion } from "framer-motion";
 import Crossroads from "../pages/Crossroads";
 import NotFound from "../pages/NotFound";
+import { trackPageView } from "../lib/analytics";
 
 // Lazy load heavy pages for code-splitting
 const Eclipse = lazy(() => import("../pages/Eclipse"));
@@ -28,9 +28,8 @@ export const AnimatedRoutes = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Manually track pageview in SPA
-    mixpanel.track_pageview();
-  }, [location]);
+    trackPageView(location.pathname + location.search);
+  }, [location.pathname, location.search]);
 
   return (
     <AnimatePresence mode="wait">

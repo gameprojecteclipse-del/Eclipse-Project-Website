@@ -56,8 +56,112 @@ const PROGRESS_PCT = `${(2.5 / (STEPS.length - 1)) * 100}%`;
 
 export const EclipseRoadmapTimeline = () => {
   const { i18n } = useTranslation();
-  const isFr = i18n.language === "fr";
+  const lang = i18n.language || "en";
+  const isFr = lang === "fr";
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const translatedSteps = STEPS.map((step, idx) => {
+    switch (lang) {
+      case "zh":
+        switch (idx) {
+          case 0:
+            return {
+              ...step,
+              title: "创意基石",
+              status: "已完成",
+              detail: "80多页的游戏设计文档（GDD）正式定稿。第一卷的主线剧情与对话撰写完毕。美术方向全面确立 — 视觉参考、色彩基调与游戏架构。纸质原型通过团队验证。"
+            };
+          case 1:
+            return {
+              ...step,
+              title: "技术孵化",
+              status: "已完成",
+              detail: "虚幻引擎5（UE5）完成选型与配置。确立了 Blender → UE5 的资产管线。初始关卡的基础白模搭建。集成 Metahuman 动画系统。技术预产阶段100%达成。"
+            };
+          case 2:
+            return {
+              ...step,
+              title: "Mawahub 扶持",
+              status: "进行中",
+              detail: "正式获准加入 2026 Mawahub 孵化计划。组建了包含12名成员的专项团队。正式开启垂直切片开发。对接孵化器的各项资源与导师指导。"
+            };
+          case 3:
+            return {
+              ...step,
+              title: "垂直切片",
+              status: "计划中",
+              detail: "完成单一完整生态（深渊之城）的打磨，包含核心战斗机制、基础敌方AI、萃取与蜕变系统的平稳运行。渲染最终的视觉展示版。为投资者会晤准备的关键里程碑。"
+            };
+          case 4:
+            return {
+              ...step,
+              title: "可玩 Alpha",
+              status: "计划中",
+              detail: "第一卷的完整内容导入完毕。开启内部测试，并针对腐败与成长系统进行平衡度调优。深度优化 UE5 运行表现。推进公开试玩版构建 of 准备。"
+            };
+          case 5:
+            return {
+              ...step,
+              title: "公开试玩 — 2027 Q1",
+              status: "终极目标",
+              detail: "在 Steam 平台发布 45 至 60 分钟的 PC 公开试玩版。启动大规模宣发、主流媒体评测与 Steam 愿望单吸量活动。同步启动第二卷的创意策划。"
+            };
+          default:
+            return { ...step, title: step.titleEn, status: step.statusEn, detail: step.detailEn };
+        }
+      case "ja":
+        switch (idx) {
+          case 0:
+            return {
+              ...step,
+              title: "クリエイティブの創造",
+              status: "完了",
+              detail: "80ページ超のゲームデザイン設計書（GDD）が完成。第1巻のメインシナリオと台詞を執筆。美術方向性の全確立 — 視覚的リファレンス、色彩設計、構成定義。ペーパープロトタイプの検証が完了。"
+            };
+          case 1:
+            return {
+              ...step,
+              title: "技術インキュベーション",
+              status: "完了",
+              detail: "Unreal Engine 5の選定と構築。BlenderからUE5へのアセットパイプライン確立。初期ステージ of ブロックアウト。Metahumanアニメーション統合。技術的プリプロダクションが100%完了。"
+            };
+          case 2:
+            return {
+              ...step,
+              title: "Mawahub インテグレーション",
+              status: "進行中",
+              detail: "Mawahub 2026 インキュベーターに正式採択。12名の精鋭メンバーからなる開発チーム結成。バーティカルスライスの開発開始。リソースと専門メンターへのアクセス確保。"
+            };
+          case 3:
+            return {
+              ...step,
+              title: "バーティカルスライス",
+              status: "計画中",
+              detail: "単一の完全なバイオーム（奈落の都）を完成。戦闘システム、初期エネミーAI、抽出・変異システムの実装。最終デモ映像のレンダリング。投資家に向けた極めて重要なマイルストーン。"
+            };
+          case 4:
+            return {
+              ...step,
+              title: "プレイアブルAlpha",
+              status: "計画中",
+              detail: "第1巻のコンテンツ全統合。内部テストの実施、および堕落・成長システムのバランス調整。UE5のパフォーマンス最適化。一般向けデモビルドの準備開始。"
+            };
+          case 5:
+            return {
+              ...step,
+              title: "体験版公開 — 2027 Q1",
+              status: "最終目標",
+              detail: "Steamにて45〜60分の一般向け体験版を配信。集中的なプロモーション、ゲームメディアへのアプローチ、Steamウィッシュリスト獲得キャンペーンの実施。並行して第2巻の開発準備。"
+            };
+          default:
+            return { ...step, title: step.titleEn, status: step.statusEn, detail: step.detailEn };
+        }
+      case "fr":
+        return { ...step, title: step.titleFr, status: step.statusFr, detail: step.detailFr };
+      default:
+        return { ...step, title: step.titleEn, status: step.statusEn, detail: step.detailEn };
+    }
+  });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -76,10 +180,7 @@ export const EclipseRoadmapTimeline = () => {
     <section ref={sectionRef} className="relative bg-black pt-24 pb-32 border-t border-white/[0.03] overflow-hidden">
       {/* Background Image without parallax or zoom */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.12] pointer-events-none"
-        style={{ 
-          backgroundImage: "url('/assets/eclipse/sections/tmeline-bg.jpg')"
-        }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.12] pointer-events-none bg-[url('/assets/eclipse/sections/tmeline-bg.jpg')]"
       />
 
       {/* Heavy Top & Bottom Gradients to blend with other sections */}
@@ -110,7 +211,7 @@ export const EclipseRoadmapTimeline = () => {
           />
 
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 md:gap-4 relative z-10">
-            {STEPS.map((step, idx) => (
+            {translatedSteps.map((step, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
@@ -121,14 +222,13 @@ export const EclipseRoadmapTimeline = () => {
               >
                 {/* Node - Diamond Shape */}
                 <div 
-                  className={`w-[56px] h-[56px] md:w-[64px] md:h-[64px] border-[1.5px] bg-[#0A0503] flex flex-col items-center justify-center transition-all duration-500 mb-6
+                  className={`w-[56px] h-[56px] md:w-[64px] md:h-[64px] border-[1.5px] bg-[#0A0503] flex flex-col items-center justify-center transition-all duration-500 mb-6 [clip-path:polygon(50%_0%,100%_50%,50%_100%,0%_50%)]
                   ${step.active
                     ? "border-[#C41E1E] bg-[#8B0000]/20 shadow-[0_0_30px_rgba(139,0,0,0.6)]"
                     : step.done
                       ? "border-[#8B0000] group-hover:border-[#C41E1E] group-hover:shadow-[0_0_20px_rgba(139,0,0,0.4)]"
                       : "border-[#8B0000]/40 group-hover:border-[#8B0000] group-hover:shadow-[0_0_15px_rgba(139,0,0,0.2)]"
                   }`}
-                  style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
                 >
                   <span className={`font-cinzel text-[8px] tracking-[0.2em] leading-none mb-1
                     ${step.active ? "text-[#C9A84C]" : "text-[#8B0000]"}`}>
@@ -147,7 +247,7 @@ export const EclipseRoadmapTimeline = () => {
                     : step.done 
                       ? "text-white/80 group-hover:text-white" 
                       : "text-white/40 group-hover:text-white/70"}`}>
-                  {isFr ? step.titleFr : step.titleEn}
+                  {step.title}
                 </h4>
 
                 {/* Status / Subtitle (italic) */}
@@ -158,13 +258,13 @@ export const EclipseRoadmapTimeline = () => {
                       ? "text-[#C9A84C]/80"
                       : "text-white/30"
                   }`}>
-                  {isFr ? step.statusFr : step.statusEn}
+                  {step.status}
                 </span>
 
                 {/* Full detail — hover reveal, absolute so it doesn't shift layout */}
                 <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[280px] mt-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-20">
                   <p className="font-inter text-xs md:text-sm text-white/60 leading-relaxed px-4 pt-4 pb-5 border-t border-[#8B0000]/30 bg-black/60 backdrop-blur-sm rounded-b-md">
-                    {isFr ? step.detailFr : step.detailEn}
+                    {step.detail}
                   </p>
                 </div>
               </motion.div>

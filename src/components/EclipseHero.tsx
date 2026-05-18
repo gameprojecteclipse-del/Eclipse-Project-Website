@@ -6,7 +6,7 @@ import { audioManager } from "@/lib/audio";
 
 export const EclipseHero = () => {
   const { i18n } = useTranslation();
-  const isFr = i18n.language === "fr";
+  const lang = i18n.language;
   const [lowResLoaded, setLowResLoaded] = useState(false);
   const [highResLoaded, setHighResLoaded] = useState(false);
 
@@ -26,6 +26,44 @@ export const EclipseHero = () => {
     e.preventDefault();
     document.getElementById("mythology")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  // Immersive translation helper
+  const text = (() => {
+    switch (lang) {
+      case "zh":
+        return {
+          presents: "Chroma 创意工坊呈现",
+          tagline: "化身轮回 — 打破缄默",
+          pillars: "萃取  ·  蜕变  ·  共鸣",
+          explore: "探索深渊宇宙",
+          discord: "加入 Discord"
+        };
+      case "ja":
+        return {
+          presents: "Chroma スタジオ提供",
+          tagline: "輪廻を宿せ — 沈黙を破れ",
+          pillars: "抽出  ·  変異  ·  共鳴",
+          explore: "世界を探索する",
+          discord: "Discord に参加"
+        };
+      case "fr":
+        return {
+          presents: "Chroma Studios Présente",
+          tagline: "INCARNEZ LE CYCLE — BRISEZ LE SILENCE",
+          pillars: "Extraction  ·  Mutation  ·  Résonance",
+          explore: "Découvrir l'Univers",
+          discord: "Rejoindre le Discord"
+        };
+      default:
+        return {
+          presents: "Chroma Studios Presents",
+          tagline: "EMBODY THE CYCLE — BREAK THE SILENCE",
+          pillars: "Extraction  ·  Mutation  ·  Resonance",
+          explore: "Explore the World",
+          discord: "Join Discord"
+        };
+    }
+  })();
 
   return (
     <section className="relative w-full h-[100dvh] overflow-hidden bg-black flex items-center justify-center vignette-blend">
@@ -63,7 +101,7 @@ export const EclipseHero = () => {
           transition={{ duration: 1.2, delay: 0.3 }}
           className="font-inter text-[10px] md:text-[9px] tracking-[0.55em] uppercase text-white/50 md:text-white/20 mb-4 block"
         >
-          {isFr ? "Chroma Studios Présente" : "Chroma Studios Presents"}
+          {text.presents}
         </motion.span>
 
         {/* Logo */}
@@ -103,7 +141,7 @@ export const EclipseHero = () => {
           transition={{ duration: 2, delay: 1.4 }}
           className="font-cinzel text-xs sm:text-sm md:text-xl lg:text-2xl text-white/85 md:text-white/65 tracking-[0.2em] md:tracking-[0.2em] uppercase mb-4"
         >
-          {isFr ? "INCARNEZ LE CYCLE — BRISEZ LE SILENCE" : "EMBODY THE CYCLE — BREAK THE SILENCE"}
+          {text.tagline}
         </motion.h2>
 
         {/* 3 pillars */}
@@ -113,7 +151,7 @@ export const EclipseHero = () => {
           transition={{ duration: 2.5, delay: 1.9 }}
           className="text-[#8B0000] font-inter text-[9px] md:text-[10px] tracking-[0.3em] md:tracking-[0.55em] uppercase mb-10 md:mb-12 drop-shadow-[0_0_10px_rgba(139,0,0,0.6)] md:drop-shadow-[0_0_10px_rgba(139,0,0,0.4)]"
         >
-          Extraction&nbsp;&nbsp;·&nbsp;&nbsp;Mutation&nbsp;&nbsp;·&nbsp;&nbsp;Résonance
+          {text.pillars}
         </motion.p>
 
         {/* CTAs */}
@@ -132,7 +170,7 @@ export const EclipseHero = () => {
             onMouseEnter={() => audioManager.playSound('hover')}
             className="btn-aaa w-full sm:w-auto font-cinzel text-[10px] md:text-[11px] tracking-[0.3em] uppercase px-6 py-4 md:px-10 md:py-4 bg-[#8B0000]/80 md:bg-[#8B0000]/60 border border-[#8B0000] text-white transition-all duration-500 text-center"
           >
-            {isFr ? "Découvrir l'Univers" : "Explore the World"}
+            {text.explore}
           </a>
           <a
             href={LINKS.eclipseDiscord}
@@ -142,7 +180,7 @@ export const EclipseHero = () => {
             onClick={() => audioManager.playSound('click')}
             className="btn-aaa w-full sm:w-auto font-cinzel text-[10px] md:text-[11px] tracking-[0.3em] uppercase px-6 py-4 md:px-10 md:py-4 border border-white/30 md:border-white/20 text-white/90 md:text-white/70 hover:text-white transition-all duration-500 text-center bg-black/40 md:bg-transparent"
           >
-            {isFr ? "Rejoindre le Discord" : "Join Discord"}
+            {text.discord}
           </a>
         </motion.div>
       </div>

@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "eclipse": "日蚀体验",
+    "chroma": "Chroma 创意工坊",
+    "lang": "FR"
+  },
+  "landing": {
+    "title": "抉择你的宿命",
+    "eclipse_btn": "步入蚀之炼狱",
+    "chroma_btn": "探索创意工坊",
+    "eclipse_desc": "动作角色扮演（Souls-like）• 黑暗奇幻",
+    "chroma_desc": "独立设计与开发工作室"
+  },
+  "eclipse": {
+    "hero_title": "日蚀计划",
+    "hero_subtitle": "萃取 • 蜕变 • 共鸣",
+    "lore_title": "深渊神话",
+    "lore_text": "宇宙恐慌与黑暗奇幻。融合马格里布、柏柏尔与奥斯曼帝国历史底蕴。",
+    "gameplay_title": "共鸣之柱",
+    "gallery_title": "终末启示",
+    "gallery_devlog_title": "研发档案",
+    "gallery_devlog_desc": "这些初版概念图是我们严谨生产流程以及艺术愿景不断演变的无可辩驳的证明。",
+    "collective_title": "核心集体",
+    "collective_desc": "“日蚀计划”由 14 位国际顶尖专家倾力打造（涵盖阿尔及利亚、法国、日本、非洲等地区）。",
+    "roadmap_mawahub": "由 Mawahub 孵化培育",
+    "roadmap_demo": "试玩公开 — 2027年第一季度"
+  }
+}

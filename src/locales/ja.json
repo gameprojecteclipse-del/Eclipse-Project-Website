@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "eclipse": "日蝕体験",
+    "chroma": "Chroma スタジオ",
+    "lang": "ZH"
+  },
+  "landing": {
+    "title": "運命を選択せよ",
+    "eclipse_btn": "蝕の煉獄へ",
+    "chroma_btn": "スタジオを探索",
+    "eclipse_desc": "アクションRPG（ソウルライク）• ダークファンタジー",
+    "chroma_desc": "独立系デザイン＆開発スタジオ"
+  },
+  "eclipse": {
+    "hero_title": "PROJECT ECLIPSE",
+    "hero_subtitle": "抽出 • 変異 • 共鳴",
+    "lore_title": "深淵の神話",
+    "lore_text": "コズミックホラーとダークファンタジーの融合。マグレブ、ベルベル、そしてオスマン帝国の伝統が息づく世界。",
+    "gameplay_title": "共鳴の柱",
+    "gallery_title": "終焉の黙示",
+    "gallery_devlog_title": "研究開発アーカイブ",
+    "gallery_devlog_desc": "これらの開発初期コンセプトは、我々の妥協なき制作プロセスと、絶えず進化し続ける芸術的ヴィジョンの揺るぎない証明である。",
+    "collective_title": "クリエイティブ集団",
+    "collective_desc": "「エクリプス計画」は、世界中（アルジェリア、フランス、日本、アフリカなど）から集結した14名の第一線で活躍する専門家によって主導されています。",
+    "roadmap_mawahub": "Mawahubによる支援・育成",
+    "roadmap_demo": "プレイアブルデモ公開 — 2027年第1四半期"
+  }
+}

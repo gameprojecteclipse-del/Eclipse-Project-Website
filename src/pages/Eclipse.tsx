@@ -16,6 +16,7 @@ import { EclipseContact } from "../components/EclipseContact";
 import { BloodScrollProgress } from "../components/BloodScrollProgress";
 import { PostProcessing } from "../components/PostProcessing";
 import { useSEO } from "@/hooks/useSEO";
+import { trackLanguageSwitch } from "../lib/analytics";
 
 
 
@@ -44,7 +45,11 @@ const EclipseMain = () => {
   });
 
   const toggleLang = () => {
-    i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr');
+    const langs = ['fr', 'en', 'ja', 'zh'];
+    const currentIndex = langs.indexOf(i18n.language);
+    const nextLang = langs[(currentIndex + 1) % langs.length];
+    trackLanguageSwitch(i18n.language, nextLang);
+    i18n.changeLanguage(nextLang);
   };
 
   useEffect(() => {

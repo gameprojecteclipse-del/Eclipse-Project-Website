@@ -1,7 +1,9 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const BloodScrollProgress = () => {
   const { scrollYProgress } = useScroll();
+  const { i18n } = useTranslation();
   
   // Smooth, organic easing
   const scaleY = useSpring(scrollYProgress, {
@@ -11,6 +13,15 @@ export const BloodScrollProgress = () => {
   });
 
   const liquidHeight = useTransform(scaleY, [0, 1], ["0%", "100%"]);
+
+  const label = (() => {
+    switch (i18n.language) {
+      case "zh": return "血脉流淌";
+      case "ja": return "脈動";
+      case "fr": return "Flux Sanguin";
+      default: return "Blood Flow";
+    }
+  })();
 
   return (
     <div className="fixed right-8 top-1/2 -translate-y-1/2 h-[45vh] w-[4px] z-[100] pointer-events-none hidden md:block">
@@ -46,7 +57,7 @@ export const BloodScrollProgress = () => {
       {/* ── Label ── */}
       <div className="absolute -left-12 top-1/2 -translate-y-1/2">
         <span className="font-cinzel text-[8px] tracking-[0.4em] uppercase text-[#8B0000]/60 -rotate-90 whitespace-nowrap block origin-center">
-          Blood Flow
+          {label}
         </span>
       </div>
     </div>

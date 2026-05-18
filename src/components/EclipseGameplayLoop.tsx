@@ -50,6 +50,58 @@ const PillarPanel = ({
   onEnter: () => void;
   onLeave: () => void;
 }) => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language || "en";
+
+  const text = (() => {
+    switch (lang) {
+      case "zh":
+        switch (pillar.id) {
+          case "01":
+            return {
+              title: "萃取",
+              desc: "战斗并非单纯的求生，而是一场收割。你将直接从敌人的灵魂深处掠夺『 Essence 』（真髓），以此充盈你的力量。残虐将获得丰厚嘉奖。"
+            };
+          case "02":
+            return {
+              title: "蜕变",
+              desc: "这股真髓强化你的同时，也在同等地异化你。利用它将你的兵刃扭曲成畸变的形态，从根本上改变你的战斗风格。"
+            };
+          case "03":
+            return {
+              title: "共鸣",
+              desc: "整个世界将随你的腐败程度而震颤起伏。随着你聚敛真髓，未知的通道将为你敞开，但同样会招致畸变巨兽无休止的追杀。腐朽自有其代价。"
+            };
+          default:
+            return { title: pillar.title, desc: pillar.descEn };
+        }
+      case "ja":
+        switch (pillar.id) {
+          case "01":
+            return {
+              title: "抽出",
+              desc: "戦闘は単なる生存競争ではない — それは刈り取りである。敵の魂から直接『 Essence 』（真髄）を奪い去り、己の力へと変換する。残虐なる者には報酬が与えられん。"
+            };
+          case "02":
+            return {
+              title: "変異",
+              desc: "真髄は力を与える将、同時にあなたを変異させる。それを使い、武器を異形の姿へと歪ませ、戦闘スタイルを根本から作り変えるのだ。"
+            };
+          case "03":
+            return {
+              title: "共鳴",
+              desc: "世界の法則は、あなたの堕落度に同調して歪み始める。真髄を蓄積することで未知の路が拓かれるが、恐るべき異形の存在たちが地の果てまであなたを追う。堕落には対価が伴う。"
+            };
+          default:
+            return { title: pillar.title, desc: pillar.descEn };
+        }
+      case "fr":
+        return { title: pillar.id === "01" ? "Extraction" : pillar.id === "02" ? "Mutation" : "Résonance", desc: pillar.descFr };
+      default:
+        return { title: pillar.id === "01" ? "Extraction" : pillar.id === "02" ? "Mutation" : "Resonance", desc: pillar.descEn };
+    }
+  })();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -98,11 +150,7 @@ const PillarPanel = ({
       />
 
       {/* ── Edge dissolve — seamless into surrounding black ── */}
-      <div className="absolute inset-0 z-[3] pointer-events-none"
-        style={{
-          boxShadow: "inset 0 0 120px 40px black",
-        }}
-      />
+      <div className="absolute inset-0 z-[3] pointer-events-none shadow-[inset_0_0_120px_40px_black]" />
 
       {/* ── Bottom fade inside pillar (Image -> Gradient -> Text) ── */}
       <div className="absolute bottom-0 inset-x-0 h-56 bg-gradient-to-t from-black via-black/90 to-transparent z-[4] pointer-events-none" />
@@ -125,7 +173,7 @@ const PillarPanel = ({
           animate={{ color: isActive ? "#ffffff" : "rgba(255,255,255,0.5)" }}
           transition={imgSpring}
         >
-          {pillar.title}
+          {text.title}
         </motion.h3>
 
         {/* Separator — draws from left on activate */}
@@ -150,7 +198,7 @@ const PillarPanel = ({
           className="overflow-hidden"
         >
           <p className="font-inter text-sm md:text-base text-white/80 leading-relaxed drop-shadow-[0_0_20px_rgba(0,0,0,1)] pb-2">
-            {isFr ? pillar.descFr : pillar.descEn}
+            {text.desc}
           </p>
         </motion.div>
       </div>
@@ -170,7 +218,7 @@ export const EclipseGameplayLoop = () => {
       <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-8 lg:px-16 pt-16 md:pt-32 pb-8 md:pb-16">
         <SectionTitle
           index="05"
-          label="Pilliers du Gameplay"
+          label="Piliers du Gameplay"
           labelEn="Gameplay Pillars"
           isFr={isFr}
         />
@@ -196,7 +244,7 @@ export const EclipseGameplayLoop = () => {
           />
         ))}
       </div>
-      
+
     </section>
   );
 };

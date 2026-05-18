@@ -10,7 +10,7 @@ const panels = [
     descEn: "An interconnected world where every alley hides a secret or a shortcut. Exploration is rewarded by discovering a rich and mysterious visual Lore.",
     video: "/assets/eclipse/videos/player-exp-1.mp4",
     tag: { fr: "L'Atmosphère", en: "Atmosphere" },
-    videoPosition: "center center",
+    videoPositionClass: "object-center",
   },
   {
     fr: "Combat Viscéral & Réactif",
@@ -20,7 +20,7 @@ const panels = [
     video: "/assets/eclipse/videos/player-exp-2.mp4",
     tag: { fr: "L'Action", en: "Action" },
     // Reframe to center on the character — the action happens in the middle-lower portion
-    videoPosition: "center 65%",
+    videoPositionClass: "object-[center_65%]",
   },
   {
     fr: "Montée en Puissance",
@@ -29,7 +29,7 @@ const panels = [
     descEn: "A transformable weapon system that changes playstyle on the fly. The player does not change weapons, they learn to master a complex tool.",
     video: "/assets/eclipse/videos/player-exp-3.mp4",
     tag: { fr: "La Progression", en: "Progression" },
-    videoPosition: "center center",
+    videoPositionClass: "object-center",
   },
   {
     fr: "Confrontations Épiques",
@@ -38,7 +38,7 @@ const panels = [
     descEn: "Monumental battles, crafted as harsh trials: victory requires patient study of their designs, unyielding persistence, and the cunning to turn every hard-won lesson into a weapon.",
     video: "/assets/eclipse/videos/player-exp-4.mp4",
     tag: { fr: "Le Challenge", en: "Challenge" },
-    videoPosition: "center center",
+    videoPositionClass: "object-center",
   },
 ];
 
@@ -49,6 +49,76 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: typeof panels[nu
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
+
+  const { i18n } = useTranslation();
+  const lang = i18n.language || "en";
+
+  const text = (() => {
+    switch (lang) {
+      case "zh":
+        switch (idx) {
+          case 0:
+            return {
+              tag: "氛围",
+              title: "叙事探索",
+              desc: "一个环环相扣的世界，每一条幽暗的窄巷都潜藏着隐秘或捷径。视觉化叙事与神秘传说等待着行者的发掘。"
+            };
+          case 1:
+            return {
+              tag: "战斗",
+              title: "直觉与致命的激斗",
+              desc: "瞬息万变且冷酷无情的拼杀，生存取决于你的闪避、时机与野性。每一次挥刀都必须是深思熟虑的博弈。"
+            };
+          case 2:
+            return {
+              tag: "蜕变",
+              title: "力量蜕变",
+              desc: "独创的可变形武器系统，允许你在瞬息间改变战斗风格。你无需频繁更换兵刃，而是去征服与掌握一件复杂的杀戮艺术品。"
+            };
+          case 3:
+            return {
+              tag: "试炼",
+              title: "史诗决战",
+              desc: "如神话般宏伟的宿命决战。胜利要求对敌方招式的冷酷观察、矢志不渝的坚韧，以及将每一次惨痛的死伤教训化作克敌的利刃。"
+            };
+          default:
+            return { tag: panel.tag.en, title: panel.en, desc: panel.descEn };
+        }
+      case "ja":
+        switch (idx) {
+          case 0:
+            return {
+              tag: "アトモスフィア",
+              title: "ナラティブの探求",
+              desc: "入り組んだ小路の至る所に秘密や近道が隠された世界。美しくも不気味なビジュアル・ロアの发现が、探索者を満たしていく。"
+            };
+          case 1:
+            return {
+              tag: "アクション",
+              title: "直感的かつ冷酷な戦闘",
+              desc: "回避、タイミング、大迫力の攻撃が生存を分ける容赦なき戦闘。すべての打撃は生と死を賭けた戦術的決断となる。"
+            };
+          case 2:
+            return {
+              tag: "プログレッシブ",
+              title: "強大なる力への覚醒",
+              desc: "戦況に応じてリアルタイムに変形する武器システム。プレイヤーは武器を取り替えるのではなく、一つの深奥なる凶器を極めていく。"
+            };
+          case 3:
+            return {
+              tag: "試練",
+              title: "畏怖すべき強敵との対峙",
+              desc: "試練として立ちはだかる巨大な異形との死闘。勝利には敵の挙動の完全な学習、不屈の執念、そして敗北から得た全ての教訓を凶器に変える知性が必要だ。"
+            };
+          default:
+            return { tag: panel.tag.en, title: panel.en, desc: panel.descEn };
+        }
+      case "fr":
+        return { tag: panel.tag.fr, title: panel.fr, desc: panel.descFr };
+      default:
+        return { tag: panel.tag.en, title: panel.en, desc: panel.descEn };
+    }
+  })();
 
   // Track last mouse pos and time for speed calculation
   const lastMousePos = useRef({ x: 0, y: 0, time: 0 });
@@ -103,8 +173,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: typeof panels[nu
   return (
     <div
       ref={containerRef}
-      className="relative flex-shrink-0 flex items-end justify-start cursor-crosshair overflow-hidden group vignette-blend"
-      style={{ width: "100vw", height: "100%" }}
+      className="relative flex-shrink-0 flex items-end justify-start cursor-crosshair overflow-hidden group vignette-blend w-screen h-full"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -118,8 +187,7 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: typeof panels[nu
         playsInline
         autoPlay
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-100 max-md:opacity-80 transition-opacity duration-700 origin-center"
-        style={{ objectPosition: panel.videoPosition }}
+        className={`absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-100 max-md:opacity-80 transition-opacity duration-700 origin-center ${panel.videoPositionClass}`}
       />
 
       {/* Red Lighting Effect based on mouse speed */}
@@ -151,14 +219,14 @@ const VideoPanel = ({ panel, idx, isFr, totalPanels }: { panel: typeof panels[nu
       <div className="relative z-30 max-w-xl px-8 md:px-16 pb-16 md:pb-20 opacity-80 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
         <div className="flex items-center gap-4 mb-6">
           <span className="text-[#8B0000] font-inter text-[10px] md:text-xs tracking-[0.5em] uppercase font-semibold drop-shadow-[0_0_5px_rgba(139,0,0,0.5)]">
-            {isFr ? panel.tag.fr : panel.tag.en}
+            {text.tag}
           </span>
         </div>
         <h2 className="font-cinzel text-3xl md:text-4xl lg:text-5xl text-white tracking-widest uppercase mb-6 drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
-          {isFr ? panel.fr : panel.en}
+          {text.title}
         </h2>
         <p className="font-inter text-sm md:text-base text-white/70 leading-relaxed border-l border-[#8B0000]/60 pl-5 max-w-md drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
-          {isFr ? panel.descFr : panel.descEn}
+          {text.desc}
         </p>
       </div>
     </div>
@@ -186,7 +254,7 @@ export const EclipsePlayerExperience = () => {
   const x = useSpring(xRaw, { stiffness: 200, damping: 40, mass: 1 });
 
   return (
-    <section ref={containerRef} className="relative bg-black" style={{ height: "500vh" }}>
+    <section ref={containerRef} className="relative bg-black h-[500vh]">
       {/* ── Bridge from Gallery section ── */}
       <div className="absolute top-0 inset-x-0 h-48 bg-gradient-to-b from-black via-black/90 to-transparent z-40 pointer-events-none" />
       {/* ── Bridge bottom → next section ── */}

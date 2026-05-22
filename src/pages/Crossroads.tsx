@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { PortalEffects } from "@/components/PortalEffects";
 import { audioManager } from "@/lib/audio";
-import mixpanel from "mixpanel-browser";
+import { trackLanguageSwitch, trackClick } from "../lib/analytics";
 
 const spring = { type: "spring" as const, stiffness: 45, damping: 25, mass: 1.2 };
 
@@ -34,11 +34,14 @@ const Crossroads = () => {
   const handleEnter = useCallback((side: 'eclipse' | 'chroma') => {
     if (transitioning) return;
     
-    // Explicitly track the entry action with Mixpanel
-    mixpanel.track('portal_entry', { 
-      side,
-      language: i18n.language 
-    });
+    // Explicitly track the entry action with Google Analytics 4 (GA4)
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag('event', 'portal_entry', {
+        event_category: 'engagement',
+        event_label: side,
+        language: i18n.language
+      });
+    }
 
     setTransitioning(side);
     setTimeout(() => navigate(side === 'eclipse' ? '/eclipse' : '/chroma'), 1700);
@@ -69,7 +72,13 @@ const Crossroads = () => {
           variant="outline"
           size="sm"
           className="bg-black/60 border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm text-[10px] tracking-widest uppercase"
-          onClick={() => i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr')}
+          onClick={() => {
+            const langs = ['fr', 'en', 'ja', 'zh'];
+            const currentIndex = langs.indexOf(i18n.language);
+            const nextLang = langs[(currentIndex + 1) % langs.length];
+            trackLanguageSwitch(i18n.language, nextLang);
+            i18n.changeLanguage(nextLang);
+          }}
         >
           {t('nav.lang')}
         </Button>
@@ -147,8 +156,8 @@ const Crossroads = () => {
             <motion.div
               className="mt-6"
               animate={{
-                opacity: hoveredSide === 'eclipse' && !transitioning ? 1 : 0,
-                y: hoveredSide === 'eclipse' && !transitioning ? 0 : 10,
+                opacity: (isMobile || hoveredSide === 'eclipse') && !transitioning ? 1 : 0,
+                y: (isMobile || hoveredSide === 'eclipse') && !transitioning ? 0 : 10,
               }}
               transition={{ duration: 0.3 }}
             >
@@ -215,15 +224,19 @@ const Crossroads = () => {
             <motion.div
               className="mt-6"
               animate={{
-                opacity: hoveredSide === 'chroma' && !transitioning ? 1 : 0,
-                y: hoveredSide === 'chroma' && !transitioning ? 0 : 10,
+                opacity: (isMobile || hoveredSide === 'chroma') && !transitioning ? 1 : 0,
+                y: (isMobile || hoveredSide === 'chroma') && !transitioning ? 0 : 10,
               }}
               transition={{ duration: 0.3 }}
             >
               <span 
                 className="inline-block text-[10px] md:text-[11px] tracking-[0.45em] uppercase px-8 py-3 md:px-10 md:py-4 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer whitespace-nowrap"
                 onMouseEnter={() => audioManager.playSound('hover')}
-                onClick={() => audioManager.playSound('click')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  audioManager.playSound('click');
+                  handleEnter('chroma');
+                }}
               >
                 {t('landing.chroma_btn')}
               </span>

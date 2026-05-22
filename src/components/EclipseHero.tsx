@@ -11,15 +11,7 @@ export const EclipseHero = () => {
   const [highResLoaded, setHighResLoaded] = useState(false);
 
   useEffect(() => {
-    // Force tiny thumb first
-    const thumb = new Image();
-    thumb.src = "/assets/eclipse/gallery/art-3-thumb.webp";
-    thumb.onload = () => setLowResLoaded(true);
-
-    // Load massive 19MB high-res in background
-    const high = new Image();
-    high.src = "/assets/eclipse/gallery/art-3.webp";
-    high.onload = () => setHighResLoaded(true);
+    // If the image is already cached, we can try to detect it, but onLoad on the img tag is safer
   }, []);
 
   const scrollToMythology = (e: React.MouseEvent) => {
@@ -76,16 +68,20 @@ export const EclipseHero = () => {
         className="absolute inset-0"
       >
         {/* Low-res blurred placeholder */}
-        <div 
-          className={`absolute inset-0 bg-[url('/assets/eclipse/gallery/art-3-thumb.webp')] bg-cover bg-center animate-ken-burns origin-center transition-opacity duration-1000 ${highResLoaded ? 'opacity-0' : 'opacity-100 blur-lg'}`}
+        <img 
+          src="/assets/eclipse/gallery/art-3-thumb.webp"
+          alt=""
+          onLoad={() => setLowResLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover animate-ken-burns origin-center transition-opacity duration-1000 ${highResLoaded ? 'opacity-0' : 'opacity-100 blur-lg'}`}
         />
         
         {/* High-res final image */}
-        {lowResLoaded && (
-          <div 
-            className={`absolute inset-0 bg-[url('/assets/eclipse/gallery/art-3.webp')] bg-cover bg-center animate-ken-burns origin-center transition-opacity duration-1000 ${highResLoaded ? 'opacity-100' : 'opacity-0'}`}
-          />
-        )}
+        <img 
+          src="/assets/eclipse/gallery/art-3.webp"
+          alt=""
+          onLoad={() => setHighResLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover animate-ken-burns origin-center transition-opacity duration-1000 ${highResLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
       </motion.div>
       <div className="absolute inset-0 bg-[#8B0000]/12 mix-blend-screen" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />

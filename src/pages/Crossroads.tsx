@@ -25,6 +25,20 @@ const Crossroads = () => {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
+  // Preload heavy background images for both paths so they are ready when the user clicks
+  useEffect(() => {
+    const imagesToPreload = [
+      "/assets/eclipse/gallery/art-3.webp",
+      "/assets/portal/backgrounds/chroma-portal-image.webp",
+      "/assets/eclipse/backgrounds/rgthree.compare._temp_ddgda_00029_.png"
+    ];
+
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   useSEO({
     title: t('landing.title') + " - Double Door Portal",
     description: "Welcome to Project Eclipse. Choose your path: Enter the dark fantasy universe or discover the Chroma Studios collective.",
